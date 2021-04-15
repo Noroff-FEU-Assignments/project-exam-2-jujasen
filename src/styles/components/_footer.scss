@@ -1,0 +1,49 @@
+.footer {
+    background-color: $dark;
+    color: $white;
+    padding: $padS;
+
+    &__general {
+        img {
+            width: 200px;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__general-text {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    &__s-link {
+        padding: 1rem;
+    }
+
+    &__social {
+        font-size: 50px;
+        color: $blue;
+    }
+
+    &__socials-text {
+        font-weight: $fSemiBold;
+        text-align: center;
+    }
+
+    &__nav {
+        margin-bottom: 2rem;
+    }
+
+    &__link {
+        display: block;
+        color: $white;
+        font-weight: $fMedium;
+        padding: 0.5rem 0;
+    }
+
+    &__copyright {
+        text-align: center;
+
+    }
+}

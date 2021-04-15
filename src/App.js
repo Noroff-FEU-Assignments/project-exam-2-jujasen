@@ -1,8 +1,8 @@
 import './styles/main.scss';
-import 'bulma';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import { AuthProvider } from './context/AuthContext';
 import Menu from './components/Menu';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
         <Switch>
           <Route path='/' exact component={Home} />
         </Switch>
+        <Footer/>
       </Router>
     // </AuthProvider>
   );

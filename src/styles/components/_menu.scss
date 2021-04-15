@@ -3,6 +3,8 @@
     padding: 1.5rem;
     position: fixed;
     width: 100%;
+    border: none;
+    margin: 0;
 
     &__logo {
         width: 150px;
@@ -31,6 +33,7 @@
         font-size: $fsizeM;
         margin: 1rem 0;
         font-weight: $fSemiBold;
+        text-decoration: none;
 
         &:hover {
             color: $white;
