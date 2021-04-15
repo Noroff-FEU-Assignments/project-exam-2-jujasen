@@ -1,4 +1,6 @@
+@import './variables';
 @import './base';
+
 
 @import './pages/home';
 @import './pages/accomodation';
@@ -8,3 +10,6 @@
 @import './pages/admin/bookings';
 @import './pages/admin/establishments';
 @import './pages/admin/messages';
+
+@import './components/menu';
+@import './components/searchResult';

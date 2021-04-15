@@ -2,12 +2,66 @@
 
 * {
     font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: $fRegular;
+    box-sizing: border-box;
 }
 
 body {
     min-height: 100vh;
 }
 
-a {
-    text-decoration: none;
+.page {
+    padding: $padS;
+}
+
+.space {
+
+    &__marg {
+
+        &--r {
+            margin-right: 1rem;
+        }
+
+        &--l {
+            margin-left: 1rem;
+        }
+    }
+
+    &__pad {
+
+        &--r {
+            padding-right: 1rem;
+        }
+
+        &--l {
+            padding-left: 1rem;
+        } 
+    }
+}
+
+
+.flex {
+    display: flex;
+    align-items: center;
+
+    &--col {
+        flex-direction: column;
+    }
+
+    &--space {
+        justify-content: space-between;
+    }
+
+    &--start {
+        justify-content: flex-start;
+    }
+
+    &--end {
+        justify-content: flex-start;
+    }
+
+    &--center {
+        justify-content: center;
+    }
 }

@@ -1,0 +1,57 @@
+.menu {
+    background: $gradient;
+    padding: 1.5rem;
+    position: fixed;
+    width: 100%;
+
+    &__logo {
+        width: 150px;
+    }
+
+    &__toggle {
+        color: $white;
+        font-size: 30px;
+        padding-top: 0.1rem;
+    }
+
+    &__open {
+        height: 100vh;
+    }
+
+    &__nav {
+        transition: all 2sec ease-out;
+        padding-bottom: 4rem;
+        align-items: flex-start;
+        padding-top: 2rem;
+    }
+
+    &__link {
+        color: $white;
+        border-bottom: 2px solid $white;
+        font-size: $fsizeM;
+        margin: 1rem 0;
+        font-weight: $fSemiBold;
+
+        &:hover {
+            color: $white;
+            padding-left: 2rem;
+            font-weight: $fBold;
+            transition: all 0.1s ease-in;
+        }
+    }
+
+    p {
+        color: $white;
+        text-align: center;
+        margin-top: 4rem;
+    }
+
+    &__s-link {
+        padding: 1rem;
+    }
+
+    &__social {
+        font-size: 50px;
+        color: $white;
+    }
+}

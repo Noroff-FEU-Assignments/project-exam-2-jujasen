@@ -1,0 +1,46 @@
+.searchresult {
+    color: $dark;
+    background-color: $white;
+    border-radius: 5px;
+
+    &__tag {
+    padding: 0.5rem;
+
+        p {
+            color: $primary;
+            font-weight: $fBold;
+        }
+    }
+
+    &__tag-icon {
+        font-size: 25px;
+        color: $primary;
+    }
+
+    &__item{
+        padding: 0.2rem 0.5rem;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(231, 231, 231);
+        }
+
+        &:last-of-type {
+            padding-bottom: 0.5rem;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    }
+
+
+    &__item-icon {
+        font-size: 25px;
+    }
+
+    &__item-info {
+        p {
+            font-size: $fsizeXS;
+        }
+    }
+    
+}
