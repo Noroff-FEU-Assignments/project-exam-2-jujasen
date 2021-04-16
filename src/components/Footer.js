@@ -42,6 +42,7 @@ const Footer = () => {
                         Log in
                         </Link>
                 </div>
+                <div className="footer__copyright">Credits</div>
                 <div className="footer__copyright">
                     Copyright 2021 &#169; Holidaze
                 </div>

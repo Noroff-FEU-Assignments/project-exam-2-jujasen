@@ -35,16 +35,16 @@ const Menu = () => {
                 { !menuClosed ? 
                     <div className="menu__open">
                     <div className="menu__nav flex flex--col">
-                        <Link className="menu__link" to='/'>
+                            <Link onClick={handleToggle} className="menu__link" to='/'>
                             Home
                         </Link>
-                        <Link className="menu__link" to='/accommodation'>
+                            <Link onClick={handleToggle} className="menu__link" to='/accommodation'>
                             All accommodation
                         </Link>
-                        <Link className="menu__link" to='/contact'>
+                            <Link onClick={handleToggle} className="menu__link" to='/contact'>
                             Contact us
                         </Link>
-                        <Link className="menu__link" to='/login'>
+                            <Link onClick={handleToggle} className="menu__link" to='/login'>
                             Log in
                         </Link>
                     </div>

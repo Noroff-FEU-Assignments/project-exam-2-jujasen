@@ -1,0 +1,96 @@
+.header {
+    background-color: $blue;
+    padding: 1rem $padS;
+
+    &__filters {
+        padding-top: 1rem;
+        padding-bottom: 0.5rem;
+    }
+
+    &__dropdown {
+        width: 100px;
+
+        .css-yk16xz-control {
+            width: 100px;
+            border: 2px solid $primary;
+            border-radius: 10px;
+            padding: 0.4rem;
+
+            &:hover {
+                border-color: $primary;
+            }
+        }
+
+        .css-1pahdxg-control {
+            width: 100px;
+            padding: 0.4rem;
+            border-color: $primary;
+            border-radius: 10px;
+            border-width: 2px;
+            box-shadow: none;
+
+
+            &:hover {
+                border-color: $primary;
+
+            }
+        }
+
+        .css-1wa3eu0-placeholder {
+            color: $dark;
+        }
+
+        .css-1okebmr-indicatorSeparator {
+            display: none;
+        }
+
+        .css-tj5bde-Svg {
+            fill: $dark;
+        }
+    }
+
+    &__search {
+        width: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+        border-radius: 10px;
+        border: none;
+        margin-left: 1rem;
+    }
+
+    &__tag {
+        background-color: $blue;
+        color: $primary;
+        padding: 0.5rem 1rem;
+        border: 2px solid $primary;
+        border-radius: 50px;
+
+        &:last-of-type {
+            margin-left: 0.5rem;
+        }
+
+        p {
+            font-size: $fsizeXS;
+            margin-left: 0.5rem;
+            font-weight: $fMedium;
+        }
+
+        &--active {
+        background-color: $primary;
+        color: $blue;
+        border: none;
+        }
+
+        &-icon {
+            path {
+                stroke: $primary;
+            }
+
+            &--active {
+                path {
+                    stroke: $blue;
+                }
+            }
+        }
+    }
+}
