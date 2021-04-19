@@ -59,6 +59,14 @@ img {
     display: flex;
     align-items: center;
 
+    &--align-start {
+        align-items: flex-start;
+    }
+
+    &--align-end {
+        align-items: end;
+    }
+
     &--wrap {
         flex-wrap: wrap;
     }
@@ -82,4 +90,9 @@ img {
     &--center {
         justify-content: center;
     }
+}
+
+.no-link {
+    text-decoration: none;
+    color: $dark;
 }

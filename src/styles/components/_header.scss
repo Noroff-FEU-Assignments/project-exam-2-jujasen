@@ -8,45 +8,52 @@
     }
 
     &__dropdown {
-        width: 100px;
+        min-width: 80px;
+        background-color: $white;
+        border: 2px solid $primary;
+        border-radius: 10px;
+        padding: 0.8rem;
+        cursor: pointer;
 
-        .css-yk16xz-control {
-            width: 100px;
+        p {
+            padding-right: 1rem;
+        }
+
+        svg {
+            font-size: 20px;
+        }
+
+    }
+
+    &__select {
+        width: 80px;
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background-color: $white;
+            border-radius: 10px;
             border: 2px solid $primary;
-            border-radius: 10px;
-            padding: 0.4rem;
+        }
 
+        li {
+            padding: 0.2rem 0.5rem;
+            cursor: pointer;
             &:hover {
-                border-color: $primary;
+                background-color: rgb(231, 231, 231);
             }
-        }
 
-        .css-1pahdxg-control {
-            width: 100px;
-            padding: 0.4rem;
-            border-color: $primary;
-            border-radius: 10px;
-            border-width: 2px;
-            box-shadow: none;
-
-
-            &:hover {
-                border-color: $primary;
-
+            &:first-of-type {
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
             }
-        }
 
-        .css-1wa3eu0-placeholder {
-            color: $dark;
-        }
-
-        .css-1okebmr-indicatorSeparator {
-            display: none;
-        }
-
-        .css-tj5bde-Svg {
-            fill: $dark;
-        }
+            &:last-of-type {
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+            }
+            }
     }
 
     &__search {

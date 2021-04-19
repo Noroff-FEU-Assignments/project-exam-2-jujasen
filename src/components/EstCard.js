@@ -1,31 +1,41 @@
 import img from '../img/home.png'
 import { TiStarFullOutline } from 'react-icons/ti'
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-const EstCard= () => {
+const EstCard= (props) => {
+
+    const { id, name, image, region, stars, price } = props;
 
 
     return (
         <>
-            <div className="estcard flex">
-                <div className="estcard__section flex flex--col flex--space">
-                    <img className="estcard__img" src={img} alt="Hotel name"/>
-                    <div className="estcard__stars flex flex--start">
-                        <TiStarFullOutline className="estcard__star"></TiStarFullOutline>
-                        <TiStarFullOutline className="estcard__star"></TiStarFullOutline>
-                        <TiStarFullOutline className="estcard__star"></TiStarFullOutline>
+            <Link className="no-link" to={`accdetails/${id}`}>
+            <div className="estcard">
+                <div className="estcard__section flex">
+                    <img className="estcard__img" src={image} alt={name + ' room'}/>
+                    <div className="estcard__general">
+                        <h3 className="estcard__title">{name}</h3>
+                        <p className="estcard__region">{region} region</p>
                     </div>
-                    <p>3 stars</p>
+
                 </div>
-                <div className="flex flex--col flex--space">
+                <div className="flex flex--space flex--align-end">
                     <div>
-                        <h3 className="estcard__title">Trathon Flesland</h3>
-                        <p className="estcard__region">Fana region</p>
+                        <div className="estcard__stars flex flex--start">
+                            <TiStarFullOutline className="estcard__star"></TiStarFullOutline>
+                            <TiStarFullOutline className="estcard__star"></TiStarFullOutline>
+                            <TiStarFullOutline className="estcard__star"></TiStarFullOutline>
+                        </div>
+                        <p className="estcard__rating">${stars} stars</p>
                     </div>
-                    <p
+                    <div
                     className="estcard__price"
-                    ><span>from</span>kr 1050<span>per night</span></p>
+                    ><p>from</p>
+                    kr {price} <span>per night</span></div>
                 </div>
             </div>
+            </Link>
         </>
     )
 
@@ -33,3 +43,13 @@ const EstCard= () => {
 }
 
 export default EstCard;
+
+EstCard.propTypes = {
+    id: PropTypes.number,
+    name: PropTypes.string,
+    image: PropTypes.string,
+    region: PropTypes.string,
+    stars: PropTypes.number,
+    price: PropTypes.number,
+};
+

@@ -19,7 +19,9 @@ const Menu = () => {
         <>
             <nav className="menu">
                 <div className="flex flex--space">
-                    <img className="menu__logo" src={logo} alt="Holidaze"></img>
+                    <Link to="/">
+                        <img className="menu__logo" src={logo} alt="Holidaze"></img>
+                    </Link>
                     {
                         menuClosed ?
                         <HiOutlineMenuAlt1

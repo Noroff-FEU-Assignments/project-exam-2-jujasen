@@ -7,8 +7,6 @@
     }
 
     &__section {
-        align-items: flex-start;
-
         p {
             font-size: $fsizeXS;
         }
@@ -18,7 +16,33 @@
         margin-top: 1rem;
     }
 
+    &__rating {
+        font-size: $fsizeXS;
+    }
 
+    &__general {
+        padding-left: 2rem;
+    }
+
+    &__title {
+        font-weight: $fBold;
+        font-size: $fsizeS;
+
+    }
+
+    &__price {
+        color: $primary;
+        font-size: $fsizeM;
+        font-weight: $fBold;
+
+        span {
+            font-size: $fsizeXS;
+        }
+
+        p {
+            font-size: $fsizeXS;
+        }
+    }
 
 }
 

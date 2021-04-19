@@ -2,6 +2,7 @@ import { RiHotelLine, RiHome5Line } from 'react-icons/ri';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { TiStarFullOutline } from 'react-icons/ti'
 
+
 const SearchResult = () => {
 
     return (
