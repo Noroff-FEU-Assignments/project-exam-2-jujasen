@@ -6,7 +6,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 import EstCard from '../components/EstCard';
 import axios from 'axios';
 import { BASE_URL, ACCOMMODATIONS_PATH } from '../utils/constants';
-
+import img from '../img/logo-dark.svg'
 
 
 const Accommodation = () => {
@@ -144,22 +144,21 @@ const Accommodation = () => {
                     </div>
                 </div>
                 <div className="accmd__results">
-                    {filteredData?.map(function (item) {
+                    {loading ? <img className="loader" src={img} alt="pulsating logo"></img> : error ? <div class="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                    </div> : filteredData?.map(function (item) {
                         return (
                             <div key={item.id}>
-                               <EstCard
+                                <EstCard
                                     id={item.id}
-                                    name={item.name} 
-                                    image={item.image} 
-                                    region={item.region} 
-                                    stars={item.stars} 
+                                    name={item.name}
+                                    image={item.image}
+                                    region={item.region}
+                                    stars={item.stars}
                                     price={item.room_standard_price}>
-                                    </EstCard>
+                                </EstCard>
                             </div>
-                            
                         )
                     })}
-                    
                 </div>
             </div>
         </>
