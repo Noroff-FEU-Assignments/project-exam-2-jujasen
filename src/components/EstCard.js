@@ -23,11 +23,13 @@ const EstCard= (props) => {
                 <div className="flex flex--space flex--align-end">
                     <div>
                         <div className="estcard__stars flex flex--start">
-                            <TiStarFullOutline className="estcard__star"></TiStarFullOutline>
-                            <TiStarFullOutline className="estcard__star"></TiStarFullOutline>
-                            <TiStarFullOutline className="estcard__star"></TiStarFullOutline>
-                        </div>
-                        <p className="estcard__rating">${stars} stars</p>
+                            {
+                                [...Array(stars)].map((i) => (
+                                    <TiStarFullOutline key={i}className="estcard__star"></TiStarFullOutline>
+                                )
+                            )}
+                        </div> 
+                        <p className="estcard__rating">{stars} stars</p>
                     </div>
                     <div
                     className="estcard__price"

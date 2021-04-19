@@ -52,7 +52,8 @@ const Accommodation = () => {
 
         if (value) {
             result = filteredData.filter((data) => {
-                return data.name.includes(value[0].toUpperCase());
+                const slicedValue = value.charAt(0).toUpperCase() + value.slice(1);
+                return data.name.includes(slicedValue);
             });
             setFilteredData(result);
         }

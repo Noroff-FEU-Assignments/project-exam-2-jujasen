@@ -5,6 +5,10 @@
     display: block;
     margin: 25vh auto;
     animation: pulse-black 1s infinite;
+
+    &--short {
+      margin: 10vh auto;
+  }
 }
 
 @keyframes pulse-black {
