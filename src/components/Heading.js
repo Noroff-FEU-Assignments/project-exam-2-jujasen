@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+
 const Heading = (props) => {
 
     const { title,} = props;

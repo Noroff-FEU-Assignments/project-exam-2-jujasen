@@ -13,6 +13,7 @@
             font-size: $fsizeL;
             font-weight: $fBlack;
             margin-bottom: 1rem;
+            color: $white;
         }
 
         &__tag {
@@ -54,6 +55,7 @@
             font-size: $fsizeM;
             font-weight: $fBold;
             margin-bottom: 1rem;
+            color: $white;
         }
 
         &__link {
@@ -65,6 +67,7 @@
         p {
             font-size: $fsizeSS;
             margin-bottom: 4rem;
+            color: $white;
         }
     }
 
@@ -78,6 +81,7 @@
             font-weight: $fBold;
             margin-bottom: 1rem;
             text-align: center;
+            color: $white;
         }
 
         &__link {
@@ -92,6 +96,7 @@
             font-size: $fsizeSS;
             margin-bottom: 4rem;
             text-align: center;
+            color: $white;
         }
     }
 }

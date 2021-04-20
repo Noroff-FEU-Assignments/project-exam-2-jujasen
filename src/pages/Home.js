@@ -23,7 +23,7 @@ const Home = () => {
         if (value) {
             result = filteredData.filter((data) => {
                 const slicedValue = value.charAt(0).toUpperCase() + value.slice(1);
-                return data.name.includes(slicedValue);
+                return data.name.includes(slicedValue) || data.region.includes(slicedValue);
             });
             setFilteredData(result);
             setReccomended(false);

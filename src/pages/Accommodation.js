@@ -53,7 +53,7 @@ const Accommodation = () => {
         if (value) {
             result = filteredData.filter((data) => {
                 const slicedValue = value.charAt(0).toUpperCase() + value.slice(1);
-                return data.name.includes(slicedValue);
+                return data.name.includes(slicedValue) || data.region.includes(slicedValue);
             });
             setFilteredData(result);
         }
@@ -148,8 +148,8 @@ const Accommodation = () => {
                     {loading ? <img className="loader" src={img} alt="pulsating logo"></img> : error ? <div class="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
                     </div> : filteredData?.map(function (item) {
                         return (
-                            <div key={item.id}>
                                 <EstCard
+                                    key={item.id}
                                     id={item.id}
                                     name={item.name}
                                     image={item.image}
@@ -157,7 +157,6 @@ const Accommodation = () => {
                                     stars={item.stars}
                                     price={item.room_standard_price}>
                                 </EstCard>
-                            </div>
                         )
                     })}
                 </div>

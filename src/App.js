@@ -5,6 +5,7 @@ import Menu from './components/Menu';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Accommodation from './pages/Accommodation';
+import AccDetails from './pages/linked/AccDetails';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/accommodation' exact component={Accommodation} />
+        <Route path='/accommodation/details/:id' exact component={AccDetails}/>
         </Switch>
         <Footer/>
       </Router>

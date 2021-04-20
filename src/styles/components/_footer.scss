@@ -15,6 +15,10 @@
     &__general-text {
         text-align: center;
         margin-bottom: 2rem;
+        
+        p {
+            color: $white;
+        }
     }
 
     &__s-link {
@@ -29,6 +33,7 @@
     &__socials-text {
         font-weight: $fSemiBold;
         text-align: center;
+        color: $white;
     }
 
     &__nav {

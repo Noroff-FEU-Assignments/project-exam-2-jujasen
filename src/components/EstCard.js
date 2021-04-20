@@ -10,7 +10,7 @@ const EstCard= (props) => {
 
     return (
         <>
-            <Link className="no-link" to={`accdetails/${id}`}>
+            <Link className="no-link" to={`accommodation/details/${id}`}>
             <div className="estcard">
                 <div className="estcard__section flex">
                     <img className="estcard__img" src={image} alt={name + ' room'}/>
