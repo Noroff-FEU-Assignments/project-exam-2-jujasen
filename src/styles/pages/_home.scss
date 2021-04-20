@@ -23,6 +23,12 @@
             color: $primary;
             font-weight: $fBold;
             margin-bottom: 1.6rem;
+
+            &--active {
+                background-color: $primary;
+                border: 2px solid $blue;
+                color: $blue;
+            }
         }
 
 

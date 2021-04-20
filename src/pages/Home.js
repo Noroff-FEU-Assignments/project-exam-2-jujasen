@@ -14,6 +14,45 @@ const Home = () => {
     const [filteredData, setFilteredData] = useState(accommodations);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [recommended, setReccomended] = useState(true);
+
+    const handleSearch = (e) => {
+        let value = e.target.value;
+        let result = [];
+
+        if (value) {
+            result = filteredData.filter((data) => {
+                const slicedValue = value.charAt(0).toUpperCase() + value.slice(1);
+                return data.name.includes(slicedValue);
+            });
+            setFilteredData(result);
+            setReccomended(false);
+        }
+
+        if (value === '') {
+            handleOption(selectedOption);
+        }
+
+    }
+
+    const handleOption = (acctype) => {
+        let value = acctype;
+        let result = [];
+
+        result = accommodations.filter((data) => {
+            if (acctype === 'All') {
+                return data.type;
+            } else {
+                return data.type.includes(value);
+
+            }
+        });
+        setReccomended(false);
+        setSelectedOption(value);
+        console.log('selected: ' + selectedOption);
+
+        setFilteredData(result);
+    }
 
 
     useEffect(() => {
@@ -59,21 +98,38 @@ const Home = () => {
         <> 
                 <div className="home">
                     <div className="home-start">
-                        <h1 className="home-start__heading">I want to stay at a...</h1>
+                        <h1 className="home-start__heading">I want to stay at...</h1>
                         <div>
                             <button
-                                className="home-start__tag space__marg--r home-start__tag--active">
-                                Hotel</button>
-                            <button className="home-start__tag ">
-                                B&B</button>
+                            onClick={() => {
+                                handleOption('All')
+                            }}
+                            className={`home-start__tag space__marg--r ${selectedOption === 'All' ? 'home-start__tag--active' : ''}`}>
+                            All</button>
+                            <button
+                            onClick={() => {
+                                handleOption('Hotel')
+                            }} className={`home-start__tag space__marg--r ${selectedOption === 'Hotel' ? 'home-start__tag--active' : ''}`}>
+                                Hotel
+                            </button>
+                            <button
+                            onClick={() => {
+                                handleOption('B&B')
+                            }}
+                            className={`home-start__tag ${selectedOption === 'B&B' ? 'home-start__tag--active' : ''}`}>
+                                B&B
+                            </button>
                         </div>
-                        <input className="home-start__search" placeholder="Search by name or region"></input>
+                        <input
+                        onChange={handleSearch}
+                        className="home-start__search" placeholder="Search by name or region"></input>
                     {loading ? <img className="loader loader--short" src={img} alt="pulsating logo"></img> : 
                     <div className=" searchresult">
-                        <div className="searchresult__tag flex">
+                        {recommended ? <div className="searchresult__tag flex">
                             <TiStarFullOutline className="searchresult__tag-icon"></TiStarFullOutline>
                             <p className="space__marg--l">Recommended</p>
-                        </div>
+                            </div> : 
+                                <div className="searchresult__tag flex"><p className="space__marg--l">Results</p></div>}
                         <ul className="searchresult__list">
                             {filteredData?.map(function (item) {
                                 return (
