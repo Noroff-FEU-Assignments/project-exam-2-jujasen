@@ -131,25 +131,27 @@ const Home = () => {
                         className="home-start__search" placeholder="Search by name or region"></input>
                     {loading ? <img className="loader loader--short" src={img} alt="pulsating logo"></img> : 
                     <div className=" searchresult">
-                        {recommended ? <div className="searchresult__tag flex">
-                            <TiStarFullOutline className="searchresult__tag-icon"></TiStarFullOutline>
-                            <p className="space__marg--l">Recommended</p>
-                            </div> : 
+                            {error ? <div class="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                    </div> : <div>{recommended ? <div className="searchresult__tag flex">
+                                <TiStarFullOutline className="searchresult__tag-icon"></TiStarFullOutline>
+                                <p className="space__marg--l">Recommended</p>
+                            </div> :
                                 <div className="searchresult__tag flex"><p className="space__marg--l">Results</p></div>}
-                        <ul className="searchresult__list">
-                            {filteredData?.map(function (item) {
-                                return (
-                                    <div key={item.id}>
-                                        <SearchResult
-                                            id={item.id}
-                                            name={item.name}
-                                            type={item.type}
-                                            region={item.region}>
-                                        </SearchResult>
-                                    </div>
-                                )
-                            })}
-                        </ul>
+                                <ul className="searchresult__list">
+                                    {filteredData?.map(function (item) {
+                                        return (
+                                            <div key={item.id}>
+                                                <SearchResult
+                                                    id={item.id}
+                                                    name={item.name}
+                                                    type={item.type}
+                                                    region={item.region}>
+                                                </SearchResult>
+                                            </div>
+                                        )
+                                    })}
+                                </ul></div>}
+                        
                     </div>
                 }
 
