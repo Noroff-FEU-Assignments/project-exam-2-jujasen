@@ -1,0 +1,44 @@
+.book {
+    position: fixed;
+    top: 80px;
+    background-color: $white;
+    padding: 2rem!important;
+    width: 100%;
+    min-height: 100vh;
+    
+    &__title {
+        font-size: $fsizeL;
+        color: $primary;
+        font-weight: $fBlack;
+    }
+
+    &__header {
+        svg{
+            font-size: 30px;
+            color: $dark;
+        }
+    }
+
+    &__room {
+        background-color: $blue;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        border-radius: 5px;
+
+        &--active {
+            border: 2px solid $primary;
+        }
+    }
+
+    &__room-title {
+        font-size: $fsizeM;
+        font-weight: $fBold;
+        margin-bottom: 1rem;
+    }
+
+    &__room-info {
+        p {
+            font-size: $fsizeXS;
+        }
+    }
+}

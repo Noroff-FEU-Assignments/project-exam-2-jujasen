@@ -6,7 +6,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 import EstCard from '../components/EstCard';
 import axios from 'axios';
 import { BASE_URL, ACCOMMODATIONS_PATH } from '../utils/constants';
-import img from '../img/logo-dark.svg'
+import img from '../img/logo-dark.svg';
 
 
 const Accommodation = () => {

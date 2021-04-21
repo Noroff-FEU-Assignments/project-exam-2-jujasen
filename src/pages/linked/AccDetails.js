@@ -16,6 +16,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import uuid from 'react-uuid';
 import img from '../../img/logo-dark.svg'
+import Book from '../../components/Book';
+
 
 
 const AccDetails = () => {
@@ -23,6 +25,7 @@ const AccDetails = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { id } = useParams();
+    const [bookOpen, setBookOpen] = useState(false);
 
     useEffect(() => {
         const getDetail = async () => {
@@ -44,11 +47,15 @@ const AccDetails = () => {
         getDetail();
     }, [id, error])
 
-
+    const handleBookToggle = () => {
+        setBookOpen(!bookOpen);
+        console.log(bookOpen)
+    };
 
     return (
         <>
             <div className="accdetails">
+                {bookOpen? <Book onClick={handleBookToggle}></Book> : ""}
                 {loading ? <img className="loader" src={img} alt="pulsating logo"></img> : error ? <div class="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
                     </div> : <div>                <div className="header accdetails__header">
                     <div className="content">
@@ -69,8 +76,10 @@ const AccDetails = () => {
                                 <p className="accdetails__rating">{detail.stars} stars</p>
 
                             </div>
-                            <div className="accdetails__btn">
-                                <Button text="Book room"></Button>
+                            <div
+                            onClick={handleBookToggle}
+                             className="accdetails__btn">
+                                    <Button text="Book room"></Button>
                             </div>
                         </div>
                     </div>
