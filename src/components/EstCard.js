@@ -1,4 +1,4 @@
-import img from '../img/home.png'
+import uuid from 'react-uuid';
 import { TiStarFullOutline } from 'react-icons/ti'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -9,7 +9,6 @@ const EstCard= (props) => {
 
 
     return (
-        <>
             <Link className="no-link" to={`accommodation/details/${id}`}>
             <div className="estcard">
                 <div className="estcard__section flex">
@@ -24,8 +23,8 @@ const EstCard= (props) => {
                     <div>
                         <div className="estcard__stars flex flex--start">
                             {
-                                [...Array(stars)].map((i) => (
-                                    <TiStarFullOutline key={i}className="estcard__star"></TiStarFullOutline>
+                                [...Array(stars)].map(() => (
+                                    <TiStarFullOutline key={uuid()}className="estcard__star"></TiStarFullOutline>
                                 )
                             )}
                         </div> 
@@ -38,7 +37,6 @@ const EstCard= (props) => {
                 </div>
             </div>
             </Link>
-        </>
     )
 
 

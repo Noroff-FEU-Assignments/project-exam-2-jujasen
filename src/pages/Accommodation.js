@@ -52,7 +52,7 @@ const Accommodation = () => {
 
         if (value) {
             result = filteredData.filter((data) => {
-                const slicedValue = value.charAt(0).toUpperCase() + value.slice(1);
+                const slicedValue = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
                 return data.name.includes(slicedValue) || data.region.includes(slicedValue);
             });
             setFilteredData(result);
@@ -149,8 +149,8 @@ const Accommodation = () => {
                     </div> : filteredData?.map(function (item) {
                         return (
                                 <EstCard
-                                    key={item.id}
                                     id={item.id}
+                                    key={item.id}
                                     name={item.name}
                                     image={item.image}
                                     region={item.region}

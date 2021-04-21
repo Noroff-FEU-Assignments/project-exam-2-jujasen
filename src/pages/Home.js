@@ -9,7 +9,7 @@ import img from '../img/logo-blue.png'
 
 
 const Home = () => {
-    const [selectedOption, setSelectedOption] = useState('All');
+    const [selectedOption, setSelectedOption] = useState('');
     const [accommodations, setAccommodations] = useState([]);
     const [filteredData, setFilteredData] = useState(accommodations);
     const [error, setError] = useState(null);
@@ -22,7 +22,7 @@ const Home = () => {
 
         if (value) {
             result = filteredData.filter((data) => {
-                const slicedValue = value.charAt(0).toUpperCase() + value.slice(1);
+                const slicedValue = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
                 return data.name.includes(slicedValue) || data.region.includes(slicedValue);
             });
             setFilteredData(result);
@@ -53,6 +53,12 @@ const Home = () => {
 
         setFilteredData(result);
     }
+
+    useEffect(() => {
+        if(!selectedOption) {
+            setReccomended(true);
+        }
+    }, [selectedOption])
 
 
     useEffect(() => {
