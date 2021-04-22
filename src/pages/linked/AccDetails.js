@@ -125,7 +125,7 @@ const AccDetails = () => {
                                 Sundts Veg 50B, 5221 Nesttun
                         </div>
                         </div>
-                        <h2 className="subtitle">Activities in Fana Region</h2>
+                        <h2 className="subtitle">Activities in {detail.region} Region</h2>
                         <div className="accdetails__activities">
                             <ul>
                                 <Link to="/">

@@ -1,0 +1,66 @@
+.form {
+    margin: 2rem 0;
+
+    &__fieldset {
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+
+    &__item {
+        margin-bottom: 2rem;
+    }
+
+    &__input {
+        width: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+        border-radius: 10px;
+        border: 2px solid $primary;
+        margin-bottom: 0.5rem;
+    }
+
+    &__label {
+        font-weight: $fSemiBold;
+        margin-bottom: 0.5rem;
+    }
+
+    &__error {
+        color: rgb(173, 2, 2);
+    }
+
+    .react-datepicker {
+        border-radius: 10px;
+        overflow: hidden;
+        border: 2px solid $dark;
+    }
+
+    .react-datepicker-ignore-onclickoutside {
+        width: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+        border-radius: 10px;
+        border: 2px solid $primary;
+        margin-bottom: 0.5rem;
+    }
+
+    .react-datepicker__input-container {
+        input {
+        width: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+        border-radius: 10px;
+        border: 2px solid $primary;
+        margin-bottom: 0.5rem;
+        }
+    }
+
+    .react-wrapper {
+        width: 100%;
+    }
+
+    .react-datepicker-wrapper {
+        display: block;
+    }
+
+}

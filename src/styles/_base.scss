@@ -40,6 +40,7 @@ ul {
 .mini-title {
     font-size: $fsizeS;
     font-weight: $fSemiBold;
+    margin-bottom: 1rem;
 }
 
 .space {
@@ -118,4 +119,8 @@ ul {
     font-weight: $fBold;
     font-size: $fsizeSS;
     margin-bottom: 1rem;
+}
+
+.pretty input:checked ~ .state.p-primary label:after, .pretty.p-toggle .state.p-primary label:after {
+    background-color: #730998!important;
 }
