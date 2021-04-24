@@ -33,7 +33,6 @@ const AccDetails = () => {
                 const response = await axios.get(`${BASE_URL}${ACCOMMODATIONS_PATH}/${id}`);
                 if (response.status === 200) {
                     setDetail(response.data);
-                    console.log(response.data)
                 } else {
                     console.log(error)
                     setError('An error occurred');
@@ -49,13 +48,12 @@ const AccDetails = () => {
 
     const handleBookToggle = () => {
         setBookOpen(!bookOpen);
-        console.log(bookOpen)
     };
 
     return (
         <>
             <div className="accdetails">
-                {bookOpen? <Book onClick={handleBookToggle}></Book> : ""}
+                {bookOpen ? <Book acc={detail} onChildClick={handleBookToggle} ></Book> : ""}
                 {loading ? <img className="loader" src={img} alt="pulsating logo"></img> : error ? <div class="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
                     </div> : <div>                <div className="header accdetails__header">
                     <div className="content">
@@ -76,8 +74,7 @@ const AccDetails = () => {
                                 <p className="accdetails__rating">{detail.stars} stars</p>
 
                             </div>
-                            <div
-                            onClick={handleBookToggle}
+                                <div onClick={handleBookToggle}
                              className="accdetails__btn">
                                     <Button text="Book room"></Button>
                             </div>

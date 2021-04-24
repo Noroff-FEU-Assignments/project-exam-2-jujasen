@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from "react-datepicker";
 import Button from './Button';
-import { Formik, useFormikContext } from 'formik'
+import { Formik } from 'formik'
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import axios from 'axios';
+import { BASE_URL, ENQUIRIES_PATH } from '../utils/constants'
 
 const validationSchema = yup.object().shape({
     fromDate: yup.date()
@@ -22,13 +24,19 @@ const validationSchema = yup.object().shape({
         .required("*Email is required"),
     phoneNumber: yup.number()
         .integer("*Phone number is invalid")
-        .required("*Phone number is required")
+        .required("*Phone number is required"),
+    request: yup.string()
 });
 
 
-const Book = ({ onClick }) => {
+const Book = (props) => {
 
+    const { acc, onChildClick } = props;
+
+    const [submitting, setSubmitting] = useState(false);
     const [roomSelected, setRoomSelected] = useState('standard');
+    const [roomPrice, setRoomPrice] = useState(acc.room_standard_price);
+    const [wantBreakfast, setWantBreakfast] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
 
@@ -36,29 +44,42 @@ const Book = ({ onClick }) => {
         setRoomSelected(type);
     }
 
+    const handleBreakfast = () => {
+        setWantBreakfast(!wantBreakfast);
+    };
+
     const { book, handleSubmit } = useForm({
         resolver: yupResolver(validationSchema),
     });
 
-
+    
     const onSubmit = async data => {
 
         // setSubmitting(true);
         // setLoginError(null);
 
-        console.log(data.fromDate);
-        
+        const booking = {
+            establishment: acc.name,
+            room_type: roomSelected,
+            room_price: roomPrice,
+            breakfast: wantBreakfast,
+            breakfast_price: acc.breakfast_price,
+            date_from: data.fromDate,
+            date_to: data.toDate,
+            name_first: data.firstName,
+            name_last: data.lastName,
+            email: data.email,
+            phone: data.phoneNumber,
+            request: data.request
+        }
+        console.log(booking);
 
-        // try {
-        //     const response = await axios.post(`${BASE_URL}${AUTH_PATH}`, data);
-        //     console.log('response', response.data);
-        //     setAuth(response.data);
-        // } catch (error) {
-        //     console.log('error', error);
-        //     setLoginError(error.toString());
-        // } finally {
-        //     setSubmitting(false);
-        // }
+        try {
+            const response = await axios.post(`${BASE_URL}${ENQUIRIES_PATH}`, booking);
+            console.log('response', response.data);
+        } catch (error) {
+            console.log('error', error);
+        }
     };
 
     return (
@@ -66,74 +87,81 @@ const Book = ({ onClick }) => {
             <div className="book">
                 <div className="book__header flex flex--space">
                     <h2 className="book__title">Book a room</h2>
-                    <div onClick={onClick}>
+                    <div className="pointer" onClick={onChildClick}>
                         <BsX></BsX>
                     </div>   
                 </div>
-                <h3 className="subtitle">Hotel name</h3>
+                <h3 className="subtitle">{acc.name}</h3>
                 <div className="book__rooms">
                     <p className="book__caption">Select room</p>
                     <div onClick={() => {
                         selectRoom("standard");
+                        setRoomPrice(acc.room_standard_price)
                     }} className={`book__room  ${roomSelected === 'standard' ? 'book__room--active' : ''}`}>
                         <h4 className="book__room-title">Standard room</h4>
                         <div className="book__room-desc flex flex--space">
                             <div className="book__room-info flex flex--space">
                                 <BsPeopleFill></BsPeopleFill>
-                                <p>Up to 3 people</p>
+                                <p>Up to {acc.max_people} people</p>
                             </div>
                             <div className="estcard__price">
-                                kr 1000 <span>per night</span></div>
+                                kr {acc.room_standard_price} <span>per night</span></div>
                             </div>
                     </div>
-                    <div onClick={() => {
+                    {acc.room_superior ? <div onClick={() => {
                         selectRoom("superior");
+                        setRoomPrice(acc.room_superior_price)
                     }} className={`book__room  ${roomSelected === 'superior' ? 'book__room--active' : ''}`}>
                         <h4 className="book__room-title">Superior room</h4>
                         <div className="book__room-desc flex flex--space">
                             <div className="book__room-info flex flex--space">
                                 <BsPeopleFill></BsPeopleFill>
-                                <p>Up to 3 people</p>
+                                <p>Up to {acc.max_people} people</p>
                             </div>
                             <div className="estcard__price">
-                                kr 1300 <span>per night</span></div>
+                                kr {acc.room_superior_price} <span>per night</span></div>
                         </div>
-                    </div>
-                    <div onClick={() => {
+                    </div> : ''}
+                    {acc.room_luxury ? <div onClick={() => {
                         selectRoom("luxury");
+                        setRoomPrice(acc.room_luxury_price)
                     }} className={`book__room  ${roomSelected === 'luxury' ? 'book__room--active' : ''}`}>
                         <h4 className="book__room-title">Luxury room</h4>
                         <div className="book__room-desc flex flex--space">
                             <div className="book__room-info flex flex--space">
                                 <BsPeopleFill></BsPeopleFill>
-                                <p>Up to 3 people</p>
+                                <p>Up to {acc.max_people} people</p>
                             </div>
                             <div className="estcard__price">
-                                kr 1600 <span>per night</span></div>
+                                kr {acc.room_luxury_price} <span>per night</span></div>
                         </div>
-                    </div>
+                    </div> : ''}
+                    
                 </div>
                 <h3 className="subtitle">Your booking</h3>
                 <div className="book__section">
-                    <h5 className="mini-title">Triathon Kokstad</h5>
-                    <p>Standard room</p>
-
-                    <div className=" book__check pretty p-icon p-round p-jelly">
+                    <h5 className="mini-title">{acc.name}</h5>
+                    <p>{roomSelected.charAt(0).toUpperCase() + roomSelected.slice(1)} room</p>
+                    {acc.facility_breakfast ? <div 
+                    onClick={handleBreakfast}
+                    className=" book__check pretty p-icon p-round p-jelly">
                         <input type="checkbox" />
                         <div className="state p-primary">
                             <i className="icon mdi mdi-check"></i>
-                            <label>Include breakfast kr 200,- per day</label>
+                            <label>Include breakfast kr {acc.breakfast_price},- per day</label>
                         </div>
-                    </div>
+                    </div> : ''}
+                    
                 </div>
-                <Formik initialValues={{ fromDate: "", toDate: "",firstName: "", lastName: "", email: "", phoneNumber: "" }} validationSchema={validationSchema}>
+                <Formik initialValues={{ fromDate: "", toDate: "",firstName: "", lastName: "", email: "", phoneNumber: "", request: "" }} validationSchema={validationSchema}>
                     {({ values,
                         errors,
                         handleChange,
                         setFieldValue,
                     handleBlur }) => ( 
-                        <form onSubmit={handleSubmit(onSubmit(values))} className="form">
+                        <form onSubmit={errors.length === undefined ? handleSubmit(onSubmit(values)) : (e) => e.preventDefault()} className="form">
                             <fieldset className="form__fieldset">
+                                {console.log(errors.length)}
                             <div className="form__item">
                                 <p
                                     className="form__label"
@@ -163,7 +191,7 @@ const Book = ({ onClick }) => {
                                     id="toDate"
                                     ref={book}
                                     selectsEnd
-                                    placeholderText="Select Start Date"
+                                    placeholderText="Select End Date"
                                     selected={endDate}
                                     endDate={endDate}
                                     minDate={startDate}
@@ -245,10 +273,14 @@ const Book = ({ onClick }) => {
                                 >Special request</p>
                                 <textarea
                                     id="request"
+                                    ref={book}
                                     className="form__input"
                                     placeholder="Describe your request"
                                     type="text"
-                                    rows="3">
+                                    rows="3"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.request}>
                                 </textarea>
                             </div>
                             <div className="flex flex--center">
@@ -270,3 +302,7 @@ const Book = ({ onClick }) => {
 }
 
 export default Book;
+
+Book.propTypes = {
+    acc: PropTypes.object
+};
