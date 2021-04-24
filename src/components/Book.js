@@ -41,12 +41,12 @@ const Book = ({ onClick }) => {
     });
 
 
-    const onSubmit = async (d) => {
+    const onSubmit = async data => {
 
         // setSubmitting(true);
         // setLoginError(null);
 
-        console.log(d);
+        console.log(data.fromDate);
         
 
         // try {
@@ -126,14 +126,13 @@ const Book = ({ onClick }) => {
                         </div>
                     </div>
                 </div>
-                <Formik initialValues={{ fromDate: {startDate}, toDate: {endDate},firstName: "", lastName: "", email: "", phoneNumber: "" }} validationSchema={validationSchema}>
+                <Formik initialValues={{ fromDate: "", toDate: "",firstName: "", lastName: "", email: "", phoneNumber: "" }} validationSchema={validationSchema}>
                     {({ values,
                         errors,
                         handleChange,
                         setFieldValue,
                     handleBlur }) => ( 
-                        <form onSubmit={handleSubmit(onSubmit)} className="form">
-                            {console.log(values)}
+                        <form onSubmit={handleSubmit(onSubmit(values))} className="form">
                             <fieldset className="form__fieldset">
                             <div className="form__item">
                                 <p
@@ -150,7 +149,7 @@ const Book = ({ onClick }) => {
                                     value={values.fromDate}
                                     onChange={(date) => {
                                         setStartDate(date);
-                                        setFieldValue(date);
+                                        setFieldValue('fromDate', date);
                                     }}
                                 />
                                 <p className="form__error">{errors.fromDate}</p>
@@ -171,7 +170,7 @@ const Book = ({ onClick }) => {
                                     value={values.toDate}
                                     onChange={(date) => {
                                         setEndDate(date);
-                                        setFieldValue(date);
+                                        setFieldValue('toDate', date);
                                     }}
                                 />
                                 <p className="form__error">{errors.toDate}</p>
