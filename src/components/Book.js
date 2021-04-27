@@ -1,4 +1,4 @@
-import { BsX, BsPeopleFill } from 'react-icons/bs';
+import { BsX, BsPeopleFill, BsCheckCircle } from 'react-icons/bs';
 import { RiHotelLine, RiHome5Line } from 'react-icons/ri';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { BASE_URL, ENQUIRIES_PATH } from '../utils/constants'
+import { useHistory } from 'react-router-dom';
 
 const validationSchema = yup.object().shape({
     fromDate: yup.date()
@@ -37,12 +38,16 @@ const Book = (props) => {
     const [bookID, setBookID] = useState(null);
     const [booking, setBooking] = useState(null);
     const [nights, setNights] = useState(null);
+    const [confirmed, setConfirmed] = useState(false);
+    const [canceled, setCanceled] = useState(false)
     const [roomSelected, setRoomSelected] = useState('standard');
     const [roomPrice, setRoomPrice] = useState(acc.room_standard_price);
     const [wantBreakfast, setWantBreakfast] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
 
+    const history = useHistory();
+    
     const selectRoom = (type) => {
         setRoomSelected(type);
     }
@@ -55,7 +60,10 @@ const Book = (props) => {
         resolver: yupResolver(validationSchema),
     });
 
-    console.log(bookID);
+    const handleConfirm = () => {
+        setConfirmed(true);
+    }
+
 
     useEffect(() => {
         if(bookID) {
@@ -145,10 +153,30 @@ const Book = (props) => {
                             <p>{booking.request}</p>
                         </div>
                     </div>
-                    <div className="flex flex--center">
-                        <button className=" button button--stroked space__marg--r">Cancel</button>
-                        <button className="button space__marg--l">CONFIRM</button>
-                    </div>
+                    {confirmed ? 
+                            <div className=" booking__confirm flex flex--center">
+                                <BsCheckCircle></BsCheckCircle>
+                                <div className=" booking__confirm-text">
+                                    <p>Thank you!</p>
+                                    <p>Your booking is confirmed</p>
+                                </div>
+                            </div>
+                    : 
+                            <div className="flex flex--center">
+                                <button className=" button button--stroked space__marg--r" onClick={ async () => {
+                                    
+                                    try {
+                                        await axios.delete(`${BASE_URL}${ENQUIRIES_PATH}/${bookID}`);
+                                    } catch (error) {
+                                        console.log(error);
+                                    } finally {
+                                        history.push('/accommodation');
+                                    }
+                                }}>Cancel</button>
+                                <button onClick={handleConfirm} className="button space__marg--l">CONFIRM</button>
+                            </div>
+                    }
+                    
                 </div>
                  : 
                 <div>

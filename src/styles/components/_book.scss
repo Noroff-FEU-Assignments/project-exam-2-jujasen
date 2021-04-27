@@ -75,5 +75,16 @@
                 font-size: 25px;
             }
         }
+
+        &__confirm {
+            svg {
+                font-size: 50px;
+                color: rgb(2, 180, 2);
+            }
+        }
+
+        &__confirm-text {
+            margin-left: 1rem;
+        }
     }
 }
