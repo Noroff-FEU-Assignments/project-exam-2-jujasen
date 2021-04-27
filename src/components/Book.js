@@ -1,4 +1,5 @@
 import { BsX, BsPeopleFill } from 'react-icons/bs';
+import { RiHotelLine, RiHome5Line } from 'react-icons/ri';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from "react-datepicker";
@@ -35,6 +36,7 @@ const Book = (props) => {
     const [submitting, setSubmitting] = useState(false);
     const [bookID, setBookID] = useState(null);
     const [booking, setBooking] = useState(null);
+    const [nights, setNights] = useState(null);
     const [roomSelected, setRoomSelected] = useState('standard');
     const [roomPrice, setRoomPrice] = useState(acc.room_standard_price);
     const [wantBreakfast, setWantBreakfast] = useState(false);
@@ -74,11 +76,19 @@ const Book = (props) => {
 
     }, [bookID])
 
+    useEffect(() => {
+        if (booking) {
+            const nights = Math.ceil(Math.abs(new Date(booking.date_from) - new Date(booking.date_to)) / (1000 * 60 * 60 * 24));
+
+            setNights(nights);
+        }
+    }, [booking])
+
 
     return (
         <>
             <div className="book">
-                <div className="book__header flex flex--space">
+                <div className="book__header flex flex--space space__marg--b">
                     <h2 className="book__title">Book a room</h2>
                     <div className="pointer" onClick={onChildClick}>
                         <BsX></BsX>
@@ -88,8 +98,56 @@ const Book = (props) => {
 
                 {booking ? 
                 <div className="book__section">
-                    <div className="book__booking">
-                        
+                        <div className="booking">
+                        <div className="booking__est flex flex--start">
+                                {booking.est_type === 'Hotel' ? <RiHotelLine></RiHotelLine> : <RiHome5Line></RiHome5Line>}
+                                <p>{booking.establishment}</p>
+                        </div>
+                        <div className="flex flex--space">
+                                <div>
+                                    <span className="capitalize">{booking.room_type}</span> room,&nbsp;
+                                    {nights} nights
+                                </div>
+                                kr {booking.room_price * nights},-
+                        </div>
+                        {booking.breakfast ? 
+                        <div className="flex flex--space">
+                            <div>
+                                With breakfast,&nbsp;
+                                {nights} nights
+                            </div>
+                            kr {booking.breakfast_price*nights},-
+                        </div> : ''}
+                        <div className="flex flex--space space__marg--b">
+                            <div className="semi-bold">
+                                TOTAL
+                            </div>
+                                {booking.breakfast ? <div className="semi-bold">kr {(booking.room_price + booking.breakfast_price) * nights},-</div> : <div className="semi-bold">kr {(booking.room_price) * nights},-</div>}
+                        </div>
+                        <div className="semi-bold space__marg--b">
+                                From date / To date
+                            <p>{booking.date_from} - {booking.date_to}</p>
+                        </div>
+                        <div className="semi-bold space__marg--b">
+                            Full name
+                        <p>{booking.name_first} {booking.name_last}</p>
+                        </div>
+                        <div className="semi-bold space__marg--b">
+                            Email
+                            <p>{booking.email}</p>
+                        </div>
+                        <div className="semi-bold space__marg--b">
+                            Phone number
+                            <p>{booking.phone}</p>
+                        </div>
+                        <div className="semi-bold space__marg--b">
+                            Special request
+                            <p>{booking.request}</p>
+                        </div>
+                    </div>
+                    <div className="flex flex--center">
+                        <button className=" button button--stroked space__marg--r">Cancel</button>
+                        <button className="button space__marg--l">CONFIRM</button>
                     </div>
                 </div>
                  : 
@@ -174,7 +232,9 @@ const Book = (props) => {
                                 name_last: data.lastName,
                                 email: data.email,
                                 phone: data.phoneNumber,
-                                request: data.request
+                                request: data.request,
+                                est_type: acc.type,
+                                confirmed: false
                             }
                             console.log(booking);
 
