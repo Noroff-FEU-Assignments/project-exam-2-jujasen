@@ -12,7 +12,7 @@ const Home = () => {
     const [selectedOption, setSelectedOption] = useState('');
     const [accommodations, setAccommodations] = useState([]);
     const [filteredData, setFilteredData] = useState(accommodations);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
     const [recommended, setReccomended] = useState(true);
 
@@ -70,7 +70,7 @@ const Home = () => {
                     setFilteredData(response.data);
                     console.log(response.data)
                 } else {
-                    setError('An error occurred');
+                    setError(true);
                 }
             } catch (error) {
                 setError(error.toString());

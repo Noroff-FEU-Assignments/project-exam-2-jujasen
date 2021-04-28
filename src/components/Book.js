@@ -44,6 +44,8 @@ const Book = (props) => {
     const [wantBreakfast, setWantBreakfast] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const history = useHistory();
 
@@ -76,6 +78,7 @@ const Book = (props) => {
                     }
                 } catch (error) {
                     console.log(error);
+                    setError(true);
                 }
             };
             getDetail();
@@ -188,6 +191,8 @@ const Book = (props) => {
                         }
                     </div>
                 </div>
+                    : error ? <div className="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                    </div>
                  : 
                 <div>
                         <div className="book__header flex flex--space space__marg--b">
