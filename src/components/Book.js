@@ -39,7 +39,6 @@ const Book = (props) => {
     const [booking, setBooking] = useState(null);
     const [nights, setNights] = useState(null);
     const [confirmed, setConfirmed] = useState(false);
-    const [canceled, setCanceled] = useState(false)
     const [roomSelected, setRoomSelected] = useState('standard');
     const [roomPrice, setRoomPrice] = useState(acc.room_standard_price);
     const [wantBreakfast, setWantBreakfast] = useState(false);
@@ -47,7 +46,7 @@ const Book = (props) => {
     const [endDate, setEndDate] = useState(new Date());
 
     const history = useHistory();
-    
+
     const selectRoom = (type) => {
         setRoomSelected(type);
     }
@@ -96,64 +95,75 @@ const Book = (props) => {
     return (
         <>
             <div className="book">
-                <div className="book__header flex flex--space space__marg--b">
-                    <h2 className="book__title">Book a room</h2>
-                    <div className="pointer" onClick={onChildClick}>
-                        <BsX></BsX>
-                    </div>   
-                </div>
-                <h3 className="subtitle">{booking ? `Your booking #${booking.id}` : acc.name}</h3>
-
                 {booking ? 
-                <div className="book__section">
+                    <div>
+                    <div className="book__header flex flex--space space__marg--b">
+                            <h2 className="book__title">{`Your booking #${booking.id}`}</h2>
+                            {confirmed ? <div className="pointer" onClick={onChildClick}>
+                                <BsX></BsX>
+                            </div> : <div className="pointer" onClick={async () => {
+
+                                try {
+                                    await axios.delete(`${BASE_URL}${ENQUIRIES_PATH}/${bookID}`);
+                                } catch (error) {
+                                    console.log(error);
+                                } finally {
+                                    history.push('/accommodation');
+                                }
+                            }}>
+                                <BsX></BsX>
+                            </div>}
+                            
+                    </div>
+                    <div className="book__section">
                         <div className="booking">
-                        <div className="booking__est flex flex--start">
+                            <div className="booking__est flex flex--start">
                                 {booking.est_type === 'Hotel' ? <RiHotelLine></RiHotelLine> : <RiHome5Line></RiHome5Line>}
                                 <p>{booking.establishment}</p>
-                        </div>
-                        <div className="flex flex--space">
+                            </div>
+                            <div className="flex flex--space">
                                 <div>
                                     <span className="capitalize">{booking.room_type}</span> room,&nbsp;
-                                    {nights} nights
-                                </div>
-                                kr {booking.room_price * nights},-
-                        </div>
-                        {booking.breakfast ? 
-                        <div className="flex flex--space">
-                            <div>
-                                With breakfast,&nbsp;
                                 {nights} nights
                             </div>
-                            kr {booking.breakfast_price*nights},-
-                        </div> : ''}
-                        <div className="flex flex--space space__marg--b">
-                            <div className="semi-bold">
-                                TOTAL
-                            </div>
-                                {booking.breakfast ? <div className="semi-bold">kr {(booking.room_price + booking.breakfast_price) * nights},-</div> : <div className="semi-bold">kr {(booking.room_price) * nights},-</div>}
-                        </div>
-                        <div className="semi-bold space__marg--b">
-                                From date / To date
-                            <p>{booking.date_from} - {booking.date_to}</p>
-                        </div>
-                        <div className="semi-bold space__marg--b">
-                            Full name
-                        <p>{booking.name_first} {booking.name_last}</p>
-                        </div>
-                        <div className="semi-bold space__marg--b">
-                            Email
-                            <p>{booking.email}</p>
-                        </div>
-                        <div className="semi-bold space__marg--b">
-                            Phone number
-                            <p>{booking.phone}</p>
-                        </div>
-                        <div className="semi-bold space__marg--b">
-                            Special request
-                            <p>{booking.request}</p>
-                        </div>
+                            kr {booking.room_price * nights},-
                     </div>
-                    {confirmed ? 
+                            {booking.breakfast ?
+                                <div className="flex flex--space">
+                                    <div>
+                                        With breakfast,&nbsp;
+                            {nights} nights
+                        </div>
+                        kr {booking.breakfast_price * nights},-
+                    </div> : ''}
+                            <div className="flex flex--space space__marg--b">
+                                <div className="semi-bold">
+                                    TOTAL
+                        </div>
+                                {booking.breakfast ? <div className="semi-bold">kr {(booking.room_price + booking.breakfast_price) * nights},-</div> : <div className="semi-bold">kr {(booking.room_price) * nights},-</div>}
+                            </div>
+                            <div className="semi-bold space__marg--b">
+                                From date / To date
+                        <p>{booking.date_from} - {booking.date_to}</p>
+                            </div>
+                            <div className="semi-bold space__marg--b">
+                                Full name
+                    <p>{booking.name_first} {booking.name_last}</p>
+                            </div>
+                            <div className="semi-bold space__marg--b">
+                                Email
+                        <p>{booking.email}</p>
+                            </div>
+                            <div className="semi-bold space__marg--b">
+                                Phone number
+                        <p>{booking.phone}</p>
+                            </div>
+                            <div className="semi-bold space__marg--b">
+                                Special request
+                        <p>{booking.request}</p>
+                            </div>
+                        </div>
+                        {confirmed ?
                             <div className=" booking__confirm flex flex--center">
                                 <BsCheckCircle></BsCheckCircle>
                                 <div className=" booking__confirm-text">
@@ -161,10 +171,10 @@ const Book = (props) => {
                                     <p>Your booking is confirmed</p>
                                 </div>
                             </div>
-                    : 
+                            :
                             <div className="flex flex--center">
-                                <button className=" button button--stroked space__marg--r" onClick={ async () => {
-                                    
+                                <button className=" button button--stroked space__marg--r" onClick={async () => {
+
                                     try {
                                         await axios.delete(`${BASE_URL}${ENQUIRIES_PATH}/${bookID}`);
                                     } catch (error) {
@@ -175,11 +185,18 @@ const Book = (props) => {
                                 }}>Cancel</button>
                                 <button onClick={handleConfirm} className="button space__marg--l">CONFIRM</button>
                             </div>
-                    }
-                    
+                        }
+                    </div>
                 </div>
                  : 
                 <div>
+                        <div className="book__header flex flex--space space__marg--b">
+                            <h2 className="book__title">Book a room</h2>
+                            <div className="pointer" onClick={onChildClick}>
+                                <BsX></BsX>
+                            </div>
+                        </div>
+                        <h3 className="subtitle">{booking ? `Your booking #${booking.id}` : acc.name}</h3>
                     <div className="book__rooms">
                         <p className="book__caption">Select room</p>
                         <div onClick={() => {
