@@ -8,7 +8,7 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
-import { BASE_URL, ENQUIRIES_PATH } from '../utils/constants'
+import { BASE_URL, ENQUIRIES_PATH } from '../utils/constants';
 import { useHistory } from 'react-router-dom';
 
 const validationSchema = yup.object().shape({
