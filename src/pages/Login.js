@@ -1,13 +1,14 @@
-import BackLink from '../components/BackLink';
 import Heading from '../components/Heading';
-import { useContext, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik'
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { BASE_URL, AUTH_PATH } from '../utils/constants';
-import AuthContext from '../utils/AuthContext';
+import getAuth from '../utils/getAuth';
+import saveAuth from '../utils/saveAuth';
+import { useHistory } from 'react-router-dom';
 
 const validationSchema = yup.object().shape({
     identifier: yup.string()
@@ -17,13 +18,28 @@ const validationSchema = yup.object().shape({
 });
 
 const Login = () => {
-
-    const [error, setError] = useState(null);
-    const [, setAuth] = useContext(AuthContext);
+    const [user, setUser] = useState([]);
+    const [loginError, setLoginError] = useState(null);
+    const history = useHistory();
 
     const { credentials } = useForm({
         resolver: yupResolver(validationSchema),
     });
+
+    const currentUser = getAuth();
+
+    useEffect(() => {
+        if (currentUser) {
+            setUser(currentUser);
+        }
+    }, [])
+    
+
+    if(currentUser.length > 0) {
+        console.log(user);
+    } else {
+        console.log(false);
+    }
 
 
     return (
@@ -38,19 +54,16 @@ const Login = () => {
                         validationSchema={validationSchema}
                         onSubmit={async (data) => {
 
-                            const credentials = {
-                                identifier: data.identifier,
-                                password: data.password
-                            }
-                            console.log(credentials);
+                            setLoginError(null);
 
                             try {
-                                const response = await axios.post(`${BASE_URL}${AUTH_PATH}`, credentials);
-                                setAuth(response.data);
+                                const response = await axios.post(`${BASE_URL}${AUTH_PATH}`, data);
                                 console.log('response', response.data);
+                                saveAuth(response.data)
+                                setUser(currentUser);
                             } catch (error) {
                                 console.log('error', error);
-                                setError(error.toString());
+                                setLoginError(error.toString());
                             };
                         }}>
                         {({ values,
@@ -88,6 +101,7 @@ const Login = () => {
                                 </div>
                                 <div className="flex flex--center">
                                     <button className="button" type="submit">Login</button>
+                                    {loginError}
                                 </div>
                             </Form>
                         )}
