@@ -1,0 +1,31 @@
+.panel {
+    padding-top: 85px;
+
+    &__section {
+        padding: $padS;
+    }
+
+    &__content {
+        background-color: $blue;
+        overflow: hidden;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+    }
+
+    &__heading {
+        background-color: $dark;
+        padding: 0.5rem 1rem;
+        color: $white;
+        font-weight: $fBold;
+    }
+
+    &__text {
+        padding: 1rem;
+    }
+
+    &__info {
+        margin-bottom: 1rem;
+        font-weight: $fSemiBold;
+        color: $primary;
+    }
+}

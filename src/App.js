@@ -8,6 +8,7 @@ import Accommodation from './pages/Accommodation';
 import AccDetails from './pages/linked/AccDetails';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
+import Panel from './pages/admin/Panel';
 
 function App() {
   return (
@@ -20,10 +21,11 @@ function App() {
           <Route path='/accommodation/details/:id' exact component={AccDetails}/>
           <Route path='/contact' exact component={Contact} />
         <Route path='/login' exact component={Login} />
+          <Route path='/panel' exact component={Panel} />
         </Switch>
         <Footer/>
       </Router>
-    // </AuthProvider>
+     </AuthProvider>
   );
 }
 

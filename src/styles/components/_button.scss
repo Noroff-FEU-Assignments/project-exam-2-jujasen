@@ -14,4 +14,9 @@
         background: none;
         color: $primary;
     }
+
+    &--small {
+        padding: 0.5rem 1rem;
+        text-transform: none;
+    }
 }

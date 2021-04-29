@@ -1,5 +1,5 @@
 import Heading from '../components/Heading';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Formik, Form } from 'formik'
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
@@ -27,9 +27,11 @@ const Login = () => {
         resolver: yupResolver(validationSchema),
     });
 
-    if (auth) {
-        console.log("userpresent")
-    }
+    useEffect(() => {
+        if (auth) {
+            history.push('/panel');
+        }
+    }, [auth, history]);
 
     return (
         <>
