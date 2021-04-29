@@ -19,4 +19,15 @@
         padding: 0.5rem 1rem;
         text-transform: none;
     }
+
+    &--simple {
+        background: none;
+        border: none;
+        color: $white;
+        text-decoration: underline;
+        text-decoration-thickness: 3px;
+        font-weight: $fSemiBold;
+        margin-right: 1rem;
+        cursor: pointer;
+    }
 }
