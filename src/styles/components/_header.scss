@@ -103,4 +103,14 @@
       }
     }
   }
+  &__contact {
+    margin-top: 0.5rem;
+    svg {
+      font-size: 20px;
+    }
+
+    p {
+      margin-left: 1rem;
+    }
+  }
 }
