@@ -1,6 +1,6 @@
 import './styles/main.scss';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-// import { AuthProvider } from './context/AuthContext';
+import { AuthProvider } from './utils/AuthContext';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -11,7 +11,7 @@ import Login from './pages/Login';
 
 function App() {
   return (
-    // <AuthProvider>
+    <AuthProvider>
       <Router>
         <Menu />
         <Switch>

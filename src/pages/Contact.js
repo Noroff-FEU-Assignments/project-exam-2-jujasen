@@ -1,7 +1,7 @@
 import BackLink from '../components/BackLink';
 import Heading from '../components/Heading';
 import { BsInfoSquare, BsEnvelope, BsPhone, BsCheckCircle } from 'react-icons/bs';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Formik, Form } from 'formik'
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';

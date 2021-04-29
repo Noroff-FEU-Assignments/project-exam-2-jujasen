@@ -1,4 +1,3 @@
-import BackLink from '../components/BackLink';
 import Heading from '../components/Heading';
 import { useContext, useState } from 'react';
 import { Formik, Form } from 'formik'
@@ -8,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { BASE_URL, AUTH_PATH } from '../utils/constants';
 import AuthContext from '../utils/AuthContext';
+import { useHistory } from 'react-router-dom';
 
 const validationSchema = yup.object().shape({
     identifier: yup.string()
@@ -20,11 +20,16 @@ const Login = () => {
 
     const [error, setError] = useState(null);
     const [, setAuth] = useContext(AuthContext);
+    const [auth] = useContext(AuthContext);
+    const history = useHistory();
 
     const { credentials } = useForm({
         resolver: yupResolver(validationSchema),
     });
 
+    if (auth) {
+        console.log("userpresent")
+    }
 
     return (
         <>
@@ -86,6 +91,10 @@ const Login = () => {
                                     />
                                     <p className="form__error">{errors.password}</p>
                                 </div>
+                                {error ? <div className="flex flex--center">{error}</div>
+                                    :
+                                    ''
+                                }
                                 <div className="flex flex--center">
                                     <button className="button" type="submit">Login</button>
                                 </div>
