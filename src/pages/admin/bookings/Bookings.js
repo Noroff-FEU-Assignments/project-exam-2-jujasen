@@ -65,7 +65,8 @@ const Bookings = () => {
                     <div className="admin-category__elems">
                         {newBookings?.map(function (item) {
                             return (
-                                <div key={item.id} className="admin-category__item">
+                                <Link className="no-link" key={item.id}  to={`bookings/details/${item.id}`}>
+                                <div className="admin-category__item">
                                     <div className="flex flex--space">
                                         <h4 className="admin-category__title">
                                             Booking #00{item.id}
@@ -86,6 +87,7 @@ const Bookings = () => {
                                         </div>
                                     </div>
                                 </div>
+                                </Link>
                             )
                         })}
                     </div>
@@ -96,6 +98,7 @@ const Bookings = () => {
                     <div className="admin-category__elems">
                         {confBookings?.map(function (item) {
                             return (
+                                <Link className="no-link" key={item.id} to={`bookings/details/${item.id}`}>
                                 <div key={item.id} className="admin-category__item">
                                     <div className="flex flex--space">
                                         <h4 className="admin-category__title">
@@ -117,6 +120,7 @@ const Bookings = () => {
                                         </div>
                                     </div>
                                 </div>
+                                </Link>
                             )
                         })}
                     </div>

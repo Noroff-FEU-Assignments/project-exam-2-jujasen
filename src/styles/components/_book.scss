@@ -56,35 +56,35 @@
 
         margin-top: 1rem;
     }
+}
 
-    .booking {
-        background-color: $blue;
-        border-radius: 10px;
-        padding: 1rem;
-        margin-bottom: 4rem;
+.booking {
+    background-color: $blue;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 4rem;
 
-        &__est {
-            margin-bottom: 1rem;
-            p {
-                font-size: $fsizeM;
-                font-weight: $fSemiBold;
-                margin-left: 0.5rem;
-            }
-
-            svg {
-                font-size: 25px;
-            }
+    &__est {
+        margin-bottom: 1rem;
+        p {
+            font-size: $fsizeM;
+            font-weight: $fSemiBold;
+            margin-left: 0.5rem;
         }
 
-        &__confirm {
-            svg {
-                font-size: 50px;
-                color: rgb(2, 180, 2);
-            }
+        svg {
+            font-size: 25px;
         }
+    }
 
-        &__confirm-text {
-            margin-left: 1rem;
+    &__confirm {
+        svg {
+            font-size: 50px;
+            color: rgb(2, 180, 2);
         }
+    }
+
+    &__confirm-text {
+        margin-left: 1rem;
     }
 }
