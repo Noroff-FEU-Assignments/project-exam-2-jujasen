@@ -4,6 +4,7 @@ import { useContext, useState, useEffect } from 'react';
 import Heading from '../../components/Heading';
 import axios from 'axios';
 import { BASE_URL, ENQUIRIES_PATH, MESSAGES_PATH, ACCOMMODATIONS_PATH } from '../../utils/constants';
+import { Link } from 'react-router-dom';
 
 const Panel = () => {
 
@@ -107,7 +108,9 @@ const Panel = () => {
                                 {confBookings?.length > 0 ? <p className="panel__info">There are currently {confBookings.length} unread bookings</p> : <p className="panel__info">There are no new bookings</p>}
                                 <div className="flex flex--space">
                                     {bookings?.length} total bookings
-                            <button className="button button--small">See bookings</button>
+                                    <Link to="panel/bookings">
+                                        <button className="button button--small">See bookings</button>
+                                    </Link>
                                 </div>
                             </div>}
                     </div>
@@ -129,7 +132,7 @@ const Panel = () => {
                     </div>
                     <div className="panel__content">
                         <h2 className="panel__heading">Establishments</h2>
-                        {messagesError ? <div className="panel__text">
+                        {estError ? <div className="panel__text">
                             <br /> Whoops, someone forgot to feed the hamsters that run this page :(
                         </div>
                             : <div className="panel__text">

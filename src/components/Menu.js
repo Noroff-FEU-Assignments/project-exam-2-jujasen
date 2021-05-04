@@ -58,10 +58,16 @@ const Menu = () => {
                             <Link onClick={handleToggle} className="menu__link" to='/contact'>
                             Contact us
                         </Link>
-                            {auth ? <div className="menu__link" onClick={() => {
+                            {auth ? 
+                            <>
+                            <Link onClick={handleToggle} className="menu__link" to='/panel'>
+                                    Admin panel
+                            </Link>
+                            <div className="menu__link" onClick={() => {
                                 logout();
                                 handleToggle();
                             }}>Log out</div> 
+                            </>
                             :
                             <Link onClick={handleToggle} className="menu__link" to='/login'>
                                     Log in

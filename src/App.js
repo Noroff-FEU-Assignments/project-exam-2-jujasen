@@ -9,6 +9,7 @@ import AccDetails from './pages/linked/AccDetails';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Panel from './pages/admin/Panel';
+import Bookings from './pages/admin/bookings/Bookings';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='/contact' exact component={Contact} />
         <Route path='/login' exact component={Login} />
           <Route path='/panel' exact component={Panel} />
+          <Route path='/panel/bookings' exact component={Bookings} />
         </Switch>
         <Footer/>
       </Router>
