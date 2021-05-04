@@ -119,8 +119,8 @@ const Panel = () => {
                                     <div className="flex flex--space">
                                         {bookings?.length} total bookings
                                     <Link to="panel/bookings">
-                                            <button className="button button--small">See bookings</button>
-                                        </Link>
+                                        <button className="button button--small">See bookings</button>
+                                    </Link>
                                     </div>
                                 </div>}
                         </div>
@@ -134,7 +134,9 @@ const Panel = () => {
                                     {repMessages?.length > 0 ? <p className="panel__info">There are currently {repMessages.length} unread messages</p> : <p className="panel__info">There are no new bookings</p>}
                                     <div className="flex flex--space">
                                         {messages?.length} total messages
-                            <button className="button button--small">See messages</button>
+                                    <Link to="panel/messages">
+                                        <button className="button button--small">See messages</button>
+                                    </Link>
                                     </div>
                                 </div>
                             }

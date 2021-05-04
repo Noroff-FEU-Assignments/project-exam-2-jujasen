@@ -11,6 +11,8 @@ import Login from './pages/Login';
 import Panel from './pages/admin/Panel';
 import Bookings from './pages/admin/bookings/Bookings';
 import BookingDetails from './pages/admin/bookings/BookingDetails'
+import Messages from './pages/admin/messages/Messages';
+import MessageDetails from './pages/admin/messages/MessageDetails';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
           <Route path='/panel' exact component={Panel} />
           <Route path='/panel/bookings' exact component={Bookings} />
           <Route path='/panel/bookings/details/:id' exact component={BookingDetails} />
+          <Route path='/panel/messages' exact component={Messages} />
+          <Route path='/panel/messages/details/:id' exact component={MessageDetails} />
         </Switch>
         <Footer/>
       </Router>
