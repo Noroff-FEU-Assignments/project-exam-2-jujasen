@@ -79,7 +79,9 @@ const Book = (props) => {
                 } catch (error) {
                     console.log(error);
                     setError(true);
-                }
+                } finally {
+                setLoading(false);
+            }
             };
             getDetail();
         }

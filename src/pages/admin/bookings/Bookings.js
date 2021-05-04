@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { BASE_URL, ENQUIRIES_PATH } from '../../../utils/constants';
+import img from '../../../img/logo-dark.svg';
 
 const Bookings = () => {
 
@@ -17,6 +18,8 @@ const Bookings = () => {
     const [newBookings, setNewBookings] = useState(null);
     const [confBookings, setConfBookings] = useState(null);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         if (!auth) {
@@ -35,6 +38,8 @@ const Bookings = () => {
             } catch (error) {
                 console.log(error);
                 setError(true);
+            } finally {
+                setLoading(false);
             }
         };
         getBookings();
@@ -57,7 +62,7 @@ const Bookings = () => {
                 <h2 className="header__subtitle">Bookings</h2>
             </div>
 
-            {error ? <div className="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(</div>
+            {loading ? <img className="loader" src={img} alt="pulsating logo"></img> : error ? <div className="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(</div>
                 :
             <div>
                 <div className="admin-category__section">

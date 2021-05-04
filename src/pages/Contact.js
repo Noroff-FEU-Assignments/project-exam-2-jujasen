@@ -27,6 +27,7 @@ const validationSchema = yup.object().shape({
 const Contact = () => {
 
     const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(null);
 
     const { message } = useForm({
         resolver: yupResolver(validationSchema),
@@ -92,6 +93,7 @@ const Contact = () => {
                                 console.log('response', response.data);;
                             } catch (error) {
                                 console.log('error', error);
+                                setError(error.toString());
                             } 
                         }}>
                         {({ values,
@@ -165,6 +167,7 @@ const Contact = () => {
                                         <p>Your message is sent</p>
                                     </div>
                                     </div> : <div className="flex flex--center">
+                                        {error ? <div className="flex flex--center">{error}</div> : ''}
                                         <button className="button" type="submit">Send message</button>
                                     </div>}
                                 

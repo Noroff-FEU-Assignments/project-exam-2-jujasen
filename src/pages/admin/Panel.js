@@ -5,6 +5,7 @@ import Heading from '../../components/Heading';
 import axios from 'axios';
 import { BASE_URL, ENQUIRIES_PATH, MESSAGES_PATH, ACCOMMODATIONS_PATH } from '../../utils/constants';
 import { Link } from 'react-router-dom';
+import img from '../../img/logo-dark.svg'
 
 const Panel = () => {
 
@@ -18,6 +19,7 @@ const Panel = () => {
     const [messagesError, setMessagesError] = useState('');
     const [est, setEst] = useState(null);
     const [estError, setEstError] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (!auth) {
@@ -36,6 +38,8 @@ const Panel = () => {
             } catch (error) {
                 console.log(error);
                 setBookingsError(true);
+            } finally {
+                setLoading(false);
             }
         };
         getBookings();
@@ -63,6 +67,8 @@ const Panel = () => {
             } catch (error) {
                 console.log('error', error);
                 setMessagesError(error);
+            } finally {
+                setLoading(false);
             }
         };
         getMessages();
@@ -85,6 +91,8 @@ const Panel = () => {
             } catch (error) {
                 console.log(error);
                 setEstError(true);
+            } finally {
+                setLoading(false);
             }
         };
         getEst();
@@ -96,55 +104,59 @@ const Panel = () => {
                 <div className="header">
                     <Heading className="header__title" title="Admin Panel" />
                 </div>
-                <div className="panel__section">
+                {loading ? <img className="loader" src={img} alt="pulsating logo"></img>
+                :
+                    <div className="panel__section">
 
-                    <div className="panel__content">
-                        <h2 className="panel__heading">Bookings</h2>
-                        {bookingsError ? <div className="panel__text">
-                            <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                        <div className="panel__content">
+                            <h2 className="panel__heading">Bookings</h2>
+                            {bookingsError ? <div className="panel__text">
+                                <br /> Whoops, someone forgot to feed the hamsters that run this page :(
                         </div>
-                            :
-                            <div className="panel__text">
-                                {confBookings?.length > 0 ? <p className="panel__info">There are currently {confBookings.length} unread bookings</p> : <p className="panel__info">There are no new bookings</p>}
-                                <div className="flex flex--space">
-                                    {bookings?.length} total bookings
+                                :
+                                <div className="panel__text">
+                                    {confBookings?.length > 0 ? <p className="panel__info">There are currently {confBookings.length} unread bookings</p> : <p className="panel__info">There are no new bookings</p>}
+                                    <div className="flex flex--space">
+                                        {bookings?.length} total bookings
                                     <Link to="panel/bookings">
-                                        <button className="button button--small">See bookings</button>
-                                    </Link>
-                                </div>
-                            </div>}
-                    </div>
-                    <div className="panel__content">
-                        <h2 className="panel__heading">Messages</h2>
-                        {messagesError ? <div className="panel__text">
-                            <br /> Whoops, someone forgot to feed the hamsters that run this page :(
-                        </div> 
-                        :
-                            <div className="panel__text">
-                                {repMessages?.length > 0 ? <p className="panel__info">There are currently {repMessages.length} unread bookings</p> : <p className="panel__info">There are no new bookings</p>}
-                                <div className="flex flex--space">
-                                    {messages?.length} total messages
-                            <button className="button button--small">See messages</button>
-                                </div>
-                            </div>
-                        }
-                        
-                    </div>
-                    <div className="panel__content">
-                        <h2 className="panel__heading">Establishments</h2>
-                        {estError ? <div className="panel__text">
-                            <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                                            <button className="button button--small">See bookings</button>
+                                        </Link>
+                                    </div>
+                                </div>}
                         </div>
-                            : <div className="panel__text">
-                                <p className="panel__info">{est?.length} total establishments</p>
-                                <div className="flex flex--space">
-                                    <button className="button button--small">Create new</button>
-                                    <button className="button button--small">See all</button>
+                        <div className="panel__content">
+                            <h2 className="panel__heading">Messages</h2>
+                            {messagesError ? <div className="panel__text">
+                                <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                        </div>
+                                :
+                                <div className="panel__text">
+                                    {repMessages?.length > 0 ? <p className="panel__info">There are currently {repMessages.length} unread messages</p> : <p className="panel__info">There are no new bookings</p>}
+                                    <div className="flex flex--space">
+                                        {messages?.length} total messages
+                            <button className="button button--small">See messages</button>
+                                    </div>
                                 </div>
-                            </div>}
-                        
+                            }
+
+                        </div>
+                        <div className="panel__content">
+                            <h2 className="panel__heading">Establishments</h2>
+                            {estError ? <div className="panel__text">
+                                <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                        </div>
+                                : <div className="panel__text">
+                                    <p className="panel__info">{est?.length} total establishments</p>
+                                    <div className="flex flex--space">
+                                        <button className="button button--small">Create new</button>
+                                        <button className="button button--small">See all</button>
+                                    </div>
+                                </div>}
+
+                        </div>
                     </div>
-                </div>
+            }
+                
             </div>
         </>
     )

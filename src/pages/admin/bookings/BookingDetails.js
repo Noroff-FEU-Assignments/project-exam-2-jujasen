@@ -8,6 +8,7 @@ import { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { BASE_URL, ENQUIRIES_PATH } from '../../../utils/constants';
 import { useParams } from 'react-router-dom';
+import img from '../../../img/logo-dark.svg'
 
 const BookingDetails = () => {
 
@@ -18,6 +19,8 @@ const BookingDetails = () => {
     const [nights, setNights] = useState(null);
     const [error, setError] = useState('');
     const [confirmed, setConfirmed] = useState(null);
+    const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         if (!auth) {
@@ -39,6 +42,8 @@ const BookingDetails = () => {
                 }
             } catch (error) {
                 setError(error.toString());
+            } finally {
+                setLoading(false);
             }
         };
         getDetails();
@@ -59,7 +64,8 @@ const BookingDetails = () => {
                 <Heading className="header__title" title="Admin Panel" />
                 <h2 className="header__subtitle">Booking Details</h2>
             </div>
-            {booking ?
+            {loading ? <img className="loader" src={img} alt="pulsating logo"></img>
+            : booking ?
                 <div className="page">
                     <div className="booking">
                         <div className="booking__est flex flex--start">
