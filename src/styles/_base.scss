@@ -55,6 +55,10 @@ ul {
     font-weight: $fSemiBold;
 }
 
+.no-marg-l {
+    margin-left: 0!important;
+}
+
 .space {
 
     &__marg {
@@ -68,7 +72,7 @@ ul {
         }
 
         &--b {
-            margin-bottom: 1rem;
+            margin-bottom: 1rem!important;
         }
     }
 

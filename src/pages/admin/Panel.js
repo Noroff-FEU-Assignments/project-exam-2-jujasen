@@ -131,7 +131,7 @@ const Panel = () => {
                         </div>
                                 :
                                 <div className="panel__text">
-                                    {repMessages?.length > 0 ? <p className="panel__info">There are currently {repMessages.length} unread messages</p> : <p className="panel__info">There are no new bookings</p>}
+                                    {repMessages?.length > 0 ? <p className="panel__info">There are currently {repMessages.length} unread messages</p> : <p className="panel__info">There are no new messages</p>}
                                     <div className="flex flex--space">
                                         {messages?.length} total messages
                                     <Link to="panel/messages">
