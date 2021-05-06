@@ -13,6 +13,7 @@ import Bookings from './pages/admin/bookings/Bookings';
 import BookingDetails from './pages/admin/bookings/BookingDetails'
 import Messages from './pages/admin/messages/Messages';
 import MessageDetails from './pages/admin/messages/MessageDetails';
+import CreateEst from './pages/admin/establishments/CreateEst';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path='/panel/bookings/details/:id' exact component={BookingDetails} />
           <Route path='/panel/messages' exact component={Messages} />
           <Route path='/panel/messages/details/:id' exact component={MessageDetails} />
+          <Route path='/panel/est/create' exact component={CreateEst} />
         </Switch>
         <Footer/>
       </Router>

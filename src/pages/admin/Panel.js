@@ -150,7 +150,9 @@ const Panel = () => {
                                 : <div className="panel__text">
                                     <p className="panel__info">{est?.length} total establishments</p>
                                     <div className="flex flex--space">
+                                        <Link to="panel/est/create">
                                         <button className="button button--small">Create new</button>
+                                        </Link>
                                         <button className="button button--small">See all</button>
                                     </div>
                                 </div>}

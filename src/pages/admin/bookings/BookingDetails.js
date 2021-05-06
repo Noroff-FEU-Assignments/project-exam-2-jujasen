@@ -1,6 +1,6 @@
 import AuthContext from '../../../utils/AuthContext';
 import { useHistory } from 'react-router-dom';
-import { BsX, BsPeopleFill, BsCheckCircle } from 'react-icons/bs';
+import { BsCheckCircle } from 'react-icons/bs';
 import { RiHotelLine, RiHome5Line } from 'react-icons/ri';
 import BackLink from '../../../components/BackLink';
 import Heading from '../../../components/Heading';

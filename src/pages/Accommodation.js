@@ -10,7 +10,7 @@ import img from '../img/logo-dark.svg';
 
 
 const Accommodation = () => {
-    const [priceLow, setpriceLow] = useState(true);
+    const [priceLow, setPriceLow] = useState(null);
     const [dropdownClosed, setDropdown] = useState("false");
     const [selectedOption, setSelectedOption] = useState('All');
     const [accommodations, setAccommodations] = useState([]);
@@ -26,25 +26,36 @@ const Accommodation = () => {
     const handleOption = (acctype) => {
         let value = acctype;
         let result = [];
-
-
         result = accommodations.filter((data) => {
             if (acctype === 'All') {
                 return data.type;
             }else {
                 return data.type.includes(value);
-
             }
         });
-
         setSelectedOption(value);
-
         setFilteredData(result);
     }
 
-    const changePrice = () => {
-        setpriceLow(!priceLow);
-    }
+    const changeSortLow = () => {
+        setPriceLow(true);
+    };
+
+    const changeSortHigh = () => {
+        setPriceLow(false);
+    };
+
+
+    useEffect(() => {
+        if (priceLow === true) {
+            let result = filteredData.sort((a, b) => a.room_standard_price - b.room_standard_price);
+
+            setFilteredData(result);
+        } else if (priceLow === false) {
+            let result = filteredData.sort((a, b) => b.room_standard_price - a.room_standard_price);
+            setFilteredData(result);
+        }
+    }, [priceLow, filteredData])
 
     const handleSearch = (e) => {
         let value = e.target.value;
@@ -61,10 +72,7 @@ const Accommodation = () => {
         if(value === '') {
             handleOption(selectedOption);
         }
-
     }
-
-
 
     useEffect(() => {
         const getAccommodations = async () => {
@@ -86,9 +94,6 @@ const Accommodation = () => {
         getAccommodations();
 
     }, [])
-
-
-
 
     return (
         <>
@@ -130,16 +135,16 @@ const Accommodation = () => {
 
                     <div className="header__filters flex flex--start">
                         <button 
-                        onClick={changePrice}
-                        className={`header__tag flex ${priceLow ? 'header__tag--active' : ''}`}>
+                            onClick={changeSortLow}
+                        className={`header__tag flex ${priceLow? 'header__tag--active' : ''}`}>
                             <GrMoney 
                             className={`header__tag-icon ${priceLow ? 'header__tag-icon--active' : ''} `}/>
                             <p>Low to high price</p>
                         </button>
                         <button 
-                        onClick={changePrice}
-                            className={`header__tag flex ${!priceLow ? 'header__tag--active' : ''}`}>
-                            <GrMoney className={`header__tag-icon ${!priceLow ? 'header__tag-icon--active' : ''} `} />
+                            onClick={changeSortHigh}
+                            className={`header__tag flex ${priceLow === false ? 'header__tag--active' : ''}`}>
+                            <GrMoney className={`header__tag-icon ${priceLow === false ? 'header__tag-icon--active' : ''} `} />
                             <p>High to low price</p>
                         </button>
                     </div>
