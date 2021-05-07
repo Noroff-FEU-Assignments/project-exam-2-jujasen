@@ -47,7 +47,7 @@ const MessageDetails = () => {
             }
         };
         getMessages();
-    }, [auth])
+    }, [id, auth])
 
     return (
         <div className="admin-details">

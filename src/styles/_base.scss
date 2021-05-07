@@ -37,6 +37,10 @@ ul {
     padding: $padS;
 }
 
+.pad-top {
+    padding-top: 85px;
+}
+
 .pointer {
     cursor: pointer;
 }
@@ -73,6 +77,10 @@ ul {
 
         &--b {
             margin-bottom: 1rem!important;
+        }
+
+        &--t {
+            margin-top: 1rem!important;
         }
     }
 
@@ -144,3 +152,4 @@ ul {
 .pretty input:checked ~ .state.p-primary label:after, .pretty.p-toggle .state.p-primary label:after {
     background-color: #730998!important;
 }
+
