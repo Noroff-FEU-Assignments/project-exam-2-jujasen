@@ -1,11 +1,13 @@
 import BackLink from '../../../components/BackLink';
 import Heading from '../../../components/Heading';
 import { BsCheckCircle } from 'react-icons/bs';
-import { useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Formik, Form } from 'formik'
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import AuthContext from '../../../utils/AuthContext';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { BASE_URL, ACCOMMODATIONS_PATH } from '../../../utils/constants';
 
@@ -34,46 +36,65 @@ const validationSchema = yup.object().shape({
     map_embed: yup.string()
         .required("Map embed is required")
         .min(300, "Map embed needs at least 300 characters"),
-    recommended: yup.boolean(),
-
-    facility_breakfast: yup.boolean(),
-    facility_aircondition: yup.boolean(),
-    facility_restaurant: yup.boolean(),
-    facility_roomservice: yup.boolean(),
-    facility_petsallowed: yup.boolean(),
-    facility_gym: yup.boolean(),
-
     max_people: yup.number()
         .required("Max people is required"),
     room_standard_price: yup.number()
         .required("Standard room price is required")
         .integer("Not a number"),
-    room_superior: yup.boolean(),
-    room_superior_price: yup.number()
-        .when('room_superior', {
-            is: (room_superior) => room_superior === true,
-            then: yup.string()
-                .required('Superior room price is required')
-        }),
-    room_luxury: yup.boolean(),
-    room_luxury_price: yup.number()
-        .when('room_luxury', {
-            is: (room_luxury) => room_luxury === true,
-            then: yup.string()
-                .required('Luxury room price is required')
-        }),
-    breakfast_price: yup.number()
-        .when('facility_breakfast', {
-            is: (facility_breakfast) => facility_breakfast === true,
-            then: yup.string()
-                .required('Breakfast price is required')
-        })
+    room_superior_price: yup.number(),
+    room_luxury_price: yup.number(),
+    breakfast_price: yup.number(),
 });
 
 const CreateEst = () => {
 
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(null);
+    const [auth] = useContext(AuthContext);
+    const history = useHistory();
+    const [recommended, setRecommended] = useState(false);
+    const [fAirCondition, setFAirCondition] = useState(false);
+    const [fBreakfast, setFBreakfast] = useState(false);
+    const [fGym, setFGym] = useState(false);
+    const [fPets, setFPets] = useState(false);
+    const [fRestaurant, setFRestaurant] = useState(false);
+    const [fRoomService, setFRoomService] = useState(false);
+    const [superiorRoom, setSuperiorRoom] = useState(false);
+    const [luxuryRoom, setLuxuryRoom] = useState(false);
+
+    useEffect(() => {
+        if (!auth) {
+            history.push('/');
+        }
+    }, [auth, history]);
+
+    const handleRecommended = () => {
+        setRecommended(!recommended);
+    };
+    const handleFAirCondition = () => {
+        setFAirCondition(!fAirCondition);
+    };
+    const handleFBreakfast = () => {
+        setFBreakfast(!fBreakfast);
+    };
+    const handleFGym = () => {
+        setFGym(!fGym);
+    };
+    const handleFPets = () => {
+        setFPets(!fPets);
+    };
+    const handleFRestaurant = () => {
+        setFRestaurant(!fRestaurant);
+    };
+    const handleFRoomService = () => {
+        setFRoomService(!fRoomService);
+    };
+    const handleSuperiorRoom = () => {
+        setSuperiorRoom(!superiorRoom);
+    };
+    const handleLuxuryRoom = () => {
+        setLuxuryRoom(!luxuryRoom);
+    };
 
     const { establishment } = useForm({
         resolver: yupResolver(validationSchema),
@@ -90,30 +111,51 @@ const CreateEst = () => {
                 </div>
                 <div className="page">
                     <Formik
-                        initialValues={{ name: "", type: "", stars: "", region: "", street_adress: "", postal_adress: "", zip_code: "", image: "", map_embed: "", recommended: "", facility_breakfast: "", facility_aircondition: "", facility_roomservice: "", facility_petsallowed: "", facility_gym: "", max_people: "", room_standard_price: "", room_superior: "", room_superior_price: "", room_luxury: "", room_luxury_price: "", breakfast_price: "" }}
+                        initialValues={{ name: "", type: "", stars: "", region: "", street_adress: "", postal_adress: "", zip_code: "", image: "", map_embed: "", max_people: "", room_standard_price: "", room_superior: "", room_superior_price: "", room_luxury: "", room_luxury_price: "", breakfast_price: 0 }}
                         validationSchema={validationSchema}
-                    // onSubmit={async (data) => {
+                    onSubmit={async (data) => {
+                        
+                        const establishment = {
+                            breakfast_price: data.breakfast_price,
+                            facility_aircondition: fAirCondition,
+                            facility_breakfast: fBreakfast,
+                            facility_gym: fGym,
+                            facility_petsallowed: fPets,
+                            facility_restaurant: fRestaurant,
+                            facility_roomservice: fRoomService,
+                            image: data.image,
+                            map_embed: data.map_embed,
+                            max_people: data.max_people,
+                            name: data.name,
+                            postal_adress: data.postal_adress,
+                            recommended: recommended,
+                            region: data.region,
+                            room_luxury: luxuryRoom,
+                            room_luxury_price: data.room_luxury_price,
+                            room_standard: true,
+                            room_standard_price: data.room_standard_price,
+                            room_superior: superiorRoom,
+                            room_superior_price: data.room_superior_price,
+                            stars: data.stars,
+                            street_adress: data.street_adress,
+                            type: data.type,
+                            zip_code: data.zip_code
+                        }
+                        console.log(establishment);
 
-                    //     const message = {
-                    //         name: data.name,
-                    //         email: data.email,
-                    //         subject: data.subject,
-                    //         message: data.message
-                    //     }
-                    //     console.log(message);
-
-                    //     try {
-                    //         const response = await axios.post(`${BASE_URL}${MESSAGES_PATH}`, message);
-                    //         setSubmitted(true);
-                    //         console.log('response', response.data);;
-                    //     } catch (error) {
-                    //         console.log('error', error);
-                    //         setError(error.toString());
-                    //     }
-                    // }}
+                        // try {
+                        //     const response = await axios.post(`${BASE_URL}${MESSAGES_PATH}`, message);
+                        //     setSubmitted(true);
+                        //     console.log('response', response.data);;
+                        // } catch (error) {
+                        //     console.log('error', error);
+                        //     setError(error.toString());
+                        // }
+                    }}
                     >
                         {({ values,
                             errors, handleChange }) => (
+                                
                             <Form className="form space__marg--t">
                                 <h3 className="subtitle">General information</h3>
                                 <div className="form__item">
@@ -170,8 +212,8 @@ const CreateEst = () => {
                                     >* Region</p>
                                     <select
                                         className="form__input"
-                                        name="stars"
-                                        id="stars"
+                                        name="region"
+                                        id="region"
                                         ref={establishment}
                                         value={values.region}
                                         onChange={handleChange}>
@@ -243,6 +285,200 @@ const CreateEst = () => {
                                     />
                                     <p className="form__error">{errors.image}</p>
                                 </div>
+                                <div className="form__item">
+                                    <p className="form__label"
+                                    >* Map embed</p>
+                                    <textarea
+                                        id="map_embed"
+                                        ref={establishment}
+                                        className="form__input"
+                                        placeholder="Paste the map embed html"
+                                        type="text"
+                                        onChange={handleChange}
+                                        value={values.map_embed}
+                                    ></textarea>
+                                    <p className="form__error">{errors.map_embed}</p>
+                                </div>
+                                <div className="form__item">
+                                    <p className="form__label"
+                                    >Recommended</p>
+                                    <div className=" book__check pretty p-icon p-round p-jelly">
+                                        <input
+                                        type="checkbox"
+                                        onChange={handleRecommended}/>
+                                        <div className="state p-primary">
+                                            <i className="icon mdi mdi-check"></i>
+                                            <label>Set as recommended</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 className="subtitle">Facilities</h3>
+                                <div className="form__item">
+                                    <div className=" book__check pretty p-icon p-round p-jelly">
+                                        <input
+                                            type="checkbox"
+                                            onChange={handleFAirCondition} />
+                                        <div className="state p-primary">
+                                            <i className="icon mdi mdi-check"></i>
+                                            <label>Air Condition</label>
+                                        </div>
+                                    </div>
+                                    <div className=" book__check pretty p-icon p-round p-jelly">
+                                        <input
+                                            type="checkbox"
+                                            onChange={handleFBreakfast} />
+                                        <div className="state p-primary">
+                                            <i className="icon mdi mdi-check"></i>
+                                            <label>Breakfast</label>
+                                        </div>
+                                    </div>
+                                    <div className=" book__check pretty p-icon p-round p-jelly">
+                                        <input
+                                            type="checkbox"
+                                            onChange={handleFGym} />
+                                        <div className="state p-primary">
+                                            <i className="icon mdi mdi-check"></i>
+                                            <label>Gym</label>
+                                        </div>
+                                    </div>
+                                    <div className=" book__check pretty p-icon p-round p-jelly">
+                                        <input
+                                            type="checkbox"
+                                            onChange={handleFPets} />
+                                        <div className="state p-primary">
+                                            <i className="icon mdi mdi-check"></i>
+                                            <label>Pets Allowed</label>
+                                        </div>
+                                    </div>
+                                    <div className=" book__check pretty p-icon p-round p-jelly">
+                                        <input
+                                            type="checkbox"
+                                            onChange={handleFRestaurant} />
+                                        <div className="state p-primary">
+                                            <i className="icon mdi mdi-check"></i>
+                                            <label>Restaurant</label>
+                                        </div>
+                                    </div>
+                                    <div className=" book__check pretty p-icon p-round p-jelly">
+                                        <input
+                                            type="checkbox"
+                                            onChange={handleFRoomService} />
+                                        <div className="state p-primary">
+                                            <i className="icon mdi mdi-check"></i>
+                                            <label>Room Service</label>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                {fBreakfast ? 
+                                    <div className="form__item">
+                                        <p className="form__label"
+                                        >* Breakfast price per day</p>
+                                        <input
+                                            id="breakfast_price"
+                                            ref={establishment}
+                                            className="form__input"
+                                            placeholder="Type breakfast price"
+                                            type="number"
+                                            onChange={handleChange}
+                                            value={values.breakfast_price}
+                                        />
+                                    </div>
+                                    : ''
+                                }
+                                <h3 className="subtitle">Rooms</h3>
+                                <div className="form__item">
+                                    <p className="form__label"
+                                    >* Max people</p>
+                                    <input
+                                        id="max_people"
+                                        ref={establishment}
+                                        className="form__input"
+                                        placeholder="Type max people amount"
+                                        type="number"
+                                        onChange={handleChange}
+                                        value={values.max_people}
+                                    />
+                                    <p className="form__error">{errors.max_people}</p>
+                                </div>
+                                <div className="form__card">
+                                    <h4 className="medium-title">Standard Room</h4>
+                                    <div className="form__item">
+                                        <p className="form__label"
+                                        >* Standard room price per night in NOK</p>
+                                        <input
+                                            id="room_standard_price"
+                                            ref={establishment}
+                                            className="form__input"
+                                            placeholder="Type standard room price"
+                                            type="number"
+                                            onChange={handleChange}
+                                            value={values.room_standard_price}
+                                        />
+                                        <p className="form__error">{errors.room_standard_price}</p>
+                                    </div>
+                                </div>
+                                <div className="form__card">
+                                    <div>
+                                        <div className="space__marg--b book__check pretty p-icon p-round p-jelly">
+                                            <input
+                                                type="checkbox"
+                                                onChange={handleSuperiorRoom} />
+                                            <div className="state p-primary">
+                                                <i className="icon mdi mdi-check"></i>
+                                                <label className="medium-title medium-title--no-marg">Superior Room</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {superiorRoom ? 
+                                        <div className="form__item">
+                                            <p className="form__label"
+                                            >* Superior room price per night in NOK</p>
+                                            <input
+                                                id="room_superior_price"
+                                                ref={establishment}
+                                                className="form__input"
+                                                placeholder="Type superior room price"
+                                                type="number"
+                                                onChange={handleChange}
+                                                value={values.room_superior_price}
+                                            />
+                                            <p className="form__error">{errors.room_superior_price}</p>
+                                        </div>
+                                    : ''
+                                    }
+                                </div>
+                                <div className="form__card">
+                                    <div>
+                                        <div className="space__marg--b book__check pretty p-icon p-round p-jelly">
+                                            <input
+                                                type="checkbox"
+                                                onChange={handleLuxuryRoom} />
+                                            <div className="state p-primary">
+                                                <i className="icon mdi mdi-check"></i>
+                                                <label className="medium-title medium-title--no-marg">Luxury Room</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {luxuryRoom ?
+                                        <div className="form__item">
+                                            <p className="form__label"
+                                            >* Luxury room price per night in NOK</p>
+                                            <input
+                                                id="room_luxury_price"
+                                                ref={establishment}
+                                                className="form__input"
+                                                placeholder="Type luxury room price"
+                                                type="number"
+                                                onChange={handleChange}
+                                                value={values.room_luxury_price}
+                                            />
+                                            <p className="form__error">{errors.room_luxury_price}</p>
+                                        </div>
+                                        : ''
+                                    }
+                                </div>
+
                                 {submitted ?
                                     <div className=" form__confirm flex flex--center">
                                         <BsCheckCircle></BsCheckCircle>

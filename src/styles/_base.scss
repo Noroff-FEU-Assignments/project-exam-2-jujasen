@@ -51,6 +51,16 @@ ul {
     margin-bottom: 1rem;
 }
 
+.medium-title {
+    font-size: $fsizeSS;
+    font-weight: $fBold!important;
+    margin-bottom: 1rem;
+
+    &--no-marg {
+        margin: 0;
+    }
+}
+
 .capitalize {
     text-transform: capitalize;
 }
