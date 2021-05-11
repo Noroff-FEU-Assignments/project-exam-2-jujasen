@@ -134,9 +134,9 @@ const Home = () => {
                             {error ? <div className="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
                     </div> : <div>{recommended ? <div className="searchresult__tag flex">
                                 <TiStarFullOutline className="searchresult__tag-icon"></TiStarFullOutline>
-                                <p className="space__marg--l">Recommended</p>
+                                <p className="space__marg--l">Recommended ({filteredData?.length})</p>
                             </div> :
-                                <div className="searchresult__tag flex"><p className="space__marg--l">Results</p></div>}
+                                    <div className="searchresult__tag flex"><p className="space__marg--l">Results ({filteredData?.length})</p></div>}
                                 <ul className="searchresult__list">
                                     {filteredData?.map(function (item) {
                                         return (

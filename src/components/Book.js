@@ -45,7 +45,6 @@ const Book = (props) => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(true);
 
     const history = useHistory();
 
@@ -79,9 +78,8 @@ const Book = (props) => {
                 } catch (error) {
                     console.log(error);
                     setError(true);
-                } finally {
-                setLoading(false);
-            }
+                }
+            
             };
             getDetail();
         }

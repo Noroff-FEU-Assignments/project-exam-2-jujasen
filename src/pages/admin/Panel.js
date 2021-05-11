@@ -7,6 +7,7 @@ import { BASE_URL, ENQUIRIES_PATH, MESSAGES_PATH, ACCOMMODATIONS_PATH } from '..
 import { Link } from 'react-router-dom';
 import img from '../../img/logo-dark.svg'
 
+
 const Panel = () => {
 
     const [auth] = useContext(AuthContext);
@@ -153,7 +154,9 @@ const Panel = () => {
                                         <Link to="panel/est/create">
                                         <button className="button button--small">Create new</button>
                                         </Link>
+                                        <Link to="accommodation">
                                         <button className="button button--small">See all</button>
+                                        </Link>
                                     </div>
                                 </div>}
 

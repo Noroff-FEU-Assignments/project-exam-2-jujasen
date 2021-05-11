@@ -1,6 +1,6 @@
 import BackLink from '../../../components/BackLink';
 import Heading from '../../../components/Heading';
-import { BsCheckCircle } from 'react-icons/bs';
+import { BsCheckCircle, BsInfoCircleFill } from 'react-icons/bs';
 import { useEffect, useState, useContext } from 'react';
 import { Formik, Form } from 'formik'
 import * as yup from 'yup';
@@ -10,6 +10,7 @@ import AuthContext from '../../../utils/AuthContext';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { BASE_URL, ACCOMMODATIONS_PATH } from '../../../utils/constants';
+import ReactTooltip from 'react-tooltip';
 
 const validationSchema = yup.object().shape({
     name: yup.string()
@@ -35,7 +36,7 @@ const validationSchema = yup.object().shape({
         .required("Image link is required"),
     map_embed: yup.string()
         .required("Map embed is required")
-        .min(300, "Map embed needs at least 300 characters"),
+        .min(200, "Map embed needs at least 300 characters"),
     max_people: yup.number()
         .required("Max people is required"),
     room_standard_price: yup.number()
@@ -111,10 +112,10 @@ const CreateEst = () => {
                 </div>
                 <div className="page">
                     <Formik
-                        initialValues={{ name: "", type: "", stars: "", region: "", street_adress: "", postal_adress: "", zip_code: "", image: "", map_embed: "", max_people: "", room_standard_price: "", room_superior: "", room_superior_price: "", room_luxury: "", room_luxury_price: "", breakfast_price: 0 }}
+                        initialValues={{ name: "", type: "", stars: "", region: "", street_adress: "", postal_adress: "", zip_code: "", image: "", map_embed: "", max_people: "", room_standard_price: "", room_superior: "", room_superior_price: 0, room_luxury: "", room_luxury_price: 0, breakfast_price: 0 }}
                         validationSchema={validationSchema}
                     onSubmit={async (data) => {
-                        
+
                         const establishment = {
                             breakfast_price: data.breakfast_price,
                             facility_aircondition: fAirCondition,
@@ -143,14 +144,21 @@ const CreateEst = () => {
                         }
                         console.log(establishment);
 
-                        // try {
-                        //     const response = await axios.post(`${BASE_URL}${MESSAGES_PATH}`, message);
-                        //     setSubmitted(true);
-                        //     console.log('response', response.data);;
-                        // } catch (error) {
-                        //     console.log('error', error);
-                        //     setError(error.toString());
-                        // }
+                        try {
+                            const response = await axios.post(`${BASE_URL}${ACCOMMODATIONS_PATH}`, establishment,
+                                {
+                                    headers: {
+                                        Authorization:
+                                            `Bearer ${auth.jwt}`,
+                                    },
+
+                                });
+                            console.log('added', response.data);
+                            setSubmitted(true);
+                        } catch (error) {
+                            setError(true)
+                            console.log('error', error);
+                        }
                     }}
                     >
                         {({ values,
@@ -287,13 +295,16 @@ const CreateEst = () => {
                                 </div>
                                 <div className="form__item">
                                     <p className="form__label"
-                                    >* Map embed</p>
+                                        data-tip={`IMPORTANT: Make sure you remove: width, height, style, allowfullscreen and loading properties from the embed. Here is an example of how it should look: <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15802.355005518015!2d5.308357539550781!3d60.324724300000014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x463cf99177a78e9b%3A0x8511c1fd93c7c06!2sTroldhaugen!5e0!3m2!1sen!2sno!4v1620498352892!5m2!1sen!2sno"></iframe>`}
+                                    >* Map embed <BsInfoCircleFill></BsInfoCircleFill></p>
+                                    <ReactTooltip/>
                                     <textarea
                                         id="map_embed"
                                         ref={establishment}
                                         className="form__input"
-                                        placeholder="Paste the map embed html"
+                                        placeholder="Paste the map embed html and edit"
                                         type="text"
+                                        rows="6"
                                         onChange={handleChange}
                                         value={values.map_embed}
                                     ></textarea>
@@ -484,7 +495,7 @@ const CreateEst = () => {
                                         <BsCheckCircle></BsCheckCircle>
                                         <div className=" form__confirm-text">
                                             <p>Thank you!</p>
-                                            <p>Your message is sent</p>
+                                            <p>The establishment has been added</p>
                                         </div>
                                     </div> : <div className="flex flex--center">
                                         {error ? <div className="flex flex--center">{error}</div> : ''}

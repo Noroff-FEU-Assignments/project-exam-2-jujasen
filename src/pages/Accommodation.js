@@ -1,13 +1,12 @@
 import BackLink from '../components/BackLink';
 import Heading from '../components/Heading';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { GrMoney } from 'react-icons/gr';
 import { IoIosArrowDown } from 'react-icons/io';
 import EstCard from '../components/EstCard';
 import axios from 'axios';
 import { BASE_URL, ACCOMMODATIONS_PATH } from '../utils/constants';
 import img from '../img/logo-dark.svg';
-
 
 const Accommodation = () => {
     const [priceLow, setPriceLow] = useState(null);

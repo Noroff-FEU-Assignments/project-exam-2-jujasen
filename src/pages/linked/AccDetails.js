@@ -12,15 +12,19 @@ import { CgGym } from 'react-icons/cg';
 import { MdKeyboardArrowRight } from 'react-icons/md'
 import { BASE_URL, ACCOMMODATIONS_PATH } from '../../utils/constants';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import uuid from 'react-uuid';
 import img from '../../img/logo-dark.svg'
 import Book from '../../components/Book';
+import AuthContext from '../../utils/AuthContext';
+import { useHistory } from 'react-router-dom';
 
 
 
 const AccDetails = () => {
+    const [auth] = useContext(AuthContext);
+    const history = useHistory();
     const [detail, setDetail] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -74,10 +78,16 @@ const AccDetails = () => {
                                 <p className="accdetails__rating">{detail.stars} stars</p>
 
                             </div>
+                            {auth ? 
+                                <Link to={`/panel/est/edit/${detail.id}`} className="accdetails__btn">
+                                <Button text={`Edit ${detail.type}`}></Button>
+                                </Link> : 
                                 <div onClick={handleBookToggle}
-                             className="accdetails__btn">
+                                    className="accdetails__btn">
                                     <Button text="Book room"></Button>
-                            </div>
+                                </div>
+                            }
+                            
                         </div>
                     </div>
                 </div>
