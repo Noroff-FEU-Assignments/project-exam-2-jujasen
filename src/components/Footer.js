@@ -1,9 +1,20 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import logo from '../img/logo-blue.png';
 import { FaTripadvisor } from 'react-icons/fa';
 import { AiOutlineFacebook, AiOutlineInstagram } from 'react-icons/ai';
+import AuthContext from '../utils/AuthContext';
+import { useState, useContext } from 'react';
 
 const Footer = () => {
+
+    const [auth, setAuth] = useContext(AuthContext);
+
+    const history = useHistory();
+
+    function logout() {
+        setAuth(null);
+        history.push('/');
+    }
 
     return (
         <>
@@ -38,9 +49,10 @@ const Footer = () => {
                     <Link className="footer__link" to='/contact'>
                         Contact us
                         </Link>
-                    <Link className="footer__link" to='/login'>
+                    {auth ? <button className="button--simple" onClick={logout}>Log out</button> : <Link className="footer__link" to='/login'>
                         Log in
-                        </Link>
+                        </Link>}
+                    
                 </div>
                 <div className="footer__copyright">Credits</div>
                 <div className="footer__copyright">
