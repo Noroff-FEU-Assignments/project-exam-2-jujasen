@@ -1,6 +1,6 @@
 import BackLink from '../components/BackLink';
 import Heading from '../components/Heading';
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { GrMoney } from 'react-icons/gr';
 import { IoIosArrowDown } from 'react-icons/io';
 import EstCard from '../components/EstCard';

@@ -83,21 +83,22 @@ const EditEst = () => {
                 if (response.status === 200) {
                     console.log(response.data);
                     setDetail(response.data);
-                    setRecommended(detail?.recommended);
-                    setFAirCondition(detail?.facility_aircondition);
-                    setFBreakfast(detail?.facility_breakfast);
-                    setFGym(detail?.facility_gym);
-                    setFPets(detail?.facility_petsallowed);
-                    setFRestaurant(detail?.facility_restaurant);
-                    setFRoomService(detail?.facility_roomservice);
-                    setSuperiorRoom(detail?.room_superior);
-                    setLuxuryRoom(detail?.room_luxury);
+                    setRecommended(response.data.recommended);
+                    setFAirCondition(response.data.facility_aircondition);
+                    setFBreakfast(response.data.facility_breakfast);
+                    setFGym(response.data.facility_gym);
+                    setFPets(response.data.facility_petsallowed);
+                    setFRestaurant(response.data.facility_restaurant);
+                    setFRoomService(response.data.facility_roomservice);
+                    setSuperiorRoom(response.data.room_superior);
+                    setLuxuryRoom(response.data.room_luxury);
                 } else {
                     console.log(error)
                     setError('An error occurred');
                 }
             } catch (error) {
                 setError(error.toString());
+                console.log(error)
             } finally {
                 setLoading(false);
             }
@@ -149,12 +150,12 @@ const EditEst = () => {
                 {detail ? 
                     <div className="page">
                         <Formik
-                            initialValues={{ name: `${detail.name}`, type: `${detail.type}`, stars: `${detail.stars}`, region: `${detail.region}`, street_adress: `${detail.street_adress}`, postal_adress: `${detail.postal_adress}`, zip_code: `${detail.zip_code}`, image: `${detail.image}`, map_embed: `${detail.map_embed}`, max_people: `${detail.max_people}`, room_standard_price: `${detail.room_standard_price}`, room_superior: "", room_superior_price: 0, room_luxury: "", room_luxury_price: 0, breakfast_price: 0 }}
+                            initialValues={{ name: `${detail.name}`, type: `${detail.type}`, stars: `${detail.stars}`, region: `${detail.region}`, street_adress: `${detail.street_adress}`, postal_adress: `${detail.postal_adress}`, zip_code: `${detail.zip_code}`, image: `${detail.image}`, map_embed: `${detail.map_embed}`, max_people: `${detail.max_people}`, room_standard_price: `${detail.room_standard_price}`, room_superior: "", room_superior_price: `${detail.room_superior_price}`, room_luxury: "", room_luxury_price: `${detail.room_luxury_price}`, breakfast_price: `${detail.breakfast_price}` }}
                             validationSchema={validationSchema}
                             onSubmit={async (data) => {
 
                                 const establishment = {
-                                    breakfast_price: data.breakfast_price,
+                                    breakfast_price: Number(data.breakfast_price),
                                     facility_aircondition: fAirCondition,
                                     facility_breakfast: fBreakfast,
                                     facility_gym: fGym,
@@ -163,26 +164,26 @@ const EditEst = () => {
                                     facility_roomservice: fRoomService,
                                     image: data.image,
                                     map_embed: data.map_embed,
-                                    max_people: data.max_people,
+                                    max_people: Number(data.max_people),
                                     name: data.name,
                                     postal_adress: data.postal_adress,
                                     recommended: recommended,
                                     region: data.region,
                                     room_luxury: luxuryRoom,
-                                    room_luxury_price: data.room_luxury_price,
+                                    room_luxury_price: Number(data.room_luxury_price),
                                     room_standard: true,
-                                    room_standard_price: data.room_standard_price,
+                                    room_standard_price: Number(data.room_standard_price),
                                     room_superior: superiorRoom,
-                                    room_superior_price: data.room_superior_price,
-                                    stars: data.stars,
+                                    room_superior_price: Number(data.room_superior_price),
+                                    stars: Number(data.stars),
                                     street_adress: data.street_adress,
                                     type: data.type,
-                                    zip_code: data.zip_code
+                                    zip_code: Number(data.zip_code)
                                 }
-                                console.log(establishment);
+                                console.log('est', establishment);
 
                                 try {
-                                    const response = await axios.post(`${BASE_URL}${ACCOMMODATIONS_PATH}`, establishment,
+                                    const response = await axios.put(`${BASE_URL}${ACCOMMODATIONS_PATH}/${id}`, establishment,
                                         {
                                             headers: {
                                                 Authorization:
@@ -190,7 +191,7 @@ const EditEst = () => {
                                             },
 
                                         });
-                                    console.log('added', response.data);
+                                    console.log('edited', response.data);
                                     setSubmitted(true);
                                 } catch (error) {
                                     setError(true)
@@ -361,7 +362,70 @@ const EditEst = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    
+                                    <h3 className="subtitle">Facilities</h3>
+                                    <div className="form__item">
+                                        <div className=" book__check pretty p-icon p-round p-jelly">
+                                            <input
+                                                type="checkbox"
+                                                checked={fAirCondition}
+                                                onChange={handleFAirCondition} />
+                                            <div className="state p-primary">
+                                                <i className="icon mdi mdi-check"></i>
+                                                <label>Air Condition</label>
+                                            </div>
+                                        </div>
+                                        <div className=" book__check pretty p-icon p-round p-jelly">
+                                            <input
+                                                type="checkbox"
+                                                checked={fBreakfast}
+                                                onChange={handleFBreakfast} />
+                                            <div className="state p-primary">
+                                                <i className="icon mdi mdi-check"></i>
+                                                <label>Breakfast</label>
+                                            </div>
+                                        </div>
+                                        <div className=" book__check pretty p-icon p-round p-jelly">
+                                            <input
+                                                type="checkbox"
+                                                checked={fGym}
+                                                onChange={handleFGym} />
+                                            <div className="state p-primary">
+                                                <i className="icon mdi mdi-check"></i>
+                                                <label>Gym</label>
+                                            </div>
+                                        </div>
+                                        <div className=" book__check pretty p-icon p-round p-jelly">
+                                            <input
+                                                type="checkbox"
+                                                checked={fPets}
+                                                onChange={handleFPets} />
+                                            <div className="state p-primary">
+                                                <i className="icon mdi mdi-check"></i>
+                                                <label>Pets Allowed</label>
+                                            </div>
+                                        </div>
+                                        <div className=" book__check pretty p-icon p-round p-jelly">
+                                            <input
+                                                type="checkbox"
+                                                checked={fRestaurant}
+                                                onChange={handleFRestaurant} />
+                                            <div className="state p-primary">
+                                                <i className="icon mdi mdi-check"></i>
+                                                <label>Restaurant</label>
+                                            </div>
+                                        </div>
+                                        <div className=" book__check pretty p-icon p-round p-jelly">
+                                            <input
+                                                type="checkbox"
+                                                checked={fRoomService}
+                                                onChange={handleFRoomService} />
+                                            <div className="state p-primary">
+                                                <i className="icon mdi mdi-check"></i>
+                                                <label>Room Service</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                     {fBreakfast ?
                                         <div className="form__item">
                                             <p className="form__label"
@@ -415,6 +479,7 @@ const EditEst = () => {
                                             <div className="space__marg--b book__check pretty p-icon p-round p-jelly">
                                                 <input
                                                     type="checkbox"
+                                                    checked={superiorRoom}
                                                     onChange={handleSuperiorRoom} />
                                                 <div className="state p-primary">
                                                     <i className="icon mdi mdi-check"></i>
@@ -445,6 +510,7 @@ const EditEst = () => {
                                             <div className="space__marg--b book__check pretty p-icon p-round p-jelly">
                                                 <input
                                                     type="checkbox"
+                                                    checked={luxuryRoom}
                                                     onChange={handleLuxuryRoom} />
                                                 <div className="state p-primary">
                                                     <i className="icon mdi mdi-check"></i>
@@ -476,7 +542,7 @@ const EditEst = () => {
                                             <BsCheckCircle></BsCheckCircle>
                                             <div className=" form__confirm-text">
                                                 <p>Thank you!</p>
-                                                <p>The establishment has been added</p>
+                                                <p>The establishment has been edited</p>
                                             </div>
                                         </div> : <div className="flex flex--center">
                                             {error ? <div className="flex flex--center">{error}</div> : ''}

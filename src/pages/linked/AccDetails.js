@@ -18,18 +18,17 @@ import uuid from 'react-uuid';
 import img from '../../img/logo-dark.svg'
 import Book from '../../components/Book';
 import AuthContext from '../../utils/AuthContext';
-import { useHistory } from 'react-router-dom';
 
 
 
 const AccDetails = () => {
     const [auth] = useContext(AuthContext);
-    const history = useHistory();
     const [detail, setDetail] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { id } = useParams();
     const [bookOpen, setBookOpen] = useState(false);
+    const [activities, setActivities] = useState(null);
 
     useEffect(() => {
         const getDetail = async () => {
