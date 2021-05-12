@@ -144,8 +144,37 @@ const EditEst = () => {
             <div className="pad-top" >
                 <div className="header">
                     <BackLink />
-                    <Heading className="header__title" title="Admin Panel" />
-                    <h2 className="header__subtitle">Create establishment</h2>
+                    <div className="flex flex--space">
+                        <div>
+                            <Heading className="header__title" title="Admin Panel" />
+                            <h2 className="header__subtitle">Edit establishment</h2>
+                        </div>
+                        <button className="button space__marg--t"
+                            onClick={async () => {
+
+                                try {
+                                    const response = await axios.delete(`${BASE_URL}${ACCOMMODATIONS_PATH}/${id}`,
+                                        {
+                                            headers: {
+                                                Authorization:
+                                                    `Bearer ${auth.jwt}`,
+                                            },
+
+                                        });
+                                    console.log('deleted', response.data);
+                                    setSubmitted(true);
+                                } catch (error) {
+                                    setError(true)
+                                    console.log('error', error);
+                                } finally {
+                                    history.push('/panel');
+                                }
+                            }}
+                        
+                        >Delete</button>
+                    </div>
+                    
+                    
                 </div>
                 {detail ? 
                     <div className="page">

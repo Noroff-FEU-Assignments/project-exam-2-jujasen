@@ -173,7 +173,7 @@ const CreateEst = () => {
                                         id="name"
                                         ref={establishment}
                                         className="form__input"
-                                        placeholder="Type your name"
+                                        placeholder="Type establishment name"
                                         type="text"
                                         onChange={handleChange}
                                         value={values.name}
