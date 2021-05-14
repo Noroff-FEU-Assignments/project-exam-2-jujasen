@@ -191,6 +191,10 @@ ul {
     width: 33%;
   }
 
+  .half-when-L {
+    width: 50%;
+  }
+
   .sixty-when-L {
     width: 66%;
   }
@@ -203,7 +207,14 @@ ul {
 
   .flex-space {
     justify-content: space-between;
+  }
+
+  .flex-align-start {
     align-items: flex-start;
+  }
+
+  .flex-align-center {
+    align-items: center;
   }
 
   .hundred-when-L {
@@ -218,6 +229,10 @@ ul {
       max-width: 800px;
     margin: 0 auto;
     }
+  }
+
+  .margin-l {
+    margin-left: 1rem;
   }
 
 }

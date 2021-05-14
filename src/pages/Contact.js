@@ -45,32 +45,36 @@ const Contact = () => {
                         <p>The Holidaze team is here to help</p>
                     </div>
                 </div>
-                <div className="contact__content">
-                    <div className="contact__content-item flex flex--start">
-                        <BsEnvelope></BsEnvelope>
-                        <div className="content-item__section--withicon">
-                            <h4>Email</h4>
-                            <p>hello@holidaze.com</p>
+                <div className="contact__content media-center--s">
+                    <div className=" contact__space flex-when-L flex-space flex-align-center">
+                        <div>
+                            <div className="contact__content-item flex flex--start">
+                                <BsEnvelope></BsEnvelope>
+                                <div className="content-item__section--withicon">
+                                    <h4>Email</h4>
+                                    <p>hello@holidaze.com</p>
+                                </div>
+                            </div>
+                            <div className="contact__content-item flex flex--start">
+                                <BsPhone></BsPhone>
+                                <div className="content-item__section--withicon">
+                                    <h4>Phone</h4>
+                                    <p>+47 402 39 232</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="contact__content-item flex flex--start">
-                        <BsPhone></BsPhone>
-                        <div className="content-item__section--withicon">
-                            <h4>Phone</h4>
-                            <p>+47 402 39 232</p>
-                        </div>
-                    </div>
-                    <div className="contact__content-item flex flex--space flex--align-start">
-                        <div className="content-item__section">
-                            <h4>Main office</h4>
-                            <p>Holidaze AS<br />
+                        <div className="contact__content-item flex flex--space flex--align-start half-when-L">
+                            <div className="content-item__section">
+                                <h4>Main office</h4>
+                                <p>Holidaze AS<br />
                             Bergensgaten 1<br />
                             5020 Bergen</p>
-                        </div>
-                        <div className="content-item__section">
-                            <h4>Office hours</h4>
-                            <p>Mon-fri<br />
+                            </div>
+                            <div className="content-item__section">
+                                <h4>Office hours</h4>
+                                <p>Mon-fri<br />
                             08.00 - 16.00</p>
+                            </div>
                         </div>
                     </div>
                     <h2 className="contact__subtitle">Contact form</h2>
@@ -94,83 +98,88 @@ const Contact = () => {
                             } catch (error) {
                                 console.log('error', error);
                                 setError(error.toString());
-                            } 
+                            }
                         }}>
                         {({ values,
                             errors, handleChange }) => (
-                            <Form className="form">
-                                <div className="form__item">
-                                    <p
-                                        className="form__label"
-                                    >* Name</p>
-                                    <input
-                                        id="name"
-                                        ref={message}
-                                        className="form__input"
-                                        placeholder="Type your name"
-                                        type="text"
-                                        onChange={handleChange}
-                                        value={values.name}
-                                    />
-                                    <p className="form__error">{errors.name}</p>
-                                </div>
-                                <div className="form__item">
-                                    <p
-                                        className="form__label"
-                                    >* E-mail</p>
-                                    <input
-                                        id="email"
-                                        ref={message}
-                                        className="form__input"
-                                        placeholder="Type your email address"
-                                        type="text"
-                                        onChange={handleChange}
-                                        value={values.email}
-                                    />
-                                    <p className="form__error">{errors.email}</p>
-                                </div>
-                                <div className="form__item">
-                                    <p
-                                        className="form__label"
-                                    >* Subject</p>
-                                    <input
-                                        id="subject"
-                                        ref={message}
-                                        className="form__input"
-                                        placeholder="Type the subject of your message"
-                                        type="text"
-                                        onChange={handleChange}
-                                        value={values.subject}
-                                    />
-                                    <p className="form__error">{errors.subject}</p>
-                                </div>
-                                <div className="form__item">
-                                    <p className="form__label"
-                                    >* Message</p>
-                                    <textarea
-                                        id="message"
-                                        ref={message}
-                                        className="form__input"
-                                        placeholder="Describe your reason for contact"
-                                        type="text"
-                                        rows="5"
-                                        onChange={handleChange}
-                                        value={values.message}>
-                                    </textarea>
-                                    <p className="form__error">{errors.message}</p>
-                                </div>
-                                {submitted ? 
-                                <div className=" form__confirm flex flex--center">
-                                    <BsCheckCircle></BsCheckCircle>
-                                    <div className=" form__confirm-text">
-                                        <p>Thank you!</p>
-                                        <p>Your message is sent</p>
+                            <Form className="form flex-when-L flex-space">
+                                <div className="hundred-when-L">
+                                    <div className="form__item">
+                                        <p
+                                            className="form__label"
+                                        >* Name</p>
+                                        <input
+                                            id="name"
+                                            ref={message}
+                                            className="form__input"
+                                            placeholder="Type your name"
+                                            type="text"
+                                            onChange={handleChange}
+                                            value={values.name}
+                                        />
+                                        <p className="form__error">{errors.name}</p>
                                     </div>
-                                    </div> : <div className="flex flex--center">
-                                        {error ? <div className="flex flex--center">{error}</div> : ''}
-                                        <button className="button" type="submit">Send message</button>
-                                    </div>}
-                                
+                                    <div className="form__item">
+                                        <p
+                                            className="form__label"
+                                        >* E-mail</p>
+                                        <input
+                                            id="email"
+                                            ref={message}
+                                            className="form__input"
+                                            placeholder="Type your email address"
+                                            type="text"
+                                            onChange={handleChange}
+                                            value={values.email}
+                                        />
+                                        <p className="form__error">{errors.email}</p>
+                                    </div>
+                                    <div className="form__item">
+                                        <p
+                                            className="form__label"
+                                        >* Subject</p>
+                                        <input
+                                            id="subject"
+                                            ref={message}
+                                            className="form__input"
+                                            placeholder="Type the subject of your message"
+                                            type="text"
+                                            onChange={handleChange}
+                                            value={values.subject}
+                                        />
+                                        <p className="form__error">{errors.subject}</p>
+                                    </div>
+                                </div>
+                                <div className="hundred-when-L margin-l">
+                                    <div className="form__item">
+                                        <p className="form__label"
+                                        >* Message</p>
+                                        <textarea
+                                            id="message"
+                                            ref={message}
+                                            className="form__input"
+                                            placeholder="Describe your reason for contact"
+                                            type="text"
+                                            rows="5"
+                                            onChange={handleChange}
+                                            value={values.message}>
+                                        </textarea>
+                                        <p className="form__error">{errors.message}</p>
+                                    </div>
+                                    {submitted ?
+                                        <div className=" form__confirm flex flex--center">
+                                            <BsCheckCircle></BsCheckCircle>
+                                            <div className=" form__confirm-text">
+                                                <p>Thank you!</p>
+                                                <p>Your message is sent</p>
+                                            </div>
+                                        </div> : <div className="flex flex--center">
+                                            {error ? <div className="flex flex--center">{error}</div> : ''}
+                                            <button className="button" type="submit">Send message</button>
+                                        </div>}
+                                </div>
+
+
                             </Form>
                         )}
                     </Formik>

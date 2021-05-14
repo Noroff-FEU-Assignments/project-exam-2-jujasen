@@ -119,7 +119,7 @@ const Book = (props) => {
 
                         </div>
                         <div className="book__section">
-                            <div className="booking flex-when-L flex-space">
+                            <div className="booking flex-when-L flex-space flex-align-start">
                                 <div>
                                     <div className="booking__est flex flex--start">
                                         {booking.est_type === 'Hotel' ? <RiHotelLine></RiHotelLine> : <RiHome5Line></RiHome5Line>}

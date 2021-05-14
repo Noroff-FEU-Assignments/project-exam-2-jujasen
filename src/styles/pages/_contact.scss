@@ -38,3 +38,20 @@
     }
   }
 }
+
+
+@media screen and (min-width: 700px) {
+  .contact {
+    &__content-item {
+      margin-bottom: 1;
+    }
+
+    .form {
+      width: 100%;
+    }
+
+    .form__item {
+      width: 100%;
+    }
+  }
+}
