@@ -102,7 +102,7 @@ const Home = () => {
 
     return (
         <>
-            <div className="home">
+            <div className="home pad-top">
                 <div className="home-start">
                     <h1 className="home-start__heading">I want to stay at...</h1>
                     <div>
