@@ -96,7 +96,7 @@ const Accommodation = () => {
 
     return (
         <>
-            <div className="accmd">
+            <div className="accmd pad-top">
                 <div className="header">
                     <BackLink/>
                     <Heading className="header__title" title="All accomodation" />
