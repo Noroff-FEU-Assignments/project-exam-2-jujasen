@@ -55,7 +55,7 @@ const Home = () => {
     }
 
     useEffect(() => {
-        if(!selectedOption) {
+        if (!selectedOption) {
             setReccomended(true);
         }
     }, [selectedOption])
@@ -101,42 +101,42 @@ const Home = () => {
 
 
     return (
-        <> 
-                <div className="home">
-                    <div className="home-start">
-                        <h1 className="home-start__heading">I want to stay at...</h1>
-                        <div>
-                            <button
+        <>
+            <div className="home">
+                <div className="home-start">
+                    <h1 className="home-start__heading">I want to stay at...</h1>
+                    <div>
+                        <button
                             onClick={() => {
                                 handleOption('All')
                             }}
                             className={`home-start__tag space__marg--r ${selectedOption === 'All' ? 'home-start__tag--active' : ''}`}>
                             All</button>
-                            <button
+                        <button
                             onClick={() => {
                                 handleOption('Hotel')
                             }} className={`home-start__tag space__marg--r ${selectedOption === 'Hotel' ? 'home-start__tag--active' : ''}`}>
-                                Hotel
+                            Hotel
                             </button>
-                            <button
+                        <button
                             onClick={() => {
                                 handleOption('B&B')
                             }}
                             className={`home-start__tag ${selectedOption === 'B&B' ? 'home-start__tag--active' : ''}`}>
-                                B&B
+                            B&B
                             </button>
-                        </div>
-                        <input
+                    </div>
+                    <input
                         onChange={handleSearch}
                         className="home-start__search" placeholder="Search by name or region"></input>
-                    {loading ? <img className="loader loader--short" src={img} alt="pulsating logo"></img> : 
-                    <div className=" searchresult">
+                    {loading ? <img className="loader loader--short" src={img} alt="pulsating logo"></img> :
+                        <div className=" searchresult">
                             {error ? <div className="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
                     </div> : <div>{recommended ? <div className="searchresult__tag flex">
                                 <TiStarFullOutline className="searchresult__tag-icon"></TiStarFullOutline>
                                 <p className="space__marg--l">Recommended ({filteredData?.length})</p>
                             </div> :
-                                    <div className="searchresult__tag flex"><p className="space__marg--l">Results ({filteredData?.length})</p></div>}
+                                <div className="searchresult__tag flex"><p className="space__marg--l">Results ({filteredData?.length})</p></div>}
                                 <ul className="searchresult__list">
                                     {filteredData?.map(function (item) {
                                         return (
@@ -151,11 +151,12 @@ const Home = () => {
                                         )
                                     })}
                                 </ul></div>}
-                        
-                    </div>
-                }
 
-                    </div>
+                        </div>
+                    }
+
+                </div>
+                <div className="home-flex">
                     <div className="home-info">
                         <h2 className="home-info__heading">Discover Bergen</h2>
                         <p>Explore Bergen in the way you want</p>
@@ -173,6 +174,7 @@ const Home = () => {
                     </Link>
                     </div>
                 </div>
+            </div>
         </>
     )
 

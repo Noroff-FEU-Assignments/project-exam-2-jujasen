@@ -61,3 +61,11 @@
         color: $white;
     }
 }
+
+@media screen and (min-width: 700px) {
+    .menu {
+        &__nav {
+            align-items: center;
+        }
+    }
+}

@@ -1,102 +1,144 @@
 .home {
-    padding-top: 80px;
+  padding-top: 80px;
 
-    &-start {
-        background-image: url('../../img/home.png');
-        background-repeat: no-repeat;
-        padding: 2rem $padS;
-        background-size: cover;
-        color: $white;
-        min-height: 500px;
+  &-start {
+    background-image: url("../../img/home.png");
+    background-repeat: no-repeat;
+    padding: 2rem $padS;
+    background-size: cover;
+    color: $white;
+    min-height: 500px;
 
-        &__heading {
-            font-size: $fsizeL;
-            font-weight: $fBlack;
-            margin-bottom: 1rem;
-            color: $white;
-        }
-
-        &__tag {
-            border-radius: 50px;
-            border: none;
-            padding: 0.5rem 1.3rem;
-            background-color: $blue;
-            color: $primary;
-            font-weight: $fBold;
-            margin-bottom: 1.6rem;
-
-            &--active {
-                background-color: $primary;
-                border: 2px solid $blue;
-                color: $blue;
-            }
-        }
-
-
-       &__search {
-            width: 100%;
-            padding: 1rem;
-            box-sizing: border-box;
-            border-radius: 10px;
-            border: none;
-            margin-bottom: 1.6rem;
-        }
-
+    &__heading {
+      font-size: $fsizeL;
+      font-weight: $fBlack;
+      margin-bottom: 1rem;
+      color: $white;
     }
 
-    &-info  {
-        color: $white;
-        padding: 2rem $padS;
-        background-image: url('../../img/home-section.png');
-        background-repeat: no-repeat;
-        background-size: cover;
+    &__tag {
+      border-radius: 50px;
+      border: none;
+      padding: 0.5rem 1.3rem;
+      background-color: $blue;
+      color: $primary;
+      font-weight: $fBold;
+      margin-bottom: 1.6rem;
 
-        &__heading {
-            font-size: $fsizeM;
-            font-weight: $fBold;
-            margin-bottom: 1rem;
-            color: $white;
-        }
-
-        &__link {
-            font-size: $fsizeM;
-            font-weight: $fBold;
-            color: $white;
-        }
-
-        p {
-            font-size: $fsizeSS;
-            margin-bottom: 4rem;
-            color: $white;
-        }
-    }
-
-    &-contact {
-        color: $white;
-        padding: 2rem $padS;
+      &--active {
         background-color: $primary;
-
-        &__heading {
-            font-size: $fsizeM;
-            font-weight: $fBold;
-            margin-bottom: 1rem;
-            text-align: center;
-            color: $white;
-        }
-
-        &__link {
-            font-size: $fsizeM;
-            font-weight: $fBold;
-            color: $white;
-            display: block;
-            text-align: center;
-        }
-
-        p {
-            font-size: $fsizeSS;
-            margin-bottom: 4rem;
-            text-align: center;
-            color: $white;
-        }
+        border: 2px solid $blue;
+        color: $blue;
+      }
     }
+
+    &__search {
+      width: 100%;
+      padding: 1rem;
+      box-sizing: border-box;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 1.6rem;
+    }
+  }
+
+  &-info {
+    color: $white;
+    padding: 2rem $padS;
+    background-image: url("../../img/home-section.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+
+    &__heading {
+      font-size: $fsizeM;
+      font-weight: $fBold;
+      margin-bottom: 1rem;
+      color: $white;
+    }
+
+    &__link {
+      font-size: $fsizeM;
+      font-weight: $fBold;
+      color: $white;
+    }
+
+    p {
+      font-size: $fsizeSS;
+      margin-bottom: 4rem;
+      color: $white;
+    }
+  }
+
+  &-contact {
+    color: $white;
+    padding: 2rem $padS;
+    background-color: $primary;
+
+    &__heading {
+      font-size: $fsizeM;
+      font-weight: $fBold;
+      margin-bottom: 1rem;
+      text-align: center;
+      color: $white;
+    }
+
+    &__link {
+      font-size: $fsizeM;
+      font-weight: $fBold;
+      color: $white;
+      display: block;
+      text-align: center;
+    }
+
+    p {
+      font-size: $fsizeSS;
+      margin-bottom: 4rem;
+      text-align: center;
+      color: $white;
+    }
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .home-start {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+
+    &__heading {
+      font-size: 60px;
+    }
+    &__search {
+      width: 50%;
+      font-size: $fsizeSS;
+    }
+
+    &__tag {
+      font-size: $fsizeM;
+    }
+  }
+
+  .home-flex {
+    display: flex;
+    height: 50vh;
+  }
+
+  .home-contact {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .home-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
