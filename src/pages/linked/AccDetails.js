@@ -58,40 +58,47 @@ const AccDetails = () => {
             <div className="accdetails">
                 {bookOpen ? <Book acc={detail} onChildClick={handleBookToggle} ></Book> : ""}
                 {loading ? <img className="loader" src={img} alt="pulsating logo"></img> : error ? <div class="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
-                    </div> : <div>                <div className="header accdetails__header">
-                    <div className="content">
-                        <BackLink />
-                    </div>
-                    <img className="accdetails__img" src={detail.image} alt=""></img>
-                    <div className="content">
-                        <div className="accdetails__title">
-                            <Heading title={detail.name} />
+                    </div> : <div>
+                    <div className="header accdetails__header">
+                        <div className="content">
+                            <BackLink />
                         </div>
-                        <div className="flex flex--space">
-                            <div className="accdetails__stars flex flex--start">
-                                {
-                                    [...Array(detail.stars)].map(() => (
-                                        <TiStarFullOutline key={uuid()} className="estcard__star"></TiStarFullOutline>
-                                    )
-                                    )}
-                                <p className="accdetails__rating">{detail.stars} stars</p>
-
-                            </div>
-                            {auth ? 
-                                <Link to={`/panel/est/edit/${detail.id}`} className="accdetails__btn">
-                                <Button text={`Edit ${detail.type}`}></Button>
-                                </Link> : 
-                                <div onClick={handleBookToggle}
-                                    className="accdetails__btn">
-                                    <Button text="Book room"></Button>
+                        <div className="accdetails--media">
+                            <img className="accdetails__img" src={detail.image} alt=""></img>
+                            <div className="accdetails__content content">
+                                <div className="accdetails__title">
+                                    <Heading title={detail.name} />
                                 </div>
-                            }
-                            
+                                <div className="accdetails__price show-when-L">
+                                    <p>from</p>
+                        kr {detail.room_standard_price} <span>per night</span>
+                                </div>
+                                <div className="flex flex--space">
+                                    <div className="accdetails__stars flex flex--start">
+                                        {
+                                            [...Array(detail.stars)].map(() => (
+                                                <TiStarFullOutline key={uuid()} className="estcard__star"></TiStarFullOutline>
+                                            )
+                                            )}
+                                        <p className="accdetails__rating">{detail.stars} stars</p>
+
+                                    </div>
+                                    {auth ?
+                                        <Link to={`/panel/est/edit/${detail.id}`} className="accdetails__btn">
+                                            <Button text={`Edit ${detail.type}`}></Button>
+                                        </Link> :
+                                        <div onClick={handleBookToggle}
+                                            className="accdetails__btn">
+                                            <Button text="Book room"></Button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                </div>
                     <div className="content">
-                        <div className="accdetails__price">
+                        <div className="accdetails__price hide-when-L">
                             <p>from</p>
                         kr {detail.room_standard_price} <span>per night</span>
                         </div>
@@ -123,29 +130,35 @@ const AccDetails = () => {
                             </div> : ''}
 
                         </div>
-                        <h2 className="subtitle">Location</h2>
-                        <div className="accdetails__location">
-                            <div dangerouslySetInnerHTML={{ __html: detail.map_embed }} />
+                        <div className="accdetails--media">
+                            <div className="half-when-L">
+                                <h2 className="subtitle">Location</h2>
+                                <div className="accdetails__location">
+                                    <div dangerouslySetInnerHTML={{ __html: detail.map_embed }} />
 
-                            <div>
-                                Sundts Veg 50B, 5221 Nesttun
-                        </div>
-                        </div>
-                        <h2 className="subtitle">Activities in {detail.region} Region</h2>
-                        <div className="accdetails__activities">
-                            <ul>
-                                <Link to="/">
-                                    <li>Leos Lekeland <MdKeyboardArrowRight></MdKeyboardArrowRight></li>
+                                    <div>
+                                        {detail.street_adress}, {detail.zip_code} {detail.postal_adress}
+                                    </div>
+                                </div>
+                            </div>
+                                <div className="half-when-L">
+                                <h2 className="subtitle">Activities in {detail.region} Region</h2>
+                                <div className="accdetails__activities">
+                                    <ul>
+                                        <Link to="/">
+                                            <li>Leos Lekeland <MdKeyboardArrowRight></MdKeyboardArrowRight></li>
 
-                                </Link>
+                                        </Link>
 
-                                <Link to="/">
-                                    <li>Leos Lekeland <MdKeyboardArrowRight></MdKeyboardArrowRight></li>
-                                </Link>
-                                <Link to="/">
-                                    <li>Leos Lekeland <MdKeyboardArrowRight></MdKeyboardArrowRight></li>
-                                </Link>
-                            </ul>
+                                        <Link to="/">
+                                            <li>Leos Lekeland <MdKeyboardArrowRight></MdKeyboardArrowRight></li>
+                                        </Link>
+                                        <Link to="/">
+                                            <li>Leos Lekeland <MdKeyboardArrowRight></MdKeyboardArrowRight></li>
+                                        </Link>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div></div>}
 

@@ -3,7 +3,7 @@ import logo from '../img/logo-blue.png';
 import { FaTripadvisor } from 'react-icons/fa';
 import { AiOutlineFacebook, AiOutlineInstagram } from 'react-icons/ai';
 import AuthContext from '../utils/AuthContext';
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 
 const Footer = () => {
 

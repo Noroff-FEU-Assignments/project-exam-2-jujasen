@@ -1,169 +1,223 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap");
 
 * {
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    font-weight: $fRegular;
-    box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: $fRegular;
+  box-sizing: border-box;
 }
 
 a {
-    text-decoration-thickness: 3px;
+  text-decoration-thickness: 3px;
 }
 
 body {
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
-    color: $dark;
-    margin: 0;
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $dark;
+  margin: 0;
 }
 
 img {
-    width: 100%;
+  width: 100%;
 }
 
 ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-
 .page {
-    padding: $padS;
+  padding: $padS;
 }
 
 .pad-top {
-    padding-top: 85px;
+  padding-top: 85px;
 }
 
 .pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .mini-title {
-    font-size: $fsizeS;
-    font-weight: $fSemiBold;
-    margin-bottom: 1rem;
+  font-size: $fsizeS;
+  font-weight: $fSemiBold;
+  margin-bottom: 1rem;
 }
 
 .medium-title {
-    font-size: $fsizeSS;
-    font-weight: $fBold!important;
-    margin-bottom: 1rem;
+  font-size: $fsizeSS;
+  font-weight: $fBold !important;
+  margin-bottom: 1rem;
 
-    &--no-marg {
-        margin: 0;
-    }
+  &--no-marg {
+    margin: 0;
+  }
 }
 
 .capitalize {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 .semi-bold {
-    font-weight: $fSemiBold;
+  font-weight: $fSemiBold;
 }
 
 .no-marg-l {
-    margin-left: 0!important;
+  margin-left: 0 !important;
 }
 
 .space {
-
-    &__marg {
-
-        &--r {
-            margin-right: 1rem;
-        }
-
-        &--l {
-            margin-left: 1rem;
-        }
-
-        &--b {
-            margin-bottom: 1rem!important;
-        }
-
-        &--t {
-            margin-top: 1rem!important;
-        }
+  &__marg {
+    &--r {
+      margin-right: 1rem;
     }
 
-    &__pad {
-
-        &--r {
-            padding-right: 1rem;
-        }
-
-        &--l {
-            padding-left: 1rem;
-        } 
+    &--l {
+      margin-left: 1rem;
     }
+
+    &--b {
+      margin-bottom: 1rem !important;
+    }
+
+    &--t {
+      margin-top: 1rem !important;
+    }
+  }
+
+  &__pad {
+    &--r {
+      padding-right: 1rem;
+    }
+
+    &--l {
+      padding-left: 1rem;
+    }
+  }
 }
 
-
 .flex {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    &--align-start {
-        align-items: flex-start;
-    }
+  &--align-start {
+    align-items: flex-start;
+  }
 
-    &--align-end {
-        align-items: end;
-    }
+  &--align-end {
+    align-items: end;
+  }
 
-    &--wrap {
-        flex-wrap: wrap;
-    }
+  &--wrap {
+    flex-wrap: wrap;
+  }
 
-    &--col {
-        flex-direction: column;
-    }
+  &--col {
+    flex-direction: column;
+  }
 
-    &--space {
-        justify-content: space-between;
-    }
+  &--space {
+    justify-content: space-between;
+  }
 
-    &--start {
-        justify-content: flex-start;
-    }
+  &--start {
+    justify-content: flex-start;
+  }
 
-    &--end {
-        justify-content: flex-start;
-    }
+  &--end {
+    justify-content: flex-start;
+  }
 
-    &--center {
-        justify-content: center;
-    }
+  &--center {
+    justify-content: center;
+  }
 }
 
 .content {
-    padding: 0 1rem;
+  padding: 0 1rem;
 }
 
 .no-link {
-    text-decoration: none;
-    color: $dark;
+  text-decoration: none;
+  color: $dark;
 }
 
 .subtitle {
-    font-weight: $fBold;
-    font-size: $fsizeSS;
-    margin-bottom: 1rem;
+  font-weight: $fBold;
+  font-size: $fsizeSS;
+  margin-bottom: 1rem;
 }
 
-.pretty input:checked ~ .state.p-primary label:after, .pretty.p-toggle .state.p-primary label:after {
-    background-color: #730998!important;
+.pretty input:checked ~ .state.p-primary label:after,
+.pretty.p-toggle .state.p-primary label:after {
+  background-color: #730998 !important;
 }
 
 .__react_component_tooltip {
-    max-width: 210px;
-    word-break: break-all;
+  max-width: 210px;
+  word-break: break-all;
+}
+
+.show-when-L {
+  display: none;
+}
+
+.hide-when-L {
+  display: block;
+}
+
+@media screen and (min-width: 700px) {
+  .show-when-L {
+    display: block;
+  }
+
+  .hide-when-L {
+    display: none;
+  }
+
+  .thirty-when-L {
+    width: 33%;
+  }
+
+  .sixty-when-L {
+    width: 66%;
+  }
+
+  .flex-when-L {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .flex-space {
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .hundred-when-L {
+    width: 100%;
+  }
+
+  .media-center {
+    max-width: 1100px;
+    margin: 0 auto;
+
+    &--s {
+      max-width: 800px;
+    margin: 0 auto;
+    }
+  }
+
 }

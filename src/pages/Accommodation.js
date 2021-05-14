@@ -1,7 +1,7 @@
 import BackLink from '../components/BackLink';
 import Heading from '../components/Heading';
 import { useState, useEffect } from "react";
-import { GrMoney } from 'react-icons/gr';
+// import { GrMoney } from 'react-icons/gr';
 import { IoIosArrowDown } from 'react-icons/io';
 import EstCard from '../components/EstCard';
 import axios from 'axios';
@@ -9,7 +9,7 @@ import { BASE_URL, ACCOMMODATIONS_PATH } from '../utils/constants';
 import img from '../img/logo-dark.svg';
 
 const Accommodation = () => {
-    const [priceLow, setPriceLow] = useState(null);
+    // const [priceLow, setPriceLow] = useState(null);
     const [dropdownClosed, setDropdown] = useState("false");
     const [selectedOption, setSelectedOption] = useState('All');
     const [accommodations, setAccommodations] = useState([]);
@@ -36,25 +36,25 @@ const Accommodation = () => {
         setFilteredData(result);
     }
 
-    const changeSortLow = () => {
-        setPriceLow(true);
-    };
+    // const changeSortLow = () => {
+    //     setPriceLow(true);
+    // };
 
-    const changeSortHigh = () => {
-        setPriceLow(false);
-    };
+    // const changeSortHigh = () => {
+    //     setPriceLow(false);
+    // };
 
 
-    useEffect(() => {
-        if (priceLow === true) {
-            let result = filteredData.sort((a, b) => a.room_standard_price - b.room_standard_price);
+    // useEffect(() => {
+    //     if (priceLow === true) {
+    //         let result = filteredData.sort((a, b) => a.room_standard_price - b.room_standard_price);
 
-            setFilteredData(result);
-        } else if (priceLow === false) {
-            let result = filteredData.sort((a, b) => b.room_standard_price - a.room_standard_price);
-            setFilteredData(result);
-        }
-    }, [priceLow, filteredData])
+    //         setFilteredData(result);
+    //     } else if (priceLow === false) {
+    //         let result = filteredData.sort((a, b) => b.room_standard_price - a.room_standard_price);
+    //         setFilteredData(result);
+    //     }
+    // }, [priceLow, filteredData])
 
     const handleSearch = (e) => {
         let value = e.target.value;
@@ -132,7 +132,7 @@ const Accommodation = () => {
                         </ul>
                     </div> : ''}
 
-                    <div className="header__filters flex flex--start">
+                    {/* <div className="header__filters flex flex--start">
                         <button 
                             onClick={changeSortLow}
                         className={`header__tag flex ${priceLow? 'header__tag--active' : ''}`}>
@@ -146,7 +146,7 @@ const Accommodation = () => {
                             <GrMoney className={`header__tag-icon ${priceLow === false ? 'header__tag-icon--active' : ''} `} />
                             <p>High to low price</p>
                         </button>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="accmd__results">
                     {loading ? <img className="loader" src={img} alt="pulsating logo"></img> : error ? <div class="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(

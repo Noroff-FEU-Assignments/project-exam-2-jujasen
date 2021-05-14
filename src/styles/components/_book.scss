@@ -88,3 +88,30 @@
         margin-left: 1rem;
     }
 }
+
+@media screen and (min-width: 700px) {
+    .book {
+
+        &--media {
+            display: flex;
+        }
+
+        &__rooms {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        &__room {
+            width: 350px;
+            margin-right: 1rem;
+        }
+
+        .form {
+            width: 100%;
+        }
+    }
+
+    
+}
