@@ -70,7 +70,7 @@ const Messages = () => {
 
             {loading ? <img className="loader" src={img} alt="pulsating logo"></img> : error ? <div className="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(</div>
                 :
-                <div>
+                <div className="flex-when-L media-center flex-align-start flex-center">
                     <div className="admin-category__section">
                         <h3 className="subtitle"> Unread messages</h3>
                         <div className="admin-category__elems">

@@ -58,7 +58,7 @@ const MessageDetails = () => {
             </div>
             {loading ? <img className="loader" src={img} alt="pulsating logo"></img>
                 : message ?
-                    <div className="page">
+                    <div className="page media-center--xs">
                         <div className="booking space__marg--b">
                             <div className="booking__est flex flex--start">
                                 <p className="no-marg-l">{message.subject}</p>

@@ -209,6 +209,10 @@ ul {
     justify-content: space-between;
   }
 
+  .flex-center {
+    justify-content: center;
+  }
+
   .flex-align-start {
     align-items: flex-start;
   }
@@ -229,10 +233,19 @@ ul {
       max-width: 800px;
     margin: 0 auto;
     }
+
+    &--xs {
+      max-width: 500px;
+    margin: 0 auto;
+    }
   }
 
   .margin-l {
     margin-left: 1rem;
+  }
+
+  .page {
+    min-height: 40vh;
   }
 
 }

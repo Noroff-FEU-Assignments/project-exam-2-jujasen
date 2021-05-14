@@ -107,7 +107,7 @@ const Panel = () => {
                 </div>
                 {loading ? <img className="loader" src={img} alt="pulsating logo"></img>
                 :
-                    <div className="panel__section">
+                    <div className="panel__section flex-when-L">
 
                         <div className="panel__content">
                             <h2 className="panel__heading">Bookings</h2>

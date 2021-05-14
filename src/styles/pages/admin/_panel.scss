@@ -29,3 +29,19 @@
         color: $primary;
     }
 }
+
+@media screen and (min-width: 700px) {
+    .panel {
+        &__section {
+            margin: 0 auto;
+            max-width: 1200px;
+            flex-wrap: wrap;
+            height: 40vh;
+        }
+
+        &__content {
+            width: 350px;
+            margin: 1rem;
+        }
+    }
+}

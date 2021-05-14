@@ -39,7 +39,7 @@ const Login = () => {
                 <div className="header">
                     <Heading className="header__title" title="Log in" />
                 </div>
-                <div className="login__content">
+                <div className="login__content media-center--xs">
                     <Formik
                         initialValues={{ identifier: "", password: "" }}
                         validationSchema={validationSchema}

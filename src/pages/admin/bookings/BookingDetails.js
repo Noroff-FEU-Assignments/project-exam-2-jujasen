@@ -58,104 +58,112 @@ const BookingDetails = () => {
     }, [booking])
 
     return (
-       <div className="admin-details">
+        <div className="admin-details">
             <div className="header">
                 <BackLink />
                 <Heading className="header__title" title="Admin Panel" />
                 <h2 className="header__subtitle">Booking Details</h2>
             </div>
             {loading ? <img className="loader" src={img} alt="pulsating logo"></img>
-            : booking ?
-                <div className="page">
-                    <div className="booking">
-                        <div className="booking__est flex flex--start">
-                            {booking.est_type === 'Hotel' ? <RiHotelLine></RiHotelLine> : <RiHome5Line></RiHome5Line>}
-                            <p>{booking.establishment}</p>
-                        </div>
-                        <div className="flex flex--space">
-                            <div>
-                                <span className="capitalize">{booking.room_type}</span> room,&nbsp;
+                : booking ?
+                    <div className="page">
+                        <div className="booking media-center--s">
+                            <div className="flex-when-L flex-space flex-align-start">
+                                <div>
+                                    <div className="booking__est flex flex--start">
+                                        {booking.est_type === 'Hotel' ? <RiHotelLine></RiHotelLine> : <RiHome5Line></RiHome5Line>}
+                                        <p>{booking.establishment}</p>
+                                    </div>
+                                    <div className="flex flex--space">
+                                        <div>
+                                            <span className="capitalize">{booking.room_type}</span> room,&nbsp;
                                 {nights} nights
                             </div>
                             kr {booking.room_price * nights},-
                     </div>
-                        {booking.breakfast ?
-                            <div className="flex flex--space">
-                                <div>
-                                    With breakfast,&nbsp;
+                                    {booking.breakfast ?
+                                        <div className="flex flex--space">
+                                            <div>
+                                                With breakfast,&nbsp;
                             {nights} nights
                         </div>
                         kr {booking.breakfast_price * nights},-
                     </div> : ''}
-                        <div className="flex flex--space space__marg--b">
-                            <div className="semi-bold">
-                                TOTAL
+                                    <div className="flex flex--space space__marg--b">
+                                        <div className="semi-bold">
+                                            TOTAL
                         </div>
-                            {booking.breakfast ? <div className="semi-bold">kr {(booking.room_price + booking.breakfast_price) * nights},-</div> : <div className="semi-bold">kr {(booking.room_price) * nights},-</div>}
-                        </div>
-                        <div className="semi-bold space__marg--b">
-                            From date / To date
+                                        {booking.breakfast ? <div className="semi-bold">kr {(booking.room_price + booking.breakfast_price) * nights},-</div> : <div className="semi-bold">kr {(booking.room_price) * nights},-</div>}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="semi-bold space__marg--b">
+                                        From date / To date
                         <p>{booking.date_from} - {booking.date_to}</p>
-                        </div>
-                        <div className="semi-bold space__marg--b">
-                            Full name
+                                    </div>
+                                    <div className="semi-bold space__marg--b">
+                                        Full name
                     <p>{booking.name_first} {booking.name_last}</p>
-                        </div>
-                        <div className="semi-bold space__marg--b">
-                            Email
+                                    </div>
+                                    <div className="semi-bold space__marg--b">
+                                        Email
                         <p>{booking.email}</p>
-                        </div>
-                        <div className="semi-bold space__marg--b">
-                            Phone number
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="semi-bold space__marg--b">
+                                        Phone number
                         <p>{booking.phone}</p>
-                        </div>
-                        <div className="semi-bold space__marg--b">
-                            Special request
+                                    </div>
+                                    <div className="semi-bold space__marg--b">
+                                        Special request
                         <p>{booking.request}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+                        {confirmed ? <div className=" booking__confirm flex flex--center">
+                            <BsCheckCircle></BsCheckCircle>
+                            <div className=" booking__confirm-text">
+                                <p>The booking is confirmed</p>
+                            </div>
+                        </div> :
+                            <div className="flex flex--center">
+                                <button className="button space__marg--l"
+                                    onClick={async () => {
+                                        const data = {
+                                            confirmed: true
+                                        }
+
+                                        try {
+                                            const response = await axios.put(`${BASE_URL}${ENQUIRIES_PATH}/${id}`, data,
+                                                {
+                                                    headers: {
+                                                        Authorization:
+                                                            `Bearer ${auth.jwt}`,
+                                                    },
+
+                                                });
+                                            console.log('response', response.data);
+                                            setConfirmed(true);
+                                        } catch (error) {
+                                            console.log('error', error);
+                                        }
+                                    }}
+                                >CONFIRM</button>
+                            </div>
+                        }
+
+
+
+
                     </div>
-
-                    {confirmed ? <div className=" booking__confirm flex flex--center">
-                        <BsCheckCircle></BsCheckCircle>
-                        <div className=" booking__confirm-text">
-                            <p>The booking is confirmed</p>
-                        </div>
-                    </div> : 
-                    <div className="flex flex--center">
-                        <button className="button space__marg--l"
-                            onClick={async () => {
-                                const data = {
-                                    confirmed: true
-                                }
-
-                                try {
-                                    const response = await axios.put(`${BASE_URL}${ENQUIRIES_PATH}/${id}`, data,
-                                        {
-                                            headers: {
-                                                Authorization:
-                                                    `Bearer ${auth.jwt}`,
-                                            },
-
-                                        });
-                                    console.log('response', response.data);
-                                    setConfirmed(true);
-                                } catch (error) {
-                                    console.log('error', error);
-                                }
-                            }}
-                        >CONFIRM</button>
+                    : error ? <div className="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
                     </div>
-                    }
-                    
-
-                    
-
-                </div>
-                : error ? <div className="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
-                    </div>
-                :
-                ''}
-       </div>
+                        :
+                        ''}
+        </div>
     )
 }
 

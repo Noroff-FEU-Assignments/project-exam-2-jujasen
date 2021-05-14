@@ -33,3 +33,13 @@
         } 
     }   
 }
+
+@media screen and (min-width: 700px) {
+    .admin-category {
+        min-height: 70vh;
+    }
+
+    .admin-category__section {
+        width: 500px;
+    }
+} 
