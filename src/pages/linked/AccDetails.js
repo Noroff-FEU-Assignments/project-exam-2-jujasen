@@ -49,6 +49,39 @@ const AccDetails = () => {
         getDetail();
     }, [id, error])
 
+    useEffect(() => {
+        const getRegion = async () => {
+            if (detail) {
+                let region = detail.region.toLowerCase();
+                if (region === "åsane" || region === "årstad") {
+                    region = region.replace(/å/, 'aa')
+                }
+                if (region === "bergenshus") {
+                    region = "bergenshuse"
+                }
+                console.log(region)
+
+                try {
+                    const response = await axios.get(`${BASE_URL}/${region}s`);
+                    if (response.status === 200) {
+                        setActivities(response.data);
+                        console.log(response.data)
+                    } else {
+                        console.log(error)
+                        setError('An error occurred');
+                    }
+                } catch (error) {
+                    setError(error.toString());
+                } finally {
+                    setLoading(false);
+                }
+            }
+            
+            
+        };
+        getRegion();
+    }, [detail])
+
     const handleBookToggle = () => {
         setBookOpen(!bookOpen);
     };
@@ -131,7 +164,7 @@ const AccDetails = () => {
 
                         </div>
                         <div className="accdetails--media">
-                            <div className="half-when-L">
+                            <div className="half-when-L margin-r">
                                 <h2 className="subtitle">Location</h2>
                                 <div className="accdetails__location">
                                     <div dangerouslySetInnerHTML={{ __html: detail.map_embed }} />
@@ -144,18 +177,15 @@ const AccDetails = () => {
                                 <div className="half-when-L">
                                 <h2 className="subtitle">Activities in {detail.region} Region</h2>
                                 <div className="accdetails__activities">
+                                        
                                     <ul>
-                                        <Link to="/">
-                                            <li>Leos Lekeland <MdKeyboardArrowRight></MdKeyboardArrowRight></li>
-
-                                        </Link>
-
-                                        <Link to="/">
-                                            <li>Leos Lekeland <MdKeyboardArrowRight></MdKeyboardArrowRight></li>
-                                        </Link>
-                                        <Link to="/">
-                                            <li>Leos Lekeland <MdKeyboardArrowRight></MdKeyboardArrowRight></li>
-                                        </Link>
+                                            {activities?.map(function (item) {
+                                                return (
+                                                    <a key={item.id} href={item.link}>
+                                                        <li>{item.activity} <MdKeyboardArrowRight></MdKeyboardArrowRight></li>
+                                                    </a>
+                                                )
+                                            })}
                                     </ul>
                                 </div>
                             </div>
