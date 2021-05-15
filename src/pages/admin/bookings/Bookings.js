@@ -66,7 +66,8 @@ const Bookings = () => {
                 :
                 <div className="flex-when-L media-center flex-align-start flex-center">
                 <div className="admin-category__section">
-                    <h3 className="subtitle"> Unread bookings</h3>
+                    <h3 className="subtitle"> New bookings</h3>
+                        {newBookings.length < 1 ? <div className="admin-category__item">No new bookings</div> : ''}
                     <div className="admin-category__elems">
                         {newBookings?.map(function (item) {
                             return (
@@ -100,6 +101,7 @@ const Bookings = () => {
 
                 <div className="admin-category__section">
                     <h3 className="subtitle"> Booking history</h3>
+                        {confBookings.length < 1 ? <div className="admin-category__item">No confirmed bookings</div> : ''}
                     <div className="admin-category__elems">
                         {confBookings?.map(function (item) {
                             return (

@@ -73,6 +73,7 @@ const Messages = () => {
                 <div className="flex-when-L media-center flex-align-start flex-center">
                     <div className="admin-category__section">
                         <h3 className="subtitle"> Unread messages</h3>
+                        {newMessages.length < 1 ? <div className="admin-category__item">No unread messages</div> : ''}
                         <div className="admin-category__elems">
                             {newMessages?.map(function (item) {
                                 return (
@@ -107,6 +108,7 @@ const Messages = () => {
 
                     <div className="admin-category__section">
                         <h3 className="subtitle"> Message history</h3>
+                        {readMessages.length < 1 ? <div className="admin-category__item">No read messages</div> : ''}
                         <div className="admin-category__elems">
                             {readMessages?.map(function (item) {
                                 return (
