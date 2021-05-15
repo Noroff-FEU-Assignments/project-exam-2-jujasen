@@ -69,7 +69,7 @@ const BookingDetails = () => {
                     <div className="page">
                         <div className="booking media-center--s">
                             <div className="flex-when-L flex-space flex-align-start">
-                                <div>
+                                <div className="booking__set-width">
                                     <div className="booking__est flex flex--start">
                                         {booking.est_type === 'Hotel' ? <RiHotelLine></RiHotelLine> : <RiHome5Line></RiHome5Line>}
                                         <p>{booking.establishment}</p>
