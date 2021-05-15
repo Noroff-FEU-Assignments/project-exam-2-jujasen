@@ -58,7 +58,7 @@ const Footer = () => {
                     
                 </div>
                 </div>
-                <div className="footer__copyright">Credits</div>
+                <div className="footer__copyright">All pictures from <a className="footer__link" href="https://pixabay.com/">Pixabay</a></div>
                 <div className="footer__copyright">
                     Copyright 2021 &#169; Holidaze
                 </div>
