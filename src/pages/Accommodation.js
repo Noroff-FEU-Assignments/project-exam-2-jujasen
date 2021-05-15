@@ -149,7 +149,7 @@ const Accommodation = () => {
                     </div> */}
                 </div>
                 <div className="accmd__results">
-                    {loading ? <img className="loader" src={img} alt="pulsating logo"></img> : error ? <div class="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                    {loading ? <img className="loader" src={img} alt="pulsating logo"></img> : error ? <div class="error">{error}
                     </div> : filteredData?.map(function (item) {
                         return (
                                 <EstCard

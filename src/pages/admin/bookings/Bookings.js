@@ -37,7 +37,7 @@ const Bookings = () => {
                 }
             } catch (error) {
                 console.log(error);
-                setError(true);
+                setError(error.toString());
             } finally {
                 setLoading(false);
             }
@@ -62,7 +62,7 @@ const Bookings = () => {
                 <h2 className="header__subtitle">Bookings</h2>
             </div>
 
-            {loading ? <img className="loader" src={img} alt="pulsating logo"></img> : error ? <div className="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(</div>
+            {loading ? <img className="loader" src={img} alt="pulsating logo"></img> : error ? <div className="error">{error}</div>
                 :
                 <div className="flex-when-L media-center flex-align-start flex-center">
                 <div className="admin-category__section">

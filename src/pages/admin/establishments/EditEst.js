@@ -94,7 +94,7 @@ const EditEst = () => {
                     setLuxuryRoom(response.data.room_luxury);
                 } else {
                     console.log(error)
-                    setError('An error occurred');
+                    setError(error.toString());
                 }
             } catch (error) {
                 setError(error.toString());
@@ -604,7 +604,7 @@ const EditEst = () => {
                         <img className="loader" src={img} alt="pulsating logo"></img>
 
                         : error ?
-                            <div class="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                            <div class="error">{error}
                     </div>
 
                             : ''

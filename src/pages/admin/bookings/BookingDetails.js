@@ -159,7 +159,7 @@ const BookingDetails = () => {
 
 
                     </div>
-                    : error ? <div className="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                    : error ? <div className="error">{error}
                     </div>
                         :
                         ''}

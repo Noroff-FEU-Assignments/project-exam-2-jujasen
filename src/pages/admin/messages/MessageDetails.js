@@ -41,7 +41,7 @@ const MessageDetails = () => {
                 setReplied(response.data.replied)
             } catch (error) {
                 console.log('error', error);
-                setError(error);
+                setError(error.toString());
             } finally {
                 setLoading(false);
             }
@@ -101,13 +101,14 @@ const MessageDetails = () => {
                                         console.log('replied', response.data);
                                         setReplied(true);
                                     } catch (error) {
+                                        setError(error.toString())
                                         console.log('error', error);
                                     }
                                 }}
                             >{replied ? "Reply again" : "Reply"}</a>
                         </div>
                     </div>
-                    : error ? <div className="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                    : error ? <div className="error">{error}
                     </div>
                         :
                         ''}

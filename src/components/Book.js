@@ -70,14 +70,14 @@ const Book = (props) => {
             console.log(bookID)
             const getDetail = async () => {
                 try {
-                    const response = await axios.get(`${BASE_URL}${ENQUIRIES_PATH}/${bookID}`);
+                    const response = await axios.get(`${BASE_URL}${ENQUIRIES_PATH}/${bookID}kk`);
                     if (response.status === 200) {
                         setBooking(response.data);
                         console.log(response.data);
                     }
                 } catch (error) {
                     console.log(error);
-                    setError(true);
+                    setError(error.toString());
                 }
 
             };
@@ -197,7 +197,7 @@ const Book = (props) => {
                             }
                         </div>
                     </div>
-                    : error ? <div className="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                    : error ? <div className="error">{error}
                     </div>
                         :
                         <div>

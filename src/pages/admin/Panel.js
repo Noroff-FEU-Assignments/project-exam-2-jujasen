@@ -38,7 +38,7 @@ const Panel = () => {
                 }
             } catch (error) {
                 console.log(error);
-                setBookingsError(true);
+                setBookingsError(error.toString());
             } finally {
                 setLoading(false);
             }
@@ -67,7 +67,7 @@ const Panel = () => {
                 console.log(response.data)
             } catch (error) {
                 console.log('error', error);
-                setMessagesError(error);
+                setMessagesError(error.toString());
             } finally {
                 setLoading(false);
             }
@@ -91,7 +91,7 @@ const Panel = () => {
                 }
             } catch (error) {
                 console.log(error);
-                setEstError(true);
+                setEstError(error.toString());
             } finally {
                 setLoading(false);
             }
@@ -112,7 +112,7 @@ const Panel = () => {
                         <div className="panel__content">
                             <h2 className="panel__heading">Bookings</h2>
                             {bookingsError ? <div className="panel__text">
-                                <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                                {bookingsError}
                         </div>
                                 :
                                 <div className="panel__text">
@@ -128,7 +128,7 @@ const Panel = () => {
                         <div className="panel__content">
                             <h2 className="panel__heading">Messages</h2>
                             {messagesError ? <div className="panel__text">
-                                <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                                {messagesError}
                         </div>
                                 :
                                 <div className="panel__text">
@@ -146,7 +146,7 @@ const Panel = () => {
                         <div className="panel__content">
                             <h2 className="panel__heading">Establishments</h2>
                             {estError ? <div className="panel__text">
-                                <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                                {estError}
                         </div>
                                 : <div className="panel__text">
                                     <p className="panel__info">{est?.length} total establishments</p>

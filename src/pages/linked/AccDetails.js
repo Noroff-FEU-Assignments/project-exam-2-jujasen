@@ -57,7 +57,7 @@ const AccDetails = () => {
         <>
             <div className="accdetails pad-top">
                 {bookOpen ? <Book acc={detail} onChildClick={handleBookToggle} ></Book> : ""}
-                {loading ? <img className="loader" src={img} alt="pulsating logo"></img> : error ? <div class="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                {loading ? <img className="loader" src={img} alt="pulsating logo"></img> : error ? <div class="error">{error}
                     </div> : <div>
                     <div className="header accdetails__header">
                         <div className="content">

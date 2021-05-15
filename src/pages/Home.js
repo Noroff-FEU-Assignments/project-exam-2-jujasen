@@ -131,7 +131,7 @@ const Home = () => {
                         className="home-start__search" placeholder="Search by name or region"></input>
                     {loading ? <img className="loader loader--short" src={img} alt="pulsating logo"></img> :
                         <div className=" searchresult">
-                            {error ? <div className="error">ERROR <br /> Whoops, someone forgot to feed the hamsters that run this page :(
+                            {error ? <div className="error">{error}
                     </div> : <div>{recommended ? <div className="searchresult__tag flex">
                                 <TiStarFullOutline className="searchresult__tag-icon"></TiStarFullOutline>
                                 <p className="space__marg--l">Recommended ({filteredData?.length})</p>
