@@ -15,12 +15,14 @@ import Messages from './pages/admin/messages/Messages';
 import MessageDetails from './pages/admin/messages/MessageDetails';
 import CreateEst from './pages/admin/establishments/CreateEst';
 import EditEst from './pages/admin/establishments/EditEst';
+import ScrollToTop from './utils/ScrollToTop';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <Menu />
+        <ScrollToTop />
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/accommodation' exact component={Accommodation} />
