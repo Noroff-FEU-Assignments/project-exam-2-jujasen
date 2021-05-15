@@ -82,6 +82,12 @@
       padding-bottom: 0 !important;
     }
 
+    &__location {
+    iframe {
+      min-height: 350px;
+    }
+  }
+
     &--media {
       display: flex;
     }
@@ -101,6 +107,10 @@
       font-size: $fsizeXL;
     }
 
+    &__activity {
+      font-size: $fsizeL!important;
+    }
+
       &__facility {
     svg {
       font-size: 40px;
@@ -112,4 +122,6 @@
       color: $primary;
     }
   }
+
+    
 }

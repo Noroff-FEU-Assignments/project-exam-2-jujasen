@@ -164,7 +164,7 @@ const AccDetails = () => {
 
                         </div>
                         <div className="accdetails--media">
-                            <div className="half-when-L margin-r">
+                            <div className="sixty-when-L margin-r--M">
                                 <h2 className="subtitle">Location</h2>
                                 <div className="accdetails__location">
                                     <div dangerouslySetInnerHTML={{ __html: detail.map_embed }} />
@@ -182,7 +182,9 @@ const AccDetails = () => {
                                             {activities?.map(function (item) {
                                                 return (
                                                     <a key={item.id} href={item.link}>
-                                                        <li>{item.activity} <MdKeyboardArrowRight></MdKeyboardArrowRight></li>
+                                                        <li
+                                                            className="accdetails__activity"
+                                                        >{item.activity} <MdKeyboardArrowRight></MdKeyboardArrowRight></li>
                                                     </a>
                                                 )
                                             })}
