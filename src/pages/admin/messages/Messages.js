@@ -36,9 +36,7 @@ const Messages = () => {
                             `Bearer ${auth.jwt}`,
                     },
                 });
-                console.log('response', response.data);
                 setMessages(response.data);
-                console.log(response.data)
             } catch (error) {
                 console.log('error', error);
                 setError(error.toString());
@@ -56,9 +54,6 @@ const Messages = () => {
         filterNewMessages();
     }, [messages])
 
-
-    console.log('replied', readMessages);
-    console.log('new', newMessages);
 
     return (
         <div className="admin-category">

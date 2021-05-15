@@ -33,7 +33,6 @@ const Bookings = () => {
                 const response = await axios.get(`${BASE_URL}${ENQUIRIES_PATH}`);
                 if (response.status === 200) {
                     setBookings(response.data);
-                    console.log(response.data);
                 }
             } catch (error) {
                 console.log(error);

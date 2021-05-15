@@ -89,12 +89,11 @@ const Contact = () => {
                                 subject: data.subject,
                                 message: data.message
                             }
-                            console.log(message);
 
                             try {
                                 const response = await axios.post(`${BASE_URL}${MESSAGES_PATH}`, message);
                                 setSubmitted(true);
-                                console.log('response', response.data);;
+                                console.log(response.data);
                             } catch (error) {
                                 console.log('error', error);
                                 setError(error.toString());

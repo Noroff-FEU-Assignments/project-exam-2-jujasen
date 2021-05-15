@@ -49,7 +49,6 @@ const Home = () => {
         });
         setReccomended(false);
         setSelectedOption(value);
-        console.log('selected: ' + selectedOption);
 
         setFilteredData(result);
     }
@@ -68,7 +67,6 @@ const Home = () => {
                 if (response.status === 200) {
                     setAccommodations(response.data);
                     setFilteredData(response.data);
-                    console.log(response.data)
                 } else {
                     setError(true);
                 }

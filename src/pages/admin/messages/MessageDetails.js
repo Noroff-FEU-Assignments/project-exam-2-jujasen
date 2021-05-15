@@ -36,7 +36,6 @@ const MessageDetails = () => {
                             `Bearer ${auth.jwt}`,
                     },
                 });
-                console.log('response', response.data);
                 setMessage(response.data);
                 setReplied(response.data.replied)
             } catch (error) {
@@ -98,8 +97,8 @@ const MessageDetails = () => {
                                                 },
 
                                             });
-                                        console.log('replied', response.data);
                                         setReplied(true);
+                                        console.log(response.data);
                                     } catch (error) {
                                         setError(error.toString())
                                         console.log('error', error);

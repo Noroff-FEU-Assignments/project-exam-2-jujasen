@@ -34,7 +34,6 @@ const Panel = () => {
                 const response = await axios.get(`${BASE_URL}${ENQUIRIES_PATH}`);
                 if (response.status === 200) {
                     setBookings(response.data);
-                    console.log(response.data);
                 }
             } catch (error) {
                 console.log(error);
@@ -62,9 +61,7 @@ const Panel = () => {
                             `Bearer ${auth.jwt}`,
                     },
                 });
-                console.log('response', response.data);
                 setMessages(response.data);
-                console.log(response.data)
             } catch (error) {
                 console.log('error', error);
                 setMessagesError(error.toString());
@@ -87,7 +84,6 @@ const Panel = () => {
                 const response = await axios.get(`${BASE_URL}${ACCOMMODATIONS_PATH}`);
                 if (response.status === 200) {
                     setEst(response.data);
-                    console.log(response.data);
                 }
             } catch (error) {
                 console.log(error);

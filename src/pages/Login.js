@@ -54,7 +54,6 @@ const Login = () => {
                             try {
                                 const response = await axios.post(`${BASE_URL}${AUTH_PATH}`, credentials);
                                 setAuth(response.data);
-                                console.log('response', response.data);
                             } catch (error) {
                                 console.log('error', error);
                                 setError(error.toString());

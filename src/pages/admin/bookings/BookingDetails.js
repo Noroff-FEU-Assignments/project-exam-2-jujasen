@@ -35,7 +35,6 @@ const BookingDetails = () => {
                 if (response.status === 200) {
                     setBooking(response.data);
                     setConfirmed(response.data.confirmed)
-                    console.log(response.data)
                 } else {
                     console.log(error)
                     setError('An error occurred');
@@ -145,8 +144,8 @@ const BookingDetails = () => {
                                                     },
 
                                                 });
-                                            console.log('response', response.data);
                                             setConfirmed(true);
+                                            console.log(response.data);
                                         } catch (error) {
                                             console.log('error', error);
                                         }

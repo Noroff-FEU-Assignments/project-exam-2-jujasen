@@ -81,7 +81,6 @@ const EditEst = () => {
 
                 const response = await axios.get(`${BASE_URL}${ACCOMMODATIONS_PATH}/${id}`);
                 if (response.status === 200) {
-                    console.log(response.data);
                     setDetail(response.data);
                     setRecommended(response.data.recommended);
                     setFAirCondition(response.data.facility_aircondition);
@@ -209,7 +208,6 @@ const EditEst = () => {
                                     type: data.type,
                                     zip_code: Number(data.zip_code)
                                 }
-                                console.log('est', establishment);
 
                                 try {
                                     const response = await axios.put(`${BASE_URL}${ACCOMMODATIONS_PATH}/${id}`, establishment,
@@ -220,8 +218,8 @@ const EditEst = () => {
                                             },
 
                                         });
-                                    console.log('edited', response.data);
                                     setSubmitted(true);
+                                    console.log(response.data);
                                 } catch (error) {
                                     setError(true)
                                     console.log('error', error);

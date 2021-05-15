@@ -142,7 +142,6 @@ const CreateEst = () => {
                             type: data.type,
                             zip_code: data.zip_code
                         }
-                        console.log(establishment);
 
                         try {
                             const response = await axios.post(`${BASE_URL}${ACCOMMODATIONS_PATH}`, establishment,
@@ -153,8 +152,8 @@ const CreateEst = () => {
                                     },
 
                                 });
-                            console.log('added', response.data);
                             setSubmitted(true);
+                            console.log(response.data);
                         } catch (error) {
                             setError(true)
                             console.log('error', error);
