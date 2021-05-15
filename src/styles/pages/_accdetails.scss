@@ -101,6 +101,12 @@
       font-size: $fsizeXL;
     }
 
+      &__facility {
+    svg {
+      font-size: 40px;
+    }
+  }
+
     .estcard__star {
       font-size: 3rem;
       color: $primary;

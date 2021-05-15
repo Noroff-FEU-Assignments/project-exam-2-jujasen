@@ -36,7 +36,7 @@
             margin: 0 auto;
             max-width: 1200px;
             flex-wrap: wrap;
-            height: 40vh;
+            min-height: 40vh;
         }
 
         &__content {
