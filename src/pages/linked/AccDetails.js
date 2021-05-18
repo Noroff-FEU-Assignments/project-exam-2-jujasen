@@ -59,6 +59,9 @@ const AccDetails = () => {
                 if (region === "bergenshus") {
                     region = "bergenshuse"
                 }
+                if (region === "laksevåg") {
+                    region = "laksevaag"
+                }
                 console.log(region)
 
                 try {
@@ -80,7 +83,7 @@ const AccDetails = () => {
             
         };
         getRegion();
-    }, [detail])
+    }, [detail, error])
 
     const handleBookToggle = () => {
         setBookOpen(!bookOpen);
