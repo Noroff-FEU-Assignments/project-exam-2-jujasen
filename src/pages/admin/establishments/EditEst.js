@@ -81,16 +81,17 @@ const EditEst = () => {
 
                 const response = await axios.get(`${BASE_URL}${ACCOMMODATIONS_PATH}/${id}`);
                 if (response.status === 200) {
+                    console.log(response.data)
                     setDetail(response.data);
-                    setRecommended(response.data.recommended);
-                    setFAirCondition(response.data.facility_aircondition);
-                    setFBreakfast(response.data.facility_breakfast);
-                    setFGym(response.data.facility_gym);
-                    setFPets(response.data.facility_petsallowed);
-                    setFRestaurant(response.data.facility_restaurant);
-                    setFRoomService(response.data.facility_roomservice);
-                    setSuperiorRoom(response.data.room_superior);
-                    setLuxuryRoom(response.data.room_luxury);
+                    setRecommended(!response.data.recommended ? false : true);
+                    setFAirCondition(!response.data.facility_aircondition ? false : true);
+                    setFBreakfast(!response.data.facility_breakfast ? false : true);
+                    setFGym(!response.data.facility_gym ? false : true);
+                    setFPets(!response.data.facility_petsallowed ? false : true);
+                    setFRestaurant(!response.data.facility_restaurant ? false : true);
+                    setFRoomService(!response.data.facility_roomservice ? false : true);
+                    setSuperiorRoom(!response.data.room_superior ? false : true);
+                    setLuxuryRoom(!response.data.room_luxury ? false : true);
                 } else {
                     console.log(error)
                     setError(error.toString());
