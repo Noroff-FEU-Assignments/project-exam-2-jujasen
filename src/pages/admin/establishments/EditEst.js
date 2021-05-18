@@ -100,6 +100,25 @@ const EditEst = () => {
         setLuxuryRoom(!luxuryRoom);
     };
 
+    const deleteEst =  async () => {
+            try {
+                const response = await axios.delete(`${BASE_URL}${ACCOMMODATIONS_PATH}/${id}`,
+                    {
+                        headers: {
+                            Authorization:
+                                `Bearer ${auth.jwt}`,
+                        },
+                    });
+                console.log('deleted', response.data);
+                setSubmitted(true);
+            } catch (error) {
+                setError(true)
+                console.log('error', error);
+            } finally {
+                history.push('/panel');
+            }
+        }
+
     const { establishment } = useForm({
         resolver: yupResolver(validationSchema),
     });
@@ -116,26 +135,7 @@ const EditEst = () => {
                             <h2 className="header__subtitle">Edit establishment</h2>
                         </div>
                         <button className="button space__marg--t"
-                            onClick={async () => {
-
-                                try {
-                                    const response = await axios.delete(`${BASE_URL}${ACCOMMODATIONS_PATH}/${id}`,
-                                        {
-                                            headers: {
-                                                Authorization:
-                                                    `Bearer ${auth.jwt}`,
-                                            },
-
-                                        });
-                                    console.log('deleted', response.data);
-                                    setSubmitted(true);
-                                } catch (error) {
-                                    setError(true)
-                                    console.log('error', error);
-                                } finally {
-                                    history.push('/panel');
-                                }
-                            }}
+                            onClick={deleteEst}
 
                         >Delete</button>
                     </div>

@@ -68,6 +68,16 @@ const Book = (props) => {
 
     }, [bookID])
 
+    const deleteEst = async () => {
+        try {
+            await axios.delete(`${BASE_URL}${ENQUIRIES_PATH}/${bookID}`);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            history.push('/accommodation');
+        }
+    }
+
     useEffect(() => {
         if (booking) {
             const nights = Math.ceil(Math.abs(new Date(booking.date_from) - new Date(booking.date_to)) / (1000 * 60 * 60 * 24));
@@ -86,16 +96,7 @@ const Book = (props) => {
                             <h2 className="book__title">{`Your booking #${booking.id}`}</h2>
                             {confirmed ? <div className="pointer" onClick={onChildClick}>
                                 <BsX></BsX>
-                            </div> : <div className="pointer" onClick={async () => {
-
-                                try {
-                                    await axios.delete(`${BASE_URL}${ENQUIRIES_PATH}/${bookID}`);
-                                } catch (error) {
-                                    console.log(error);
-                                } finally {
-                                    history.push('/accommodation');
-                                }
-                            }}>
+                            </div> : <div className="pointer" onClick={deleteEst}>
                                 <BsX></BsX>
                             </div>}
 
@@ -164,16 +165,7 @@ const Book = (props) => {
                                 </div>
                                 :
                                 <div className="flex flex--center">
-                                    <button className=" button button--stroked space__marg--r" onClick={async () => {
-
-                                        try {
-                                            await axios.delete(`${BASE_URL}${ENQUIRIES_PATH}/${bookID}`);
-                                        } catch (error) {
-                                            console.log(error);
-                                        } finally {
-                                            history.push('/accommodation');
-                                        }
-                                    }}>Cancel</button>
+                                    <button className=" button button--stroked space__marg--r" onClick={deleteEst}>Cancel</button>
                                     <button onClick={handleConfirm} className="button space__marg--l">CONFIRM</button>
                                 </div>
                             }

@@ -8,6 +8,7 @@ import axios from 'axios';
 import { BASE_URL, AUTH_PATH } from '../utils/constants';
 import AuthContext from '../utils/AuthContext';
 import { useHistory } from 'react-router-dom';
+import img from '../img/logo-dark.svg';
 
 const validationSchema = yup.object().shape({
     identifier: yup.string()
@@ -22,6 +23,7 @@ const Login = () => {
     const [, setAuth] = useContext(AuthContext);
     const [auth] = useContext(AuthContext);
     const history = useHistory();
+    const [submitting, setSubmitting] = useState(false);
 
     const { credentials } = useForm({
         resolver: yupResolver(validationSchema),
@@ -40,10 +42,12 @@ const Login = () => {
                     <Heading className="header__title" title="Log in" />
                 </div>
                 <div className="login__content media-center--xs">
+                    {submitting ? <img className="loader loader--short" src={img} alt="pulsating logo"></img> : 
                     <Formik
                         initialValues={{ identifier: "", password: "" }}
                         validationSchema={validationSchema}
                         onSubmit={async (data) => {
+                            setSubmitting(true);
 
                             const credentials = {
                                 identifier: data.identifier,
@@ -57,6 +61,8 @@ const Login = () => {
                             } catch (error) {
                                 console.log('error', error);
                                 setError(error.toString());
+                            } finally {
+                                setSubmitting(false)
                             };
                         }}>
                         {({ values,
@@ -102,6 +108,7 @@ const Login = () => {
                             </Form>
                         )}
                     </Formik>
+                    }
                 </div>
 
             </div>

@@ -8,10 +8,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { BASE_URL, MESSAGES_PATH } from '../utils/constants';
 import { contactSchema } from '../utils/schemas';
+import img from '../img/logo-dark.svg';
 
 const Contact = () => {
 
     const [submitted, setSubmitted] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState(null);
 
     const { message } = useForm({
@@ -63,10 +65,12 @@ const Contact = () => {
                         </div>
                     </div>
                     <h2 className="contact__subtitle">Contact form</h2>
+                    
                     <Formik
                         initialValues={{ name: "", email: "", subject: "", message: "" }}
                         validationSchema={contactSchema}
                         onSubmit={async (data) => {
+                            setSubmitting(true);
 
                             const message = {
                                 name: data.name,
@@ -78,15 +82,17 @@ const Contact = () => {
                             try {
                                 const response = await axios.post(`${BASE_URL}${MESSAGES_PATH}`, message);
                                 setSubmitted(true);
-                                console.log(response.data);
                             } catch (error) {
                                 console.log('error', error);
                                 setError(error.toString());
+                            } finally {
+                                setSubmitting(false);
                             }
                         }}>
                         {({ values,
                             errors, handleChange }) => (
                             <Form className="form flex-when-L flex-space">
+                                {submitting ? <img className="loader loader--short" src={img} alt="pulsating logo"></img> :
                                 <div className="hundred-when-L">
                                     <div className="form__item">
                                         <p
@@ -134,22 +140,26 @@ const Contact = () => {
                                         <p className="form__error">{errors.subject}</p>
                                     </div>
                                 </div>
+                                }
                                 <div className="hundred-when-L margin-l">
-                                    <div className="form__item">
-                                        <p className="form__label"
-                                        >* Message</p>
-                                        <textarea
-                                            id="message"
-                                            ref={message}
-                                            className="form__input"
-                                            placeholder="Describe your reason for contact"
-                                            type="text"
-                                            rows="5"
-                                            onChange={handleChange}
-                                            value={values.message}>
-                                        </textarea>
-                                        <p className="form__error">{errors.message}</p>
-                                    </div>
+                                    {submitting ? '' : 
+                                        <div className="form__item">
+                                            <p className="form__label"
+                                            >* Message</p>
+                                            <textarea
+                                                id="message"
+                                                ref={message}
+                                                className="form__input"
+                                                placeholder="Describe your reason for contact"
+                                                type="text"
+                                                rows="5"
+                                                onChange={handleChange}
+                                                value={values.message}>
+                                            </textarea>
+                                            <p className="form__error">{errors.message}</p>
+                                        </div>}
+                                    
+                                   
                                     {submitted ?
                                         <div className=" form__confirm flex flex--center">
                                             <BsCheckCircle></BsCheckCircle>
@@ -167,6 +177,7 @@ const Contact = () => {
                             </Form>
                         )}
                     </Formik>
+                    
                 </div>
 
             </div>
