@@ -4,30 +4,12 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from "react-datepicker";
 import { Formik, Form } from 'formik'
-import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { BASE_URL, ENQUIRIES_PATH } from '../utils/constants';
 import { useHistory } from 'react-router-dom';
-
-const validationSchema = yup.object().shape({
-    fromDate: yup.date()
-        .required("From date is required"),
-    toDate: yup.date()
-        .required("To date is required"),
-    firstName: yup.string()
-        .required("*First name is required"),
-    lastName: yup.string()
-        .required("*Last name is required"),
-    email: yup.string()
-        .email("*Email is invalid")
-        .required("*Email is required"),
-    phoneNumber: yup.number()
-        .integer("*Phone number is invalid")
-        .required("*Phone number is required"),
-    request: yup.string()
-});
+import { bookingSchema } from '../utils/schemas';
 
 
 const Book = (props) => {
@@ -57,7 +39,7 @@ const Book = (props) => {
     };
 
     const { book } = useForm({
-        resolver: yupResolver(validationSchema),
+        resolver: yupResolver(bookingSchema),
     });
 
     const handleConfirm = () => {
@@ -70,7 +52,7 @@ const Book = (props) => {
             console.log(bookID)
             const getDetail = async () => {
                 try {
-                    const response = await axios.get(`${BASE_URL}${ENQUIRIES_PATH}/${bookID}kk`);
+                    const response = await axios.get(`${BASE_URL}${ENQUIRIES_PATH}/${bookID}`);
                     if (response.status === 200) {
                         setBooking(response.data);
                         console.log(response.data);
@@ -273,7 +255,7 @@ const Book = (props) => {
                                 <Formik
                                     className="sixty-when-L "
                                     initialValues={{ fromDate: "", toDate: "", firstName: "", lastName: "", email: "", phoneNumber: "", request: "" }}
-                                    validationSchema={validationSchema}
+                                    validationSchema={bookingSchema}
                                     onSubmit={async (data) => {
                                         setSubmitting(true);
 

@@ -3,7 +3,6 @@ import Heading from '../../../components/Heading';
 import { BsCheckCircle, BsInfoCircleFill } from 'react-icons/bs';
 import { useEffect, useState, useContext } from 'react';
 import { Formik, Form } from 'formik'
-import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AuthContext from '../../../utils/AuthContext';
@@ -11,41 +10,8 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { BASE_URL, ACCOMMODATIONS_PATH } from '../../../utils/constants';
 import ReactTooltip from 'react-tooltip';
+import { validationSchema } from '../../../utils/schemas';
 
-const validationSchema = yup.object().shape({
-    name: yup.string()
-        .required("Establishment name is required")
-        .min(3, "Establishment name needs at least 3 characters"),
-    type: yup.string()
-        .required("*Establishment type is required"),
-    stars: yup.number()
-        .required("Stars are required"),
-    region: yup.string()
-        .required("Region is required"),
-    street_adress: yup.string()
-        .required("Street address is required")
-        .min(5, "Street address needs at least 5 characters"),
-    postal_adress: yup.string()
-        .required("Postal adress is required"),
-    zip_code: yup.string()
-        .required("Zip code is required")
-        .min(4, "Zip code must be 4 characters")
-        .max(4, "Zip code must be 4 characters"),
-    image: yup.string()
-        .url("Not a valid url")
-        .required("Image link is required"),
-    map_embed: yup.string()
-        .required("Map embed is required")
-        .min(200, "Map embed needs at least 300 characters"),
-    max_people: yup.number()
-        .required("Max people is required"),
-    room_standard_price: yup.number()
-        .required("Standard room price is required")
-        .integer("Not a number"),
-    room_superior_price: yup.number(),
-    room_luxury_price: yup.number(),
-    breakfast_price: yup.number(),
-});
 
 const CreateEst = () => {
 

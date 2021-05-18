@@ -3,7 +3,6 @@ import Heading from '../../../components/Heading';
 import { BsCheckCircle, BsInfoCircleFill } from 'react-icons/bs';
 import { useEffect, useState, useContext } from 'react';
 import { Formik, Form } from 'formik'
-import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AuthContext from '../../../utils/AuthContext';
@@ -13,41 +12,8 @@ import { BASE_URL, ACCOMMODATIONS_PATH } from '../../../utils/constants';
 import ReactTooltip from 'react-tooltip';
 import { useParams } from 'react-router-dom';
 import img from '../../../img/logo-dark.svg'
+import { validationSchema } from '../../../utils/schemas';
 
-const validationSchema = yup.object().shape({
-    name: yup.string()
-        .required("Establishment name is required")
-        .min(3, "Establishment name needs at least 3 characters"),
-    type: yup.string()
-        .required("*Establishment type is required"),
-    stars: yup.number()
-        .required("Stars are required"),
-    region: yup.string()
-        .required("Region is required"),
-    street_adress: yup.string()
-        .required("Street address is required")
-        .min(5, "Street address needs at least 5 characters"),
-    postal_adress: yup.string()
-        .required("Postal adress is required"),
-    zip_code: yup.string()
-        .required("Zip code is required")
-        .min(4, "Zip code must be 4 characters")
-        .max(4, "Zip code must be 4 characters"),
-    image: yup.string()
-        .url("Not a valid url")
-        .required("Image link is required"),
-    map_embed: yup.string()
-        .required("Map embed is required")
-        .min(200, "Map embed needs at least 300 characters"),
-    max_people: yup.number()
-        .required("Max people is required"),
-    room_standard_price: yup.number()
-        .required("Standard room price is required")
-        .integer("Not a number"),
-    room_superior_price: yup.number(),
-    room_luxury_price: yup.number(),
-    breakfast_price: yup.number(),
-});
 
 const EditEst = () => {
 
@@ -179,7 +145,7 @@ const EditEst = () => {
                 {detail ?
                     <div className="page">
                         <Formik
-                            initialValues={{ name: `${detail.name}`, type: `${detail.type}`, stars: `${detail.stars}`, region: `${detail.region}`, street_adress: `${detail.street_adress}`, postal_adress: `${detail.postal_adress}`, zip_code: `${detail.zip_code}`, image: `${detail.image}`, map_embed: `${detail.map_embed}`, max_people: `${detail.max_people}`, room_standard_price: `${detail.room_standard_price}`, room_superior: "", room_superior_price: `${detail.room_superior_price}`, room_luxury: "", room_luxury_price: `${detail.room_luxury_price}`, breakfast_price: `${detail.breakfast_price}` }}
+                            initialValues={{ name: `${detail.name}`, type: `${detail.type}`, stars: `${Number(detail.stars)}`, region: `${detail.region}`, street_adress: `${detail.street_adress}`, postal_adress: `${detail.postal_adress}`, zip_code: `${Number(detail.zip_code)}`, image: `${detail.image}`, map_embed: `${detail.map_embed}`, max_people: `${Number(detail.max_people)}`, room_standard_price: `${Number(detail.room_standard_price)}`, room_superior: "", room_superior_price: `${Number(detail.room_superior_price)}`, room_luxury: "", room_luxury_price: `${Number(detail.room_luxury_price)}`, breakfast_price: `${Number(detail.breakfast_price)}` }}
                             validationSchema={validationSchema}
                             onSubmit={async (data) => {
 
@@ -228,8 +194,8 @@ const EditEst = () => {
                             }}
                         >
                             {({ values,
-                                errors, handleChange }) => (
-
+                                errors, handleChange  }) => (
+                                
                                 <Form className="form space__marg--t">
                                     <h3 className="subtitle">General information</h3>
                                     <div className="flex-when-L flex-align-start">

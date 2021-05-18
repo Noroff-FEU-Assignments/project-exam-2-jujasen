@@ -3,26 +3,11 @@ import Heading from '../components/Heading';
 import { BsInfoSquare, BsEnvelope, BsPhone, BsCheckCircle } from 'react-icons/bs';
 import { useState } from 'react';
 import { Formik, Form } from 'formik'
-import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { BASE_URL, MESSAGES_PATH } from '../utils/constants';
-
-const validationSchema = yup.object().shape({
-    name: yup.string()
-        .required("Name is required")
-        .min(2, "Name needs at least 2 characters"),
-    email: yup.string()
-        .email("*Email is invalid")
-        .required("*Email is required"),
-    subject: yup.string()
-        .required("Subject is required")
-        .min(2, "Subject needs at least 2 characters"),
-    message: yup.string()
-        .required("Message is required")
-        .min(10, "Message needs at least 10 characters"),
-});
+import { contactSchema } from '../utils/schemas';
 
 const Contact = () => {
 
@@ -30,7 +15,7 @@ const Contact = () => {
     const [error, setError] = useState(null);
 
     const { message } = useForm({
-        resolver: yupResolver(validationSchema),
+        resolver: yupResolver(contactSchema),
     });
 
 
@@ -80,7 +65,7 @@ const Contact = () => {
                     <h2 className="contact__subtitle">Contact form</h2>
                     <Formik
                         initialValues={{ name: "", email: "", subject: "", message: "" }}
-                        validationSchema={validationSchema}
+                        validationSchema={contactSchema}
                         onSubmit={async (data) => {
 
                             const message = {
