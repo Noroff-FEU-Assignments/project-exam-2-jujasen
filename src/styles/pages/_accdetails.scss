@@ -67,6 +67,13 @@
       padding: 0.5rem 0;
       font-weight: $fSemiBold;
       color: $dark;
+      text-decoration-color: $dark;
+
+      &:hover {
+        padding-left: 2rem;
+        font-weight: $fBold;
+        transition: all 0.1s ease-in;
+      }
 
       svg {
         font-size: 20px;
@@ -83,10 +90,10 @@
     }
 
     &__location {
-    iframe {
-      min-height: 350px;
+      iframe {
+        min-height: 350px;
+      }
     }
-  }
 
     &--media {
       display: flex;
@@ -108,20 +115,18 @@
     }
 
     &__activity {
-      font-size: $fsizeL!important;
+      font-size: $fsizeL !important;
     }
 
-      &__facility {
-    svg {
-      font-size: 40px;
+    &__facility {
+      svg {
+        font-size: 40px;
+      }
     }
-  }
 
     .estcard__star {
       font-size: 3rem;
       color: $primary;
     }
   }
-
-    
 }

@@ -17,6 +17,12 @@
     font-size: $fsizeM;
     font-weight: $fBold;
     color: $white;
+
+    &:hover {
+        padding-left: 2rem;
+        font-weight: $fBold;
+        transition: all 0.1s ease-in;
+      }
   }
 
   p {
@@ -45,6 +51,12 @@
     color: $white;
     display: block;
     text-align: center;
+
+    &:hover {
+        padding-left: 2rem;
+        font-weight: $fBold;
+        transition: all 0.1s ease-in;
+      }
   }
 
   p {
@@ -84,6 +96,7 @@
       border: 2px solid $blue;
       color: $blue;
     }
+
   }
 
   &__search {

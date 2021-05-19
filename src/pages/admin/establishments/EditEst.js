@@ -339,7 +339,7 @@ const EditEst = () => {
                                                 <textarea
                                                     id="map_embed"
                                                     ref={establishment}
-                                                    className="form__input"
+                                                    className="form__input form__input--area"
                                                     placeholder="Paste the map embed html and edit"
                                                     type="text"
                                                     rows="10"
@@ -452,21 +452,21 @@ const EditEst = () => {
 
 
                                     <h3 className="subtitle">Rooms</h3>
+                                    <div className="form__item hundred-when-L margin-">
+                                        <p className="form__label"
+                                        >* Max people</p>
+                                        <input
+                                            id="max_people"
+                                            ref={establishment}
+                                            className="form__input form__input--max"
+                                            placeholder="Type max people amount"
+                                            type="number"
+                                            onChange={handleChange}
+                                            value={values.max_people}
+                                        />
+                                        <p className="form__error">{errors.max_people}</p>
+                                    </div>
                                     <div className="flex-when-L flex-align-center">
-                                        <div className="form__item hundred-when-L margin-">
-                                            <p className="form__label"
-                                            >* Max people</p>
-                                            <input
-                                                id="max_people"
-                                                ref={establishment}
-                                                className="form__input"
-                                                placeholder="Type max people amount"
-                                                type="number"
-                                                onChange={handleChange}
-                                                value={values.max_people}
-                                            />
-                                            <p className="form__error">{errors.max_people}</p>
-                                        </div>
                                         <div className="form__card hundred-when-L margin-r">
                                             <h4 className="medium-title">Standard Room</h4>
                                             <div className="form__item">
