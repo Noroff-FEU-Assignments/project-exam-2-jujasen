@@ -13,7 +13,7 @@ import { bookingSchema } from '../utils/schemas';
 
 
 const Book = (props) => {
-
+// got solution from here https://stackoverflow.com/questions/67243766/props-and-onchildclick-not-working-together
     const { acc, onChildClick } = props;
 
     const [submitting, setSubmitting] = useState(false);
