@@ -81,6 +81,7 @@ const Contact = () => {
 
                             try {
                                 const response = await axios.post(`${BASE_URL}${MESSAGES_PATH}`, message);
+                                console.log(response.data);
                                 setSubmitted(true);
                             } catch (error) {
                                 console.log('error', error);

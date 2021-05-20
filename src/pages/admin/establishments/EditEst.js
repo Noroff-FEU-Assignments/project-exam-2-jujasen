@@ -569,7 +569,7 @@ const EditEst = () => {
                         <img className="loader" src={img} alt="pulsating logo"></img>
 
                         : error ?
-                            <div class="error">{error}
+                            <div className="error">{error}
                     </div>
 
                             : ''
