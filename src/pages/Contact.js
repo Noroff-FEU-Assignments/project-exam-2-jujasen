@@ -150,7 +150,7 @@ const Contact = () => {
                                             <textarea
                                                 id="message"
                                                 ref={message}
-                                                className="form__input"
+                                                className="form__input form__input--area"
                                                 placeholder="Describe your reason for contact"
                                                 type="text"
                                                 rows="5"

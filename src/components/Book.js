@@ -398,7 +398,7 @@ const Book = (props) => {
                                                         <textarea
                                                             id="request"
                                                             ref={book}
-                                                            className="form__input"
+                                                            className="form__input form__input--area"
                                                             placeholder="Describe your request"
                                                             type="text"
                                                             rows="3"
